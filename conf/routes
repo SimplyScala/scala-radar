@@ -1,0 +1,20 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                               controllers.Application.index
+
+# Project views
+GET     /project/*projectName           controllers.Application.project(projectName)
+
+# Issues views
+GET     /issues/*projectName            controllers.Application.issues(projectName)
+
+# Coverage views
+GET     /coverage/*projectName          controllers.Application.coverage(projectName)
+#GET     / controllers.Assets.at(path="/public/html", file="index.html")
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                   controllers.Assets.at(path="/public", file)

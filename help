@@ -1,0 +1,1 @@
+java -jar /Users/ugobourdon/Dev/apps/scalastyle-batch_2.10-0.3.2/scalastyle-batch_2.10.jar  --xmlOutput scala-radar_style.xml --config /Users/ugobourdon/Dev/apps/scalastyle-batch_2.10-0.3.2/scalastyle_config.xml app

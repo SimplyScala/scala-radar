@@ -1,0 +1,89 @@
+body {
+    font: 13px/1.231 arial,helvetica,clean,sans-serif;
+
+    margin: 0;
+    padding: 0;
+}
+
+body, a {
+    color: rgb(68, 68, 68);
+}
+
+header {
+    background: none repeat scroll 0% 0% rgb(38, 38, 38);
+    height: 30px;
+
+    line-height: 30px;
+    color: rgb(255, 255, 255);
+    padding: 0px 10px 0px 21px;
+    height: 30px;
+    font-size: 93%;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+div.widget_title {
+    background-color: rgb(75, 159, 213);
+    color: rgb(254, 254, 254);
+    padding: 0px 5px;
+    height: 24px;
+    line-height: 24px;
+}
+
+section.widget, div.widget {
+    padding: 10px;
+    border: 1px solid rgb(221, 221, 221);
+}
+
+a.nolink:hover, .dashbox a:hover, .dashbox a.action, .dashbox a.action:visited {
+    text-decoration: underline;
+}
+
+.clear {
+    height: 0px;
+    clear: both;
+}
+
+#path {
+    color: rgb(68, 68, 68);
+    background: none repeat scroll 0% 0% rgb(239, 239, 239);
+    height: 26px;
+    line-height: 26px;
+    font-size: 93%;
+    margin: 0px;
+    margin-bottom: 30px;
+    padding: 0px 10px 0px 21px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+#path ul, #path ol {
+    margin: 0;
+    padding: 0;
+    list-style: none outside none;
+}
+
+#path a {
+    text-decoration: none;
+}
+
+#path a:hover {
+    text-decoration: underline;
+}
+
+.stub {
+    color: chocolate;
+    font-size: 1.2em;
+    font-weight: bold;
+}

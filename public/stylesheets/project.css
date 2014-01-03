@@ -1,0 +1,57 @@
+#project_board {
+    width: 90%;
+    margin-left: 9%;
+}
+
+#project_board table {
+    width: 100%;
+}
+
+#project_board td {
+    width: 50%;
+    vertical-align: top;
+}
+
+#project_board h1, #project_board h2, #project_board h3,
+#project_board th, #project_board td, #project_board p {
+    margin: 0;
+    padding: 0;
+}
+
+#project_board h3 {
+    font-size: 1em;
+}
+
+#lines, #docs, #rules, #tests {
+    margin-bottom: 10px;
+    width: 97%;
+}
+
+.dashbox {
+    float: left;
+    vertical-align: top;
+    text-align: left;
+    padding: 0px 10px 7px 0px;
+}
+
+.dashbox a {
+    text-decoration: none;
+}
+
+.big {
+    font-size: 152%;
+    font-weight: bold;
+}
+
+.board_column_wrapper {
+    width: 45%;
+    margin: 0;
+    padding: 0;
+
+    float: left;
+    /*border: solid 1px red;*/
+}
+
+.board_column_wrapper {
+    margin-right: 10px;
+}

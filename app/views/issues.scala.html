@@ -1,0 +1,87 @@
+@(projectName: String, checkstyleIssues: Seq[model.CheckstyleIssue], groupedMessages: Seq[(String, Int)])
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <title>Scala Radar</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/issues.css")'>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <script src='@routes.Assets.at("javascripts/issues.min.js")' type="text/javascript"></script>
+</head>
+
+<body>
+<header>
+    <a href="/">Dashboards</a>
+</header>
+
+<div id="path">
+    <ul>
+        @defining("/project/" + projectName) { projectLink =>
+            <li><a href=@projectLink class="stub">@projectName</a></li>
+        }
+
+    </ul>
+</div>
+
+<div class="container">
+    @issuesNumber(issueType: String) = {
+        @checkstyleIssues.groupBy(x => x.severity.toLowerCase).getOrElse(issueType, Nil).size
+    }
+
+    <section id="severity">
+        <h3>Severity</h3>
+        <div class="scrollable">
+            <table>
+                <tbody>
+                <tr class="even"><td></td><td>Error</td><td>@issuesNumber("error")</td><td></td></tr>
+                <tr><td></td><td><a href="#" id="warning">Warning</a></td><td>@issuesNumber("warning")</td><td></td></tr>
+                <tr class="even"><td></td><td>All</td><td>@checkstyleIssues.size</td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section id="rules">
+        <h3>Rules</h3>
+        <div class="scrollable">
+            <table>
+                <tbody>
+            @for(message <- groupedMessages) {
+                <tr class="clicable">
+                    <td><span class="issue_id">@message._1</span></td>
+                    <td>@message._1</td><td>@message._2</td>
+                    <td></td>
+                </tr>
+            }
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <div class="clear"></div>
+</div>
+
+<section id="issues_details">
+    <h3>Issues details</h3>
+    <div class="scrollable">
+        <table>
+            <thead>
+                <tr><th></th><th>severity</th><th>class</th><th>line</th></tr>
+            </thead>
+            <tbody>
+        @for(issue <- checkstyleIssues) {
+            <tr>
+                <td><span class="issue_id">@issue.message</span></td>
+                <td>@issue.severity</td><td>@issue.fromPath</td>
+                <td>@issue.line</td>
+                <td></td>
+            </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+</body>
+</html>

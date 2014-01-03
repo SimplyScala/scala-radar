@@ -1,0 +1,219 @@
+@(projectName: String, coberturaReport: model.CoberturaReport, checkstyleErrors: Seq[model.CheckstyleIssue], projectMetadatas: model.ScalaProjectMetaDatas)
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <title>Scala Radar</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/project.css")'>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/">Dashboards</a>
+    </header>
+
+    <div id="path">
+        <ul>
+            @defining("/project/" + projectName) { projectLink =>
+            <li><a href=@projectLink class="stub">@projectName</a></li>
+            }
+        </ul>
+    </div>
+
+    <section id="project_board">
+        <div class="board_column_wrapper">
+            <section id="lines" class="widget">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="dashbox">
+                                <h3>Lines of code</h3>
+                                <p><span class="big"><a href="#"><span id="m_ncloc">@projectMetadatas.codeLineNumber</span></a></span></p>
+                                <p><a href="#"><span id="m_lines">@projectMetadatas.totalLineNumber</span> lines</a></p>
+                                <p><a href="#"><span id="m_statements" class="stub">807</span> statements</a></p>
+                                <p><a href="#"><span id="m_files">@projectMetadatas.fileNumber</span> files</a></p>
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="dashbox">
+                                <h3>Class</h3>
+                                <p>
+                                    <span class="big"><a href="#"><span id="m_classes">
+                                    @{projectMetadatas.classNumber + projectMetadatas.caseClassNumber + projectMetadatas.traitNumber + projectMetadatas.objectNumber}
+                                </span></a></span>
+                                    whose :
+                                </p>
+                                <p><a href="#"><span id="m_class">@projectMetadatas.classNumber</span> classes</a></p>
+                                <p><a href="#"><span id="m_caseClass">@projectMetadatas.caseClassNumber</span> case classes</a></p>
+                                <p><a href="#"><span id="m_trait">@projectMetadatas.traitNumber</span> traits</a></p>
+                                <p><a href="#"><span id="m_object">@projectMetadatas.objectNumber</span> objects</a></p>
+                                <p><a href="#"><span id="m_packages" class="stub">10</span> packages</a></p>
+                                <p><a href="#"><span id="m_functions" class="stub">112</span> methods</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="clear"></div>
+            </section>
+
+            <section id="docs" class="widget">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="dashbox">
+                                <h3>Documentation</h3>
+                                <p><span class="big"><a href="#"><span id="m_public_documented_api_density" class="stub">2,4%</span></a></span> docu. API</p>
+                                <p><a href="#"><span id="m_public_api" class="stub">253</span> public API</a></p>
+                                <p><a href="#"><span id="m_public_undocumented_api" class="stub">247</span> undocu. API</a></p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="dashbox">
+                                <h3>Comments</h3>
+                                <p><span class="big"><a href="#"><span id="m_comment_lines_density" class="stub">5,4%</span></a></span></p>
+                                <p><a href="#"><span id="m_comment_lines">@projectMetadatas.commentLineNumber</span> lines</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="clear"></div>
+            </section>
+        </div>
+
+        <div class="board_column_wrapper">
+            <section id="rules" class="widget">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td valign="top" width="50%">
+                                <div class="dashbox">
+                                    <h3>Issues</h3>
+                                    <div class="marginbottom10">
+                                        @defining("/issues/" + projectName) { issuesLink =>
+                                        <span class="big"><a href=@issuesLink>@checkstyleErrors.size</a></span>
+                                        }
+                                    </div>
+
+                                <!--<h3>Technical Debt</h3>
+                                <div>
+                                    <span class="big">
+                                    <a href="/drilldown/measures/25?metric=sqale_index"><span id="m_sqale_index">0,0</span></a>
+                                    </span>
+                                        <span>days</span>
+                                        <span></span>
+                                </div>-->
+
+                                </div>
+                            </td>
+                            <td nowrap="" valign="top" width="50%">
+
+                                <table class="clear width100">
+                                    <tbody><tr>
+                                        <td><img alt="Blocker" src="/images/priority/BLOCKER.png?1383751212"></td>
+                                        <td> &nbsp;<a href="/drilldown/issues/valuation:valuation?severity=BLOCKER">Blocker</a></td>
+                                        <td style="padding: 0 5px;" align="right">
+                                            <span id="m_blocker_violations" class="stub">0</span></td>
+                                        <td>
+                                            <img alt="" src="/images/trend/0.png?1383751212" title="" height="10" width="10"></td>
+                                        <td>&nbsp;</td>
+                                        <td style="padding-bottom:2px; padding-top:2px;" align="left">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><img alt="Critical" src="/images/priority/CRITICAL.png?1383751212"></td>
+                                        <td> &nbsp;<a href="/drilldown/issues/valuation:valuation?severity=CRITICAL">Critical</a></td>
+                                        <td style="padding: 0 5px;" align="right">
+                                            <span id="m_critical_violations" class="stub">0</span></td>
+                                        <td>
+                                            <img alt="" src="/images/trend/0.png?1383751212" title="" height="10" width="10"></td>
+                                        <td>&nbsp;</td>
+                                        <td style="padding-bottom:2px; padding-top:2px;" align="left">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><img alt="Major" src="/images/priority/MAJOR.png?1383751212"></td>
+                                        <td> &nbsp;<a href="/drilldown/issues/valuation:valuation?severity=MAJOR">Major</a></td>
+                                        <td style="padding: 0 5px;" align="right">
+                                            <span id="m_major_violations" class="stub">0</span></td>
+                                        <td>
+                                            <img alt="" src="/images/trend/0.png?1383751212" title="" height="10" width="10"></td>
+                                        <td>&nbsp;</td>
+                                        <td style="padding-bottom:2px; padding-top:2px;" align="left">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><img alt="Minor" src="/images/priority/MINOR.png?1383751212"></td>
+                                        <td> &nbsp;<a href="/drilldown/issues/valuation:valuation?severity=MINOR">Minor</a></td>
+                                        <td style="padding: 0 5px;" align="right">
+                                            <span id="m_minor_violations" class="stub">0</span></td>
+                                        <td>
+                                            <img alt="" src="/images/trend/0.png?1383751212" title="" height="10" width="10"></td>
+                                        <td>&nbsp;</td>
+                                        <td style="padding-bottom:2px; padding-top:2px;" align="left">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><img alt="Info" src="/images/priority/INFO.png?1383751212"></td>
+                                        <td> &nbsp;<a href="/drilldown/issues/valuation:valuation?severity=INFO">Info</a></td>
+                                        <td style="padding: 0 5px;" align="right">
+                                            <span id="m_info_violations" class="stub">0</span></td>
+                                        <td>
+                                            <img alt="" src="/images/trend/0.png?1383751212" title="" height="10" width="10"></td>
+                                        <td>&nbsp;</td>
+                                        <td style="padding-bottom:2px; padding-top:2px;" align="left">
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="clear"></div>
+
+            </section>
+            <section id="#tests" class="widget">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="dashbox">
+                                <h3>Unit Tests Coverage</h3>
+                                @defining("/coverage/" + projectName) { coverageLink =>
+                                <p><span class="big"><a href="/assets/resources/coverage-report/index.html">@coberturaReport.lineRate %</a></span></p>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div class="dashbox">
+                                <h3>Unit test success</h3>
+                                <p><a href="#" class="stub">142 tests</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <div class="clear"></div>
+    </section>
+
+    <footer style="padding-left: 30px">
+        <span class="stub">stub value</span>
+    </footer>
+</body>
+</html>

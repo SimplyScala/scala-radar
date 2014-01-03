@@ -1,0 +1,7 @@
+package stubedProject.compositePackage
+
+trait CompositeTrait
+
+object CompositeObject extends CompositeTrait
+
+class CompositeClass extends CompositeTrait

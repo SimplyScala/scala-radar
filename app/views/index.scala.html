@@ -1,0 +1,53 @@
+@()
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <title>Scala Radar</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/portal.css")'>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <!--<script src='@routes.Assets.at("javascripts/suggest.min.js")' type="text/javascript"></script>-->
+    <!--<link href='@routes.Assets.at("images/favicon.ico")' rel="shortcut icon">-->
+</head>
+
+<body>
+    <header>
+        <a href="/">Dashboards</a>
+    </header>
+
+    <section id="projects">
+        <div class="widget_title">Projects</div>
+        <div class="widget">
+            <table class="data">
+                <thead>
+                    <tr>
+                        <th><a href="#" title="Name">Name</a></th>
+                        <th><a href="#" title="Version">Version</a></th>
+                        <th><a href="#" title="Non Commenting Lines of Code">LOCs</a></th>
+                        <th><a href="#" title="Rules compliance">RCI</a></th>
+                        <th><a href="#" title="Last Analysis">Last Analysis</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="even">
+                        <td><a href="/project/scala-radar">scala-radar</a></td>
+                        <td>42.0-SNAPSHOT</td>
+                        <td>42</td>
+                        <td>42.0 %</td>
+                        <td>09 déc. 2013</td>
+                    </tr>
+                    <tr>
+                        <td>other</td>
+                        <td>42.0-SNAPSHOT</td>
+                        <td>42</td>
+                        <td>42.0 %</td>
+                        <td>09 déc. 2013</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

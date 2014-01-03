@@ -1,0 +1,32 @@
+@(projectName: String, coverageView: Html)
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <title>Scala Radar</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/">Dashboards</a>
+    </header>
+
+    <div id="path">
+        <ul>
+            @defining("/project/" + projectName) { projectLink =>
+            <li><a href=@projectLink class="stub">@projectName</a></li>
+            }
+
+        </ul>
+    </div>
+
+    <div>
+        @coverageView
+    </div>
+
+</body>
+
+</html>

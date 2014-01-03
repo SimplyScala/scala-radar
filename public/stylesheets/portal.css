@@ -1,0 +1,36 @@
+table.data {
+    width: 100%;
+}
+
+table.data > thead {
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+table.data > tbody {
+    border-bottom: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid rgb(221, 221, 221);
+    border-left: 1px solid rgb(221, 221, 221);
+}
+
+table.data > thead > tr > th {
+    font-size: 93%;
+    padding: 4px 7px 4px 3px;
+    font-weight: bold;
+    vertical-align: top;
+    text-align: left;
+}
+
+table.data > tbody > tr > td {
+    line-height: 20px;
+    text-align: left;
+}
+
+tr.even {
+    background-color: rgb(239, 239, 239);
+}
+
+#projects {
+    width: 50%;
+    margin-left: 20px;
+    margin-top: 20px;
+}

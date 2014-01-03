@@ -1,0 +1,33 @@
+# PENSE BETE
+
+chaque build doit avoir un écran log
+
+calcul de complexité
+
+fumer les TODO (dans le code)
+
+chaque build lance asynchronement et non intrusivement dans le projet :
+    - calcul metadatas
+    - test code covergae
+    - scalastyle
+
+récupérer le code à scanner via git
+
+permettre un build avec des données déjà produites (checkstyle.xml, scct report, etc...)
+
+permettre d'utiliser son propre fichier de config scalastyle pour le build
+
+ecran de configuration du projet à scanner
+
+séparer la partie affichage de l'appli des outils de calculs des métriques
+
+permettre l'export des métriques (checkstyle.xml, etc...)
+
+ecran de build permet de voir ou en est chaque étape
+    - calcul code coverage
+    - analyse métriques
+    - ...
+
+métriques d'évolutions
+    - flèche progression, regresison, stagnation
+    - différents graphiques (eventsourcing ???...)
