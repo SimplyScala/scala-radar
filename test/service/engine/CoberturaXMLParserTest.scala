@@ -5,7 +5,7 @@ import model.CoberturaReport
 
 class CoberturaXMLParserTest extends FunSuite with Matchers {
     test("retrieve global code coverage") {
-        val report = scala.xml.XML.loadFile("public/resources/cobertura.xml")
-        CoberturaXMLParser.produceCodeCoverageReport(report) should be (CoberturaReport(72.0))
+        val report = scala.xml.XML.loadFile("public/resources/coverage-report/cobertura.xml")
+        CoberturaXMLParser.produceCodeCoverageReport(report) should be (CoberturaReport(96.0))
     }
 }
