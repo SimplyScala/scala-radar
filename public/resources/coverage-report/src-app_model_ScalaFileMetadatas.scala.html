@@ -1,0 +1,201 @@
+<table class="classes"><tbody><tr>
+      <td class="barContainerLeft"><a href="#">&#x200B;file:/&#x200B;Users/&#x200B;ugobourdon/&#x200B;Dev/&#x200B;Projects/&#x200B;ScalaQuality/&#x200B;scala-radar/&#x200B;app/&#x200B;model/<span class="header">&#x200B;ScalaFileMetadatas.scala</span></a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-app_model_ScalaFileMetadatas.scala.html#Class_model_ScalaFileMetadatas"><img src="class.png"/>ScalaFileMetadatas</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-app_model_ScalaFileMetadatas.scala.html#Class_model_ScalaMetadatas"><img src="class.png"/>ScalaMetadatas</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-app_model_ScalaFileMetadatas.scala.html#Class_model_ScalaProjectMetaDatas"><img src="class.png"/>ScalaProjectMetaDatas</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-app_model_ScalaFileMetadatas.scala.html#Object_model_ScalaProjectMetaDatas"><img src="object.png"/>ScalaProjectMetaDatas</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr></tbody></table><table class="source"><tbody><tr>
+            <td class="black">1</td>
+            <td>package model
+</td>
+          </tr><tr>
+            <td class="black">2</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="green">3</td>
+            <td><a id="Class_model_ScalaFileMetadatas"/>case class ScalaFileMetadatas(totalLineNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">4</td>
+            <td>                              blankLineNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">5</td>
+            <td>                              commentLineNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">6</td>
+            <td>                              headerLineNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">7</td>
+            <td><a id="Class_model_ScalaProjectMetaDatas"/><a id="Class_model_ScalaMetadatas"/>                              codeLineNumber: Int)
+</td>
+          </tr><tr>
+            <td class="black">8</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">9</td>
+            <td>// TODO add def number
+</td>
+          </tr><tr>
+            <td class="black">10</td>
+            <td>// TODO add private def number
+</td>
+          </tr><tr>
+            <td class="black">11</td>
+            <td>// TODO add statements param
+</td>
+          </tr><tr>
+            <td class="green">12</td>
+            <td>case class ScalaMetadatas(classNumber: Int, caseClassNumber: Int, traitNumber: Int, objectNumber: Int)
+</td>
+          </tr><tr>
+            <td class="black">13</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">14</td>
+            <td><a id="Object_model_ScalaProjectMetaDatas"/>object ScalaProjectMetaDatas {
+</td>
+          </tr><tr>
+            <td class="black">15</td>
+            <td>    def apply(fileNumber: Int, fileMetadatas: Seq[ScalaFileMetadatas], scalaMetadatas: Seq[ScalaMetadatas]): ScalaProjectMetaDatas =
+</td>
+          </tr><tr>
+            <td class="green">16</td>
+            <td>        ScalaProjectMetaDatas(
+</td>
+          </tr><tr>
+            <td class="black">17</td>
+            <td>            fileNumber = fileNumber,
+</td>
+          </tr><tr>
+            <td class="green">18</td>
+            <td>            classNumber = if(!scalaMetadatas.isEmpty) scalaMetadatas.map(_.classNumber).reduce(_ + _) else 0,
+</td>
+          </tr><tr>
+            <td class="green">19</td>
+            <td>            caseClassNumber = if(!scalaMetadatas.isEmpty) scalaMetadatas.map(_.caseClassNumber).reduce(_ + _) else 0,
+</td>
+          </tr><tr>
+            <td class="green">20</td>
+            <td>            traitNumber = if(!scalaMetadatas.isEmpty) scalaMetadatas.map(_.traitNumber).reduce(_ + _) else 0,
+</td>
+          </tr><tr>
+            <td class="green">21</td>
+            <td>            objectNumber = if(!scalaMetadatas.isEmpty) scalaMetadatas.map(_.objectNumber).reduce(_ + _) else 0,
+</td>
+          </tr><tr>
+            <td class="green">22</td>
+            <td>            totalLineNumber = if(!fileMetadatas.isEmpty) fileMetadatas.map(_.totalLineNumber).reduce(_ + _) else 0,
+</td>
+          </tr><tr>
+            <td class="green">23</td>
+            <td>            blankLineNumber = if(!fileMetadatas.isEmpty) fileMetadatas.map(_.blankLineNumber).reduce(_ + _) else 0,
+</td>
+          </tr><tr>
+            <td class="green">24</td>
+            <td>            commentLineNumber = if(!fileMetadatas.isEmpty) fileMetadatas.map(_.commentLineNumber).reduce(_ + _) else 0,
+</td>
+          </tr><tr>
+            <td class="green">25</td>
+            <td>            headerLineNumber = if(!fileMetadatas.isEmpty) fileMetadatas.map(_.headerLineNumber).reduce(_ + _) else 0,
+</td>
+          </tr><tr>
+            <td class="green">26</td>
+            <td>            codeLineNumber = if(!fileMetadatas.isEmpty) fileMetadatas.map(_.codeLineNumber).reduce(_ + _) else 0
+</td>
+          </tr><tr>
+            <td class="black">27</td>
+            <td>        )
+</td>
+          </tr><tr>
+            <td class="black">28</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">29</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">30</td>
+            <td>// TODO add package number
+</td>
+          </tr><tr>
+            <td class="green">31</td>
+            <td>case class ScalaProjectMetaDatas(fileNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">32</td>
+            <td>                                 classNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">33</td>
+            <td>                                 caseClassNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">34</td>
+            <td>                                 traitNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">35</td>
+            <td>                                 objectNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">36</td>
+            <td>                                 totalLineNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">37</td>
+            <td>                                 blankLineNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">38</td>
+            <td>                                 commentLineNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">39</td>
+            <td>                                 headerLineNumber: Int,
+</td>
+          </tr><tr>
+            <td class="black">40</td>
+            <td>                                 codeLineNumber: Int)
+</td>
+          </tr></tbody></table>

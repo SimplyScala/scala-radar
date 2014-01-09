@@ -1,0 +1,1053 @@
+<table class="classes"><tbody><tr>
+      <td class="barContainerLeft"><a href="#">&#x200B;file:/&#x200B;Users/&#x200B;ugobourdon/&#x200B;Dev/&#x200B;Projects/&#x200B;ScalaQuality/&#x200B;scala-radar/&#x200B;target/&#x200B;scala-2.10/&#x200B;src_managed/&#x200B;main/&#x200B;views/&#x200B;html/<span class="header">&#x200B;project.template.scala</span></a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">0 %</div>
+        <div class="greenBar" style="width:0px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-target_scala-2.10_src_managed_main_views_html_project.template.scala.html#Object_views_html_project"><img src="object.png"/>project</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">0 %</div>
+        <div class="greenBar" style="width:0px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr></tbody></table><table class="source"><tbody><tr>
+            <td class="black">1</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">2</td>
+            <td>package views.html
+</td>
+          </tr><tr>
+            <td class="black">3</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">4</td>
+            <td>import play.templates._
+</td>
+          </tr><tr>
+            <td class="black">5</td>
+            <td>import play.templates.TemplateMagic._
+</td>
+          </tr><tr>
+            <td class="black">6</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">7</td>
+            <td>import play.api.templates._
+</td>
+          </tr><tr>
+            <td class="black">8</td>
+            <td>import play.api.templates.PlayMagic._
+</td>
+          </tr><tr>
+            <td class="black">9</td>
+            <td>import models._
+</td>
+          </tr><tr>
+            <td class="black">10</td>
+            <td>import controllers._
+</td>
+          </tr><tr>
+            <td class="black">11</td>
+            <td>import play.api.i18n._
+</td>
+          </tr><tr>
+            <td class="black">12</td>
+            <td>import play.api.mvc._
+</td>
+          </tr><tr>
+            <td class="black">13</td>
+            <td>import play.api.data._
+</td>
+          </tr><tr>
+            <td class="black">14</td>
+            <td>import views.html._
+</td>
+          </tr><tr>
+            <td class="black">15</td>
+            <td>/**/
+</td>
+          </tr><tr>
+            <td class="black">16</td>
+            <td><a id="Object_views_html_project"/>object project extends BaseScalaTemplate[play.api.templates.HtmlFormat.Appendable,Format[play.api.templates.HtmlFormat.Appendable]](play.api.templates.HtmlFormat) with play.api.templates.Template4[String,model.CoberturaReport,Seq[model.CheckstyleIssue],model.ScalaProjectMetaDatas,play.api.templates.HtmlFormat.Appendable] {
+</td>
+          </tr><tr>
+            <td class="black">17</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">18</td>
+            <td>    /**/
+</td>
+          </tr><tr>
+            <td class="black">19</td>
+            <td>    def apply/*1.2*/(projectName: String, coberturaReport: model.CoberturaReport, checkstyleErrors: Seq[model.CheckstyleIssue], projectMetadatas: model.ScalaProjectMetaDatas):play.api.templates.HtmlFormat.Appendable = {
+</td>
+          </tr><tr>
+            <td class="red">20</td>
+            <td>        <span class="non">_display_ {
+</span></td>
+          </tr><tr>
+            <td class="black">21</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">22</td>
+            <td>Seq[Any](format.raw/*1.156*/(&quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">23</td>
+            <td>&lt;!DOCTYPE html&gt;
+</td>
+          </tr><tr>
+            <td class="black">24</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">25</td>
+            <td>&lt;html lang=&quot;fr&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">26</td>
+            <td>&lt;head&gt;
+</td>
+          </tr><tr>
+            <td class="black">27</td>
+            <td>    &lt;title&gt;Scala Radar&lt;/title&gt;
+</td>
+          </tr><tr>
+            <td class="black">28</td>
+            <td>    &lt;meta charset=&quot;utf-8&quot;/&gt;
+</td>
+          </tr><tr>
+            <td class="black">29</td>
+            <td>    &lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href='&quot;&quot;&quot;),_display_(Seq[Any](/*8.50*/routes/*8.56*/.Assets.at(&quot;stylesheets/main.css&quot;))),format.raw/*8.90*/(&quot;&quot;&quot;'&gt;
+</td>
+          </tr><tr>
+            <td class="black">30</td>
+            <td>    &lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href='&quot;&quot;&quot;),_display_(Seq[Any](/*9.50*/routes/*9.56*/.Assets.at(&quot;stylesheets/project.css&quot;))),format.raw/*9.93*/(&quot;&quot;&quot;'&gt;
+</td>
+          </tr><tr>
+            <td class="black">31</td>
+            <td>    &lt;script src=&quot;http://code.jquery.com/jquery.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+</td>
+          </tr><tr>
+            <td class="black">32</td>
+            <td>&lt;/head&gt;
+</td>
+          </tr><tr>
+            <td class="black">33</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">34</td>
+            <td>&lt;body&gt;
+</td>
+          </tr><tr>
+            <td class="black">35</td>
+            <td>    &lt;header&gt;
+</td>
+          </tr><tr>
+            <td class="black">36</td>
+            <td>        &lt;a href=&quot;/&quot;&gt;Dashboards&lt;/a&gt;
+</td>
+          </tr><tr>
+            <td class="black">37</td>
+            <td>    &lt;/header&gt;
+</td>
+          </tr><tr>
+            <td class="black">38</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">39</td>
+            <td>    &lt;div id=&quot;path&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">40</td>
+            <td>        &lt;ul&gt;
+</td>
+          </tr><tr>
+            <td class="red">41</td>
+            <td>            &quot;&quot;&quot;),_display_(Seq[Any](/*20.14*/defining(&quot;/project/&quot; + projectName)/*20.49*/ { projectLink =&gt;<span class="non">_display_(Seq[Any](format.raw/*20.66*/(&quot;&quot;&quot;
+</span></td>
+          </tr><tr>
+            <td class="black">42</td>
+            <td>            &lt;li&gt;&lt;a href=&quot;&quot;&quot;),_display_(Seq[Any](/*21.26*/projectLink)),format.raw/*21.37*/(&quot;&quot;&quot; class=&quot;stub&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*21.52*/projectName)),format.raw/*21.63*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/li&gt;
+</td>
+          </tr><tr>
+            <td class="black">43</td>
+            <td>            &quot;&quot;&quot;)))})),format.raw/*22.14*/(&quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">44</td>
+            <td>        &lt;/ul&gt;
+</td>
+          </tr><tr>
+            <td class="black">45</td>
+            <td>    &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">46</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">47</td>
+            <td>    &lt;section id=&quot;project_board&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">48</td>
+            <td>        &lt;div class=&quot;board_column_wrapper&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">49</td>
+            <td>            &lt;section id=&quot;lines&quot; class=&quot;widget&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">50</td>
+            <td>                &lt;table&gt;
+</td>
+          </tr><tr>
+            <td class="black">51</td>
+            <td>                    &lt;tbody&gt;
+</td>
+          </tr><tr>
+            <td class="black">52</td>
+            <td>                    &lt;tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">53</td>
+            <td>                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">54</td>
+            <td>                            &lt;div class=&quot;dashbox&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">55</td>
+            <td>                                &lt;h3&gt;Lines of code&lt;/h3&gt;
+</td>
+          </tr><tr>
+            <td class="black">56</td>
+            <td>                                &lt;p&gt;&lt;span class=&quot;big&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_ncloc&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*35.86*/projectMetadatas/*35.102*/.codeLineNumber)),format.raw/*35.117*/(&quot;&quot;&quot;&lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">57</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_lines&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*36.68*/projectMetadatas/*36.84*/.totalLineNumber)),format.raw/*36.100*/(&quot;&quot;&quot;&lt;/span&gt; lines&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">58</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_statements&quot; class=&quot;stub&quot;&gt;807&lt;/span&gt; statements&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">59</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_files&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*38.68*/projectMetadatas/*38.84*/.fileNumber)),format.raw/*38.95*/(&quot;&quot;&quot;&lt;/span&gt; files&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">60</td>
+            <td>                            &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">61</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">62</td>
+            <td>                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">63</td>
+            <td>                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">64</td>
+            <td>                            &lt;div class=&quot;dashbox&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">65</td>
+            <td>                                &lt;h3&gt;Class&lt;/h3&gt;
+</td>
+          </tr><tr>
+            <td class="black">66</td>
+            <td>                                &lt;p&gt;
+</td>
+          </tr><tr>
+            <td class="black">67</td>
+            <td>                                    &lt;span class=&quot;big&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_classes&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">68</td>
+            <td>                                    &quot;&quot;&quot;),_display_(Seq[Any](/*47.38*/{projectMetadatas.classNumber + projectMetadatas.caseClassNumber + projectMetadatas.traitNumber + projectMetadatas.objectNumber})),format.raw/*47.166*/(&quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">69</td>
+            <td>                                &lt;/span&gt;&lt;/a&gt;&lt;/span&gt;
+</td>
+          </tr><tr>
+            <td class="black">70</td>
+            <td>                                    whose :
+</td>
+          </tr><tr>
+            <td class="black">71</td>
+            <td>                                &lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">72</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_class&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*51.68*/projectMetadatas/*51.84*/.classNumber)),format.raw/*51.96*/(&quot;&quot;&quot;&lt;/span&gt; classes&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">73</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_caseClass&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*52.72*/projectMetadatas/*52.88*/.caseClassNumber)),format.raw/*52.104*/(&quot;&quot;&quot;&lt;/span&gt; case classes&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">74</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_trait&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*53.68*/projectMetadatas/*53.84*/.traitNumber)),format.raw/*53.96*/(&quot;&quot;&quot;&lt;/span&gt; traits&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">75</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_object&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*54.69*/projectMetadatas/*54.85*/.objectNumber)),format.raw/*54.98*/(&quot;&quot;&quot;&lt;/span&gt; objects&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">76</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_packages&quot; class=&quot;stub&quot;&gt;10&lt;/span&gt; packages&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">77</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_functions&quot; class=&quot;stub&quot;&gt;112&lt;/span&gt; methods&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">78</td>
+            <td>                            &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">79</td>
+            <td>                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">80</td>
+            <td>                    &lt;/tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">81</td>
+            <td>                    &lt;/tbody&gt;
+</td>
+          </tr><tr>
+            <td class="black">82</td>
+            <td>                &lt;/table&gt;
+</td>
+          </tr><tr>
+            <td class="black">83</td>
+            <td>                &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">84</td>
+            <td>            &lt;/section&gt;
+</td>
+          </tr><tr>
+            <td class="black">85</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">86</td>
+            <td>            &lt;section id=&quot;docs&quot; class=&quot;widget&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">87</td>
+            <td>                &lt;table&gt;
+</td>
+          </tr><tr>
+            <td class="black">88</td>
+            <td>                    &lt;tbody&gt;
+</td>
+          </tr><tr>
+            <td class="black">89</td>
+            <td>                    &lt;tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">90</td>
+            <td>                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">91</td>
+            <td>                            &lt;div class=&quot;dashbox&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">92</td>
+            <td>                                &lt;h3&gt;Documentation&lt;/h3&gt;
+</td>
+          </tr><tr>
+            <td class="black">93</td>
+            <td>                                &lt;p&gt;&lt;span class=&quot;big&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_public_documented_api_density&quot; class=&quot;stub&quot;&gt;2,4%&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; docu. API&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">94</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_public_api&quot; class=&quot;stub&quot;&gt;253&lt;/span&gt; public API&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">95</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_public_undocumented_api&quot; class=&quot;stub&quot;&gt;247&lt;/span&gt; undocu. API&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">96</td>
+            <td>                            &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">97</td>
+            <td>                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">98</td>
+            <td>                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">99</td>
+            <td>                            &lt;div class=&quot;dashbox&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">100</td>
+            <td>                                &lt;h3&gt;Comments&lt;/h3&gt;
+</td>
+          </tr><tr>
+            <td class="black">101</td>
+            <td>                                &lt;p&gt;&lt;span class=&quot;big&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_comment_lines_density&quot; class=&quot;stub&quot;&gt;5,4%&lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">102</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot;&gt;&lt;span id=&quot;m_comment_lines&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*81.76*/projectMetadatas/*81.92*/.commentLineNumber)),format.raw/*81.110*/(&quot;&quot;&quot;&lt;/span&gt; lines&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">103</td>
+            <td>                            &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">104</td>
+            <td>                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">105</td>
+            <td>                    &lt;/tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">106</td>
+            <td>                    &lt;/tbody&gt;
+</td>
+          </tr><tr>
+            <td class="black">107</td>
+            <td>                &lt;/table&gt;
+</td>
+          </tr><tr>
+            <td class="black">108</td>
+            <td>                &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">109</td>
+            <td>            &lt;/section&gt;
+</td>
+          </tr><tr>
+            <td class="black">110</td>
+            <td>        &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">111</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">112</td>
+            <td>        &lt;div class=&quot;board_column_wrapper&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">113</td>
+            <td>            &lt;section id=&quot;rules&quot; class=&quot;widget&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">114</td>
+            <td>                &lt;table&gt;
+</td>
+          </tr><tr>
+            <td class="black">115</td>
+            <td>                    &lt;tbody&gt;
+</td>
+          </tr><tr>
+            <td class="black">116</td>
+            <td>                        &lt;tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">117</td>
+            <td>                            &lt;td valign=&quot;top&quot; width=&quot;50%&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">118</td>
+            <td>                                &lt;div class=&quot;dashbox&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">119</td>
+            <td>                                    &lt;h3&gt;Issues&lt;/h3&gt;
+</td>
+          </tr><tr>
+            <td class="black">120</td>
+            <td>                                    &lt;div class=&quot;marginbottom10&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="red">121</td>
+            <td>                                        &quot;&quot;&quot;),_display_(Seq[Any](/*100.42*/defining(&quot;/issues/&quot; + projectName)/*100.76*/ { issuesLink =&gt;<span class="non">_display_(Seq[Any](format.raw/*100.92*/(&quot;&quot;&quot;
+</span></td>
+          </tr><tr>
+            <td class="black">122</td>
+            <td>                                        &lt;span class=&quot;big&quot;&gt;&lt;a href=&quot;&quot;&quot;),_display_(Seq[Any](/*101.68*/issuesLink)),format.raw/*101.78*/(&quot;&quot;&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*101.80*/checkstyleErrors/*101.96*/.size)),format.raw/*101.101*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/span&gt;
+</td>
+          </tr><tr>
+            <td class="black">123</td>
+            <td>                                        &quot;&quot;&quot;)))})),format.raw/*102.42*/(&quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">124</td>
+            <td>                                    &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">125</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">126</td>
+            <td>                                &lt;!--&lt;h3&gt;Technical Debt&lt;/h3&gt;
+</td>
+          </tr><tr>
+            <td class="black">127</td>
+            <td>                                &lt;div&gt;
+</td>
+          </tr><tr>
+            <td class="black">128</td>
+            <td>                                    &lt;span class=&quot;big&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">129</td>
+            <td>                                    &lt;a href=&quot;/drilldown/measures/25?metric=sqale_index&quot;&gt;&lt;span id=&quot;m_sqale_index&quot;&gt;0,0&lt;/span&gt;&lt;/a&gt;
+</td>
+          </tr><tr>
+            <td class="black">130</td>
+            <td>                                    &lt;/span&gt;
+</td>
+          </tr><tr>
+            <td class="black">131</td>
+            <td>                                        &lt;span&gt;days&lt;/span&gt;
+</td>
+          </tr><tr>
+            <td class="black">132</td>
+            <td>                                        &lt;span&gt;&lt;/span&gt;
+</td>
+          </tr><tr>
+            <td class="black">133</td>
+            <td>                                &lt;/div&gt;--&gt;
+</td>
+          </tr><tr>
+            <td class="black">134</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">135</td>
+            <td>                                &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">136</td>
+            <td>                            &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">137</td>
+            <td>                            &lt;td nowrap=&quot;&quot; valign=&quot;top&quot; width=&quot;50%&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">138</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">139</td>
+            <td>                                &lt;table class=&quot;clear width100&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">140</td>
+            <td>                                    &lt;tbody&gt;&lt;tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">141</td>
+            <td>                                        &lt;td&gt;&lt;img alt=&quot;Blocker&quot; src=&quot;/images/priority/BLOCKER.png?1383751212&quot;&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">142</td>
+            <td>                                        &lt;td&gt; &amp;nbsp;&lt;a href=&quot;/drilldown/issues/valuation:valuation?severity=BLOCKER&quot;&gt;Blocker&lt;/a&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">143</td>
+            <td>                                        &lt;td style=&quot;padding: 0 5px;&quot; align=&quot;right&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">144</td>
+            <td>                                            &lt;span id=&quot;m_blocker_violations&quot; class=&quot;stub&quot;&gt;0&lt;/span&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">145</td>
+            <td>                                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">146</td>
+            <td>                                            &lt;img alt=&quot;&quot; src=&quot;/images/trend/0.png?1383751212&quot; title=&quot;&quot; height=&quot;10&quot; width=&quot;10&quot;&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">147</td>
+            <td>                                        &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">148</td>
+            <td>                                        &lt;td style=&quot;padding-bottom:2px; padding-top:2px;&quot; align=&quot;left&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">149</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">150</td>
+            <td>                                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">151</td>
+            <td>                                    &lt;/tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">152</td>
+            <td>                                    &lt;tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">153</td>
+            <td>                                        &lt;td&gt;&lt;img alt=&quot;Critical&quot; src=&quot;/images/priority/CRITICAL.png?1383751212&quot;&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">154</td>
+            <td>                                        &lt;td&gt; &amp;nbsp;&lt;a href=&quot;/drilldown/issues/valuation:valuation?severity=CRITICAL&quot;&gt;Critical&lt;/a&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">155</td>
+            <td>                                        &lt;td style=&quot;padding: 0 5px;&quot; align=&quot;right&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">156</td>
+            <td>                                            &lt;span id=&quot;m_critical_violations&quot; class=&quot;stub&quot;&gt;0&lt;/span&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">157</td>
+            <td>                                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">158</td>
+            <td>                                            &lt;img alt=&quot;&quot; src=&quot;/images/trend/0.png?1383751212&quot; title=&quot;&quot; height=&quot;10&quot; width=&quot;10&quot;&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">159</td>
+            <td>                                        &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">160</td>
+            <td>                                        &lt;td style=&quot;padding-bottom:2px; padding-top:2px;&quot; align=&quot;left&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">161</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">162</td>
+            <td>                                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">163</td>
+            <td>                                    &lt;/tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">164</td>
+            <td>                                    &lt;tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">165</td>
+            <td>                                        &lt;td&gt;&lt;img alt=&quot;Major&quot; src=&quot;/images/priority/MAJOR.png?1383751212&quot;&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">166</td>
+            <td>                                        &lt;td&gt; &amp;nbsp;&lt;a href=&quot;/drilldown/issues/valuation:valuation?severity=MAJOR&quot;&gt;Major&lt;/a&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">167</td>
+            <td>                                        &lt;td style=&quot;padding: 0 5px;&quot; align=&quot;right&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">168</td>
+            <td>                                            &lt;span id=&quot;m_major_violations&quot; class=&quot;stub&quot;&gt;0&lt;/span&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">169</td>
+            <td>                                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">170</td>
+            <td>                                            &lt;img alt=&quot;&quot; src=&quot;/images/trend/0.png?1383751212&quot; title=&quot;&quot; height=&quot;10&quot; width=&quot;10&quot;&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">171</td>
+            <td>                                        &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">172</td>
+            <td>                                        &lt;td style=&quot;padding-bottom:2px; padding-top:2px;&quot; align=&quot;left&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">173</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">174</td>
+            <td>                                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">175</td>
+            <td>                                    &lt;/tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">176</td>
+            <td>                                    &lt;tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">177</td>
+            <td>                                        &lt;td&gt;&lt;img alt=&quot;Minor&quot; src=&quot;/images/priority/MINOR.png?1383751212&quot;&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">178</td>
+            <td>                                        &lt;td&gt; &amp;nbsp;&lt;a href=&quot;/drilldown/issues/valuation:valuation?severity=MINOR&quot;&gt;Minor&lt;/a&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">179</td>
+            <td>                                        &lt;td style=&quot;padding: 0 5px;&quot; align=&quot;right&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">180</td>
+            <td>                                            &lt;span id=&quot;m_minor_violations&quot; class=&quot;stub&quot;&gt;0&lt;/span&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">181</td>
+            <td>                                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">182</td>
+            <td>                                            &lt;img alt=&quot;&quot; src=&quot;/images/trend/0.png?1383751212&quot; title=&quot;&quot; height=&quot;10&quot; width=&quot;10&quot;&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">183</td>
+            <td>                                        &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">184</td>
+            <td>                                        &lt;td style=&quot;padding-bottom:2px; padding-top:2px;&quot; align=&quot;left&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">185</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">186</td>
+            <td>                                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">187</td>
+            <td>                                    &lt;/tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">188</td>
+            <td>                                    &lt;tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">189</td>
+            <td>                                        &lt;td&gt;&lt;img alt=&quot;Info&quot; src=&quot;/images/priority/INFO.png?1383751212&quot;&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">190</td>
+            <td>                                        &lt;td&gt; &amp;nbsp;&lt;a href=&quot;/drilldown/issues/valuation:valuation?severity=INFO&quot;&gt;Info&lt;/a&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">191</td>
+            <td>                                        &lt;td style=&quot;padding: 0 5px;&quot; align=&quot;right&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">192</td>
+            <td>                                            &lt;span id=&quot;m_info_violations&quot; class=&quot;stub&quot;&gt;0&lt;/span&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">193</td>
+            <td>                                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">194</td>
+            <td>                                            &lt;img alt=&quot;&quot; src=&quot;/images/trend/0.png?1383751212&quot; title=&quot;&quot; height=&quot;10&quot; width=&quot;10&quot;&gt;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">195</td>
+            <td>                                        &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">196</td>
+            <td>                                        &lt;td style=&quot;padding-bottom:2px; padding-top:2px;&quot; align=&quot;left&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">197</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">198</td>
+            <td>                                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">199</td>
+            <td>                                    &lt;/tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">200</td>
+            <td>                                    &lt;/tbody&gt;
+</td>
+          </tr><tr>
+            <td class="black">201</td>
+            <td>                                &lt;/table&gt;
+</td>
+          </tr><tr>
+            <td class="black">202</td>
+            <td>                            &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">203</td>
+            <td>                        &lt;/tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">204</td>
+            <td>                    &lt;/tbody&gt;
+</td>
+          </tr><tr>
+            <td class="black">205</td>
+            <td>                &lt;/table&gt;
+</td>
+          </tr><tr>
+            <td class="black">206</td>
+            <td>                &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">207</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">208</td>
+            <td>            &lt;/section&gt;
+</td>
+          </tr><tr>
+            <td class="black">209</td>
+            <td>            &lt;section id=&quot;#tests&quot; class=&quot;widget&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">210</td>
+            <td>                &lt;table&gt;
+</td>
+          </tr><tr>
+            <td class="black">211</td>
+            <td>                    &lt;tbody&gt;
+</td>
+          </tr><tr>
+            <td class="black">212</td>
+            <td>                    &lt;tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">213</td>
+            <td>                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">214</td>
+            <td>                            &lt;div class=&quot;dashbox&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">215</td>
+            <td>                                &lt;h3&gt;Unit Tests Coverage&lt;/h3&gt;
+</td>
+          </tr><tr>
+            <td class="red">216</td>
+            <td>                                &quot;&quot;&quot;),_display_(Seq[Any](/*195.34*/defining(&quot;/coverage/&quot; + projectName)/*195.70*/ { coverageLink =&gt;<span class="non">_display_(Seq[Any](format.raw/*195.88*/(&quot;&quot;&quot;
+</span></td>
+          </tr><tr>
+            <td class="black">217</td>
+            <td>                                &lt;p&gt;&lt;span class=&quot;big&quot;&gt;&lt;a href=&quot;/assets/resources/coverage-report/index.html&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*196.110*/coberturaReport/*196.125*/.lineRate)),format.raw/*196.134*/(&quot;&quot;&quot; %&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">218</td>
+            <td>                                &quot;&quot;&quot;)))})),format.raw/*197.34*/(&quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">219</td>
+            <td>                            &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">220</td>
+            <td>                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">221</td>
+            <td>                        &lt;td&gt;
+</td>
+          </tr><tr>
+            <td class="black">222</td>
+            <td>                            &lt;div class=&quot;dashbox&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">223</td>
+            <td>                                &lt;h3&gt;Unit test success&lt;/h3&gt;
+</td>
+          </tr><tr>
+            <td class="black">224</td>
+            <td>                                &lt;p&gt;&lt;a href=&quot;#&quot; class=&quot;stub&quot;&gt;142 tests&lt;/a&gt;&lt;/p&gt;
+</td>
+          </tr><tr>
+            <td class="black">225</td>
+            <td>                            &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">226</td>
+            <td>                        &lt;/td&gt;
+</td>
+          </tr><tr>
+            <td class="black">227</td>
+            <td>                    &lt;/tr&gt;
+</td>
+          </tr><tr>
+            <td class="black">228</td>
+            <td>                    &lt;/tbody&gt;
+</td>
+          </tr><tr>
+            <td class="black">229</td>
+            <td>                &lt;/table&gt;
+</td>
+          </tr><tr>
+            <td class="black">230</td>
+            <td>            &lt;/section&gt;
+</td>
+          </tr><tr>
+            <td class="black">231</td>
+            <td>        &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">232</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">233</td>
+            <td>        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">234</td>
+            <td>    &lt;/section&gt;
+</td>
+          </tr><tr>
+            <td class="black">235</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">236</td>
+            <td>    &lt;footer style=&quot;padding-left: 30px&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">237</td>
+            <td>        &lt;span class=&quot;stub&quot;&gt;stub value&lt;/span&gt;
+</td>
+          </tr><tr>
+            <td class="black">238</td>
+            <td>    &lt;/footer&gt;
+</td>
+          </tr><tr>
+            <td class="black">239</td>
+            <td>&lt;/body&gt;
+</td>
+          </tr><tr>
+            <td class="black">240</td>
+            <td>&lt;/html&gt;&quot;&quot;&quot;))}
+</td>
+          </tr><tr>
+            <td class="black">241</td>
+            <td>    }
+</td>
+          </tr><tr>
+            <td class="black">242</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="red">243</td>
+            <td>    def render(projectName:String,coberturaReport:model.CoberturaReport,checkstyleErrors:Seq[model.CheckstyleIssue],projectMetadatas:model.ScalaProjectMetaDatas): play.api.templates.HtmlFormat.Appendable = <span class="non">apply(projectName,coberturaReport,checkstyleErrors,projectMetadatas)
+</span></td>
+          </tr><tr>
+            <td class="black">244</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="red">245</td>
+            <td>    def f:((String,model.CoberturaReport,Seq[model.CheckstyleIssue],model.ScalaProjectMetaDatas) =&gt; play.api.templates.HtmlFormat.Appendable) = (projectName,coberturaReport,checkstyleErrors,projectMetadatas) =&gt; <span class="non">apply(projectName,coberturaReport,checkstyleErrors,projectMetadatas)
+</span></td>
+          </tr><tr>
+            <td class="black">246</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="red">247</td>
+            <td>    def ref: this.type = <span class="non">this
+</span></td>
+          </tr><tr>
+            <td class="black">248</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">249</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">250</td>
+            <td>                /*
+</td>
+          </tr><tr>
+            <td class="black">251</td>
+            <td>                    -- GENERATED --
+</td>
+          </tr><tr>
+            <td class="black">252</td>
+            <td>                    DATE: Fri Jan 03 23:51:28 CET 2014
+</td>
+          </tr><tr>
+            <td class="black">253</td>
+            <td>                    SOURCE: /Users/ugobourdon/Dev/Projects/ScalaQuality/scala-radar/app/views/project.scala.html
+</td>
+          </tr><tr>
+            <td class="black">254</td>
+            <td>                    HASH: bd70c00666455414f12f014cd663c729de30d4aa
+</td>
+          </tr><tr>
+            <td class="black">255</td>
+            <td>                    MATRIX: 635-&gt;1|884-&gt;155|1069-&gt;305|1083-&gt;311|1138-&gt;345|1225-&gt;397|1239-&gt;403|1297-&gt;440|1549-&gt;656|1593-&gt;691|1648-&gt;708|1710-&gt;734|1743-&gt;745|1794-&gt;760|1827-&gt;771|1882-&gt;794|2365-&gt;1241|2391-&gt;1257|2429-&gt;1272|2555-&gt;1362|2580-&gt;1378|2619-&gt;1394|2858-&gt;1597|2883-&gt;1613|2916-&gt;1624|3327-&gt;1999|3478-&gt;2127|3714-&gt;2327|3739-&gt;2343|3773-&gt;2355|3904-&gt;2450|3929-&gt;2466|3968-&gt;2482|4100-&gt;2578|4125-&gt;2594|4159-&gt;2606|4286-&gt;2697|4311-&gt;2713|4346-&gt;2726|5903-&gt;4247|5928-&gt;4263|5969-&gt;4281|6696-&gt;4971|6740-&gt;5005|6795-&gt;5021|6900-&gt;5089|6933-&gt;5099|6972-&gt;5101|6998-&gt;5117|7027-&gt;5122|7113-&gt;5175|12921-&gt;10946|12967-&gt;10982|13024-&gt;11000|13172-&gt;11110|13198-&gt;11125|13231-&gt;11134|13315-&gt;11185
+</td>
+          </tr><tr>
+            <td class="black">256</td>
+            <td>                    LINES: 19-&gt;1|22-&gt;1|29-&gt;8|29-&gt;8|29-&gt;8|30-&gt;9|30-&gt;9|30-&gt;9|41-&gt;20|41-&gt;20|41-&gt;20|42-&gt;21|42-&gt;21|42-&gt;21|42-&gt;21|43-&gt;22|56-&gt;35|56-&gt;35|56-&gt;35|57-&gt;36|57-&gt;36|57-&gt;36|59-&gt;38|59-&gt;38|59-&gt;38|68-&gt;47|68-&gt;47|72-&gt;51|72-&gt;51|72-&gt;51|73-&gt;52|73-&gt;52|73-&gt;52|74-&gt;53|74-&gt;53|74-&gt;53|75-&gt;54|75-&gt;54|75-&gt;54|102-&gt;81|102-&gt;81|102-&gt;81|121-&gt;100|121-&gt;100|121-&gt;100|122-&gt;101|122-&gt;101|122-&gt;101|122-&gt;101|122-&gt;101|123-&gt;102|216-&gt;195|216-&gt;195|216-&gt;195|217-&gt;196|217-&gt;196|217-&gt;196|218-&gt;197
+</td>
+          </tr><tr>
+            <td class="black">257</td>
+            <td>                    -- GENERATED --
+</td>
+          </tr><tr>
+            <td class="black">258</td>
+            <td>                */
+</td>
+          </tr><tr>
+            <td class="black">259</td>
+            <td>            
+</td>
+          </tr></tbody></table>

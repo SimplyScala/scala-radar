@@ -1,0 +1,121 @@
+<table class="classes"><tbody><tr>
+      <td class="barContainerLeft"><a href="#">&#x200B;file:/&#x200B;Users/&#x200B;ugobourdon/&#x200B;Dev/&#x200B;Projects/&#x200B;ScalaQuality/&#x200B;scala-radar/&#x200B;app/&#x200B;service/&#x200B;engine/<span class="header">&#x200B;CheckstyleXMLParser.scala</span></a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-app_service_engine_CheckstyleXMLParser.scala.html#Object_service_engine_CheckstyleXMLParser"><img src="object.png"/>CheckstyleXMLParser</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr></tbody></table><table class="source"><tbody><tr>
+            <td class="black">1</td>
+            <td>package service.engine
+</td>
+          </tr><tr>
+            <td class="black">2</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">3</td>
+            <td>import scala.xml.{NodeSeq, Node}
+</td>
+          </tr><tr>
+            <td class="black">4</td>
+            <td>import model.CheckstyleIssue.CheckStyleReport
+</td>
+          </tr><tr>
+            <td class="black">5</td>
+            <td>import model.CheckstyleIssue
+</td>
+          </tr><tr>
+            <td class="black">6</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">7</td>
+            <td><a id="Object_service_engine_CheckstyleXMLParser"/>object CheckstyleXMLParser {
+</td>
+          </tr><tr>
+            <td class="black">8</td>
+            <td>    def produceIssues(checkstyleReport: CheckStyleReport): Seq[CheckstyleIssue] = {
+</td>
+          </tr><tr>
+            <td class="black">9</td>
+            <td>        for {
+</td>
+          </tr><tr>
+            <td class="green">10</td>
+            <td>            file &lt;- (checkstyleReport \ &quot;file&quot;)
+</td>
+          </tr><tr>
+            <td class="green">11</td>
+            <td>            error &lt;- extractChildNodes(file)
+</td>
+          </tr><tr>
+            <td class="black">12</td>
+            <td>        } yield {
+</td>
+          </tr><tr>
+            <td class="green">13</td>
+            <td>            CheckstyleIssue(extractAttributValue(error, &quot;severity&quot;),
+</td>
+          </tr><tr>
+            <td class="black">14</td>
+            <td>                extractAttributValue(error, &quot;message&quot;),
+</td>
+          </tr><tr>
+            <td class="green">15</td>
+            <td>                extractOptionalAttributValue(error, &quot;line&quot;).map(_.toInt),
+</td>
+          </tr><tr>
+            <td class="black">16</td>
+            <td>                extractAttributValue(file, &quot;name&quot;))
+</td>
+          </tr><tr>
+            <td class="black">17</td>
+            <td>        }
+</td>
+          </tr><tr>
+            <td class="black">18</td>
+            <td>    }
+</td>
+          </tr><tr>
+            <td class="black">19</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="green">20</td>
+            <td>    private def extractChildNodes(parentNode: Node): NodeSeq = (parentNode \ &quot;error&quot;)
+</td>
+          </tr><tr>
+            <td class="green">21</td>
+            <td>    private def extractAttributValue(node: Node, attributName: String): String = (node \ s&quot;@$attributName&quot;).text
+</td>
+          </tr><tr>
+            <td class="black">22</td>
+            <td>    private def extractOptionalAttributValue(node: Node, attributName: String): Option[String] = {
+</td>
+          </tr><tr>
+            <td class="green">23</td>
+            <td>        val attr = (node \ s&quot;@$attributName&quot;)
+</td>
+          </tr><tr>
+            <td class="green">24</td>
+            <td>        if(attr.isEmpty) None else Option(attr.text)
+</td>
+          </tr><tr>
+            <td class="black">25</td>
+            <td>    }
+</td>
+          </tr><tr>
+            <td class="black">26</td>
+            <td>}
+</td>
+          </tr></tbody></table>

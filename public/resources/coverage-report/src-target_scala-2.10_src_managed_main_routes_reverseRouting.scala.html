@@ -1,0 +1,869 @@
+<table class="classes"><tbody><tr>
+      <td class="barContainerLeft"><a href="#">&#x200B;file:/&#x200B;Users/&#x200B;ugobourdon/&#x200B;Dev/&#x200B;Projects/&#x200B;ScalaQuality/&#x200B;scala-radar/&#x200B;target/&#x200B;scala-2.10/&#x200B;src_managed/&#x200B;main/<span class="header">&#x200B;routes_reverseRouting.scala</span></a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">0 %</div>
+        <div class="greenBar" style="width:0px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-target_scala-2.10_src_managed_main_routes_reverseRouting.scala.html#Class_controllers_ref_ReverseApplication"><img src="class.png"/>ReverseApplication</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">0 %</div>
+        <div class="greenBar" style="width:0px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-target_scala-2.10_src_managed_main_routes_reverseRouting.scala.html#Class_controllers_ref_ReverseAssets"><img src="class.png"/>ReverseAssets</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">0 %</div>
+        <div class="greenBar" style="width:0px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr></tbody></table><table class="source"><tbody><tr>
+            <td class="black">1</td>
+            <td>// @SOURCE:/Users/ugobourdon/Dev/Projects/ScalaQuality/scala-radar/conf/routes
+</td>
+          </tr><tr>
+            <td class="black">2</td>
+            <td>// @HASH:8a6e54849b738db50bb016c3ecbc3e3203bc70e9
+</td>
+          </tr><tr>
+            <td class="black">3</td>
+            <td>// @DATE:Fri Jan 03 23:51:27 CET 2014
+</td>
+          </tr><tr>
+            <td class="black">4</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">5</td>
+            <td>import Routes.{prefix =&gt; _prefix, defaultPrefix =&gt; _defaultPrefix}
+</td>
+          </tr><tr>
+            <td class="black">6</td>
+            <td>import play.core._
+</td>
+          </tr><tr>
+            <td class="black">7</td>
+            <td>import play.core.Router._
+</td>
+          </tr><tr>
+            <td class="black">8</td>
+            <td>import play.core.j._
+</td>
+          </tr><tr>
+            <td class="black">9</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">10</td>
+            <td>import play.api.mvc._
+</td>
+          </tr><tr>
+            <td class="black">11</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">12</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">13</td>
+            <td>import Router.queryString
+</td>
+          </tr><tr>
+            <td class="black">14</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">15</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">16</td>
+            <td>// @LINE:20
+</td>
+          </tr><tr>
+            <td class="black">17</td>
+            <td>// @LINE:15
+</td>
+          </tr><tr>
+            <td class="black">18</td>
+            <td>// @LINE:12
+</td>
+          </tr><tr>
+            <td class="black">19</td>
+            <td>// @LINE:9
+</td>
+          </tr><tr>
+            <td class="black">20</td>
+            <td>// @LINE:6
+</td>
+          </tr><tr>
+            <td class="black">21</td>
+            <td>package controllers {
+</td>
+          </tr><tr>
+            <td class="black">22</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">23</td>
+            <td>// @LINE:20
+</td>
+          </tr><tr>
+            <td class="red">24</td>
+            <td><a id="Class_controllers_ReverseAssets"/>class ReverseAssets <span class="non">{
+</span></td>
+          </tr><tr>
+            <td class="black">25</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">26</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">27</td>
+            <td>// @LINE:20
+</td>
+          </tr><tr>
+            <td class="black">28</td>
+            <td>def at(file:String): Call = {
+</td>
+          </tr><tr>
+            <td class="red">29</td>
+            <td>   <span class="non">Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;assets/&quot; + implicitly[PathBindable[String]].unbind(&quot;file&quot;, file))
+</span></td>
+          </tr><tr>
+            <td class="black">30</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">31</td>
+            <td>                                                
+</td>
+          </tr><tr>
+            <td class="black">32</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">33</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">34</td>
+            <td>                          
+</td>
+          </tr><tr>
+            <td class="black">35</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">36</td>
+            <td>// @LINE:15
+</td>
+          </tr><tr>
+            <td class="black">37</td>
+            <td>// @LINE:12
+</td>
+          </tr><tr>
+            <td class="black">38</td>
+            <td>// @LINE:9
+</td>
+          </tr><tr>
+            <td class="black">39</td>
+            <td>// @LINE:6
+</td>
+          </tr><tr>
+            <td class="red">40</td>
+            <td><a id="Class_controllers_ReverseApplication"/>class ReverseApplication <span class="non">{
+</span></td>
+          </tr><tr>
+            <td class="black">41</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">42</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">43</td>
+            <td>// @LINE:9
+</td>
+          </tr><tr>
+            <td class="black">44</td>
+            <td>def project(projectName:String): Call = {
+</td>
+          </tr><tr>
+            <td class="red">45</td>
+            <td>   <span class="non">Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;project/&quot; + implicitly[PathBindable[String]].unbind(&quot;projectName&quot;, projectName))
+</span></td>
+          </tr><tr>
+            <td class="black">46</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">47</td>
+            <td>                                                
+</td>
+          </tr><tr>
+            <td class="black">48</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">49</td>
+            <td>// @LINE:12
+</td>
+          </tr><tr>
+            <td class="black">50</td>
+            <td>def issues(projectName:String): Call = {
+</td>
+          </tr><tr>
+            <td class="red">51</td>
+            <td>   <span class="non">Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;issues/&quot; + implicitly[PathBindable[String]].unbind(&quot;projectName&quot;, projectName))
+</span></td>
+          </tr><tr>
+            <td class="black">52</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">53</td>
+            <td>                                                
+</td>
+          </tr><tr>
+            <td class="black">54</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">55</td>
+            <td>// @LINE:6
+</td>
+          </tr><tr>
+            <td class="black">56</td>
+            <td>def index(): Call = {
+</td>
+          </tr><tr>
+            <td class="red">57</td>
+            <td>   <span class="non">Call(&quot;GET&quot;, _prefix)
+</span></td>
+          </tr><tr>
+            <td class="black">58</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">59</td>
+            <td>                                                
+</td>
+          </tr><tr>
+            <td class="black">60</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">61</td>
+            <td>// @LINE:15
+</td>
+          </tr><tr>
+            <td class="black">62</td>
+            <td>def coverage(projectName:String): Call = {
+</td>
+          </tr><tr>
+            <td class="red">63</td>
+            <td>   <span class="non">Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;coverage/&quot; + implicitly[PathBindable[String]].unbind(&quot;projectName&quot;, projectName))
+</span></td>
+          </tr><tr>
+            <td class="black">64</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">65</td>
+            <td>                                                
+</td>
+          </tr><tr>
+            <td class="black">66</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">67</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">68</td>
+            <td>                          
+</td>
+          </tr><tr>
+            <td class="black">69</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">70</td>
+            <td>                  
+</td>
+          </tr><tr>
+            <td class="black">71</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">72</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">73</td>
+            <td>// @LINE:20
+</td>
+          </tr><tr>
+            <td class="black">74</td>
+            <td>// @LINE:15
+</td>
+          </tr><tr>
+            <td class="black">75</td>
+            <td>// @LINE:12
+</td>
+          </tr><tr>
+            <td class="black">76</td>
+            <td>// @LINE:9
+</td>
+          </tr><tr>
+            <td class="black">77</td>
+            <td>// @LINE:6
+</td>
+          </tr><tr>
+            <td class="black">78</td>
+            <td>package controllers.javascript {
+</td>
+          </tr><tr>
+            <td class="black">79</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">80</td>
+            <td>// @LINE:20
+</td>
+          </tr><tr>
+            <td class="red">81</td>
+            <td><a id="Class_controllers_javascript_ReverseAssets"/>class ReverseAssets <span class="non">{
+</span></td>
+          </tr><tr>
+            <td class="black">82</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">83</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">84</td>
+            <td>// @LINE:20
+</td>
+          </tr><tr>
+            <td class="red">85</td>
+            <td>def at : JavascriptReverseRoute = <span class="non">JavascriptReverseRoute(
+</span></td>
+          </tr><tr>
+            <td class="black">86</td>
+            <td>   &quot;controllers.Assets.at&quot;,
+</td>
+          </tr><tr>
+            <td class="black">87</td>
+            <td>   &quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">88</td>
+            <td>      function(file) {
+</td>
+          </tr><tr>
+            <td class="black">89</td>
+            <td>      return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;assets/&quot; + (&quot;&quot;&quot; + implicitly[PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;file&quot;, file)})
+</td>
+          </tr><tr>
+            <td class="black">90</td>
+            <td>      }
+</td>
+          </tr><tr>
+            <td class="black">91</td>
+            <td>   &quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">92</td>
+            <td>)
+</td>
+          </tr><tr>
+            <td class="black">93</td>
+            <td>                        
+</td>
+          </tr><tr>
+            <td class="black">94</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">95</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">96</td>
+            <td>              
+</td>
+          </tr><tr>
+            <td class="black">97</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">98</td>
+            <td>// @LINE:15
+</td>
+          </tr><tr>
+            <td class="black">99</td>
+            <td>// @LINE:12
+</td>
+          </tr><tr>
+            <td class="black">100</td>
+            <td>// @LINE:9
+</td>
+          </tr><tr>
+            <td class="black">101</td>
+            <td>// @LINE:6
+</td>
+          </tr><tr>
+            <td class="red">102</td>
+            <td><a id="Class_controllers_javascript_ReverseApplication"/>class ReverseApplication <span class="non">{
+</span></td>
+          </tr><tr>
+            <td class="black">103</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">104</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">105</td>
+            <td>// @LINE:9
+</td>
+          </tr><tr>
+            <td class="red">106</td>
+            <td>def project : JavascriptReverseRoute = <span class="non">JavascriptReverseRoute(
+</span></td>
+          </tr><tr>
+            <td class="black">107</td>
+            <td>   &quot;controllers.Application.project&quot;,
+</td>
+          </tr><tr>
+            <td class="black">108</td>
+            <td>   &quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">109</td>
+            <td>      function(projectName) {
+</td>
+          </tr><tr>
+            <td class="black">110</td>
+            <td>      return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;project/&quot; + (&quot;&quot;&quot; + implicitly[PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;projectName&quot;, projectName)})
+</td>
+          </tr><tr>
+            <td class="black">111</td>
+            <td>      }
+</td>
+          </tr><tr>
+            <td class="black">112</td>
+            <td>   &quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">113</td>
+            <td>)
+</td>
+          </tr><tr>
+            <td class="black">114</td>
+            <td>                        
+</td>
+          </tr><tr>
+            <td class="black">115</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">116</td>
+            <td>// @LINE:12
+</td>
+          </tr><tr>
+            <td class="red">117</td>
+            <td>def issues : JavascriptReverseRoute = <span class="non">JavascriptReverseRoute(
+</span></td>
+          </tr><tr>
+            <td class="black">118</td>
+            <td>   &quot;controllers.Application.issues&quot;,
+</td>
+          </tr><tr>
+            <td class="black">119</td>
+            <td>   &quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">120</td>
+            <td>      function(projectName) {
+</td>
+          </tr><tr>
+            <td class="black">121</td>
+            <td>      return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;issues/&quot; + (&quot;&quot;&quot; + implicitly[PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;projectName&quot;, projectName)})
+</td>
+          </tr><tr>
+            <td class="black">122</td>
+            <td>      }
+</td>
+          </tr><tr>
+            <td class="black">123</td>
+            <td>   &quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">124</td>
+            <td>)
+</td>
+          </tr><tr>
+            <td class="black">125</td>
+            <td>                        
+</td>
+          </tr><tr>
+            <td class="black">126</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">127</td>
+            <td>// @LINE:6
+</td>
+          </tr><tr>
+            <td class="red">128</td>
+            <td>def index : JavascriptReverseRoute = <span class="non">JavascriptReverseRoute(
+</span></td>
+          </tr><tr>
+            <td class="black">129</td>
+            <td>   &quot;controllers.Application.index&quot;,
+</td>
+          </tr><tr>
+            <td class="black">130</td>
+            <td>   &quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">131</td>
+            <td>      function() {
+</td>
+          </tr><tr>
+            <td class="black">132</td>
+            <td>      return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + &quot;&quot;&quot;&quot;})
+</td>
+          </tr><tr>
+            <td class="black">133</td>
+            <td>      }
+</td>
+          </tr><tr>
+            <td class="black">134</td>
+            <td>   &quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">135</td>
+            <td>)
+</td>
+          </tr><tr>
+            <td class="black">136</td>
+            <td>                        
+</td>
+          </tr><tr>
+            <td class="black">137</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">138</td>
+            <td>// @LINE:15
+</td>
+          </tr><tr>
+            <td class="red">139</td>
+            <td>def coverage : JavascriptReverseRoute = <span class="non">JavascriptReverseRoute(
+</span></td>
+          </tr><tr>
+            <td class="black">140</td>
+            <td>   &quot;controllers.Application.coverage&quot;,
+</td>
+          </tr><tr>
+            <td class="black">141</td>
+            <td>   &quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">142</td>
+            <td>      function(projectName) {
+</td>
+          </tr><tr>
+            <td class="black">143</td>
+            <td>      return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;coverage/&quot; + (&quot;&quot;&quot; + implicitly[PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;projectName&quot;, projectName)})
+</td>
+          </tr><tr>
+            <td class="black">144</td>
+            <td>      }
+</td>
+          </tr><tr>
+            <td class="black">145</td>
+            <td>   &quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">146</td>
+            <td>)
+</td>
+          </tr><tr>
+            <td class="black">147</td>
+            <td>                        
+</td>
+          </tr><tr>
+            <td class="black">148</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">149</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">150</td>
+            <td>              
+</td>
+          </tr><tr>
+            <td class="black">151</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">152</td>
+            <td>        
+</td>
+          </tr><tr>
+            <td class="black">153</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">154</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">155</td>
+            <td>// @LINE:20
+</td>
+          </tr><tr>
+            <td class="black">156</td>
+            <td>// @LINE:15
+</td>
+          </tr><tr>
+            <td class="black">157</td>
+            <td>// @LINE:12
+</td>
+          </tr><tr>
+            <td class="black">158</td>
+            <td>// @LINE:9
+</td>
+          </tr><tr>
+            <td class="black">159</td>
+            <td>// @LINE:6
+</td>
+          </tr><tr>
+            <td class="black">160</td>
+            <td>package controllers.ref {
+</td>
+          </tr><tr>
+            <td class="black">161</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">162</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">163</td>
+            <td>// @LINE:20
+</td>
+          </tr><tr>
+            <td class="red">164</td>
+            <td><a id="Class_controllers_ref_ReverseAssets"/>class ReverseAssets <span class="non">{
+</span></td>
+          </tr><tr>
+            <td class="black">165</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">166</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">167</td>
+            <td>// @LINE:20
+</td>
+          </tr><tr>
+            <td class="red">168</td>
+            <td>def at(path:String, file:String): play.api.mvc.HandlerRef[_] = <span class="non">new play.api.mvc.HandlerRef(
+</span></td>
+          </tr><tr>
+            <td class="black">169</td>
+            <td>   controllers.Assets.at(path, file), HandlerDef(this, &quot;controllers.Assets&quot;, &quot;at&quot;, Seq(classOf[String], classOf[String]), &quot;GET&quot;, &quot;&quot;&quot; Map static resources from the /public folder to the /assets URL path&quot;&quot;&quot;, _prefix + &quot;&quot;&quot;assets/$file&lt;.+&gt;&quot;&quot;&quot;)
+</td>
+          </tr><tr>
+            <td class="black">170</td>
+            <td>)
+</td>
+          </tr><tr>
+            <td class="black">171</td>
+            <td>                      
+</td>
+          </tr><tr>
+            <td class="black">172</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">173</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">174</td>
+            <td>                          
+</td>
+          </tr><tr>
+            <td class="black">175</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">176</td>
+            <td>// @LINE:15
+</td>
+          </tr><tr>
+            <td class="black">177</td>
+            <td>// @LINE:12
+</td>
+          </tr><tr>
+            <td class="black">178</td>
+            <td>// @LINE:9
+</td>
+          </tr><tr>
+            <td class="black">179</td>
+            <td>// @LINE:6
+</td>
+          </tr><tr>
+            <td class="red">180</td>
+            <td><a id="Class_controllers_ref_ReverseApplication"/>class ReverseApplication <span class="non">{
+</span></td>
+          </tr><tr>
+            <td class="black">181</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">182</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">183</td>
+            <td>// @LINE:9
+</td>
+          </tr><tr>
+            <td class="red">184</td>
+            <td>def project(projectName:String): play.api.mvc.HandlerRef[_] = <span class="non">new play.api.mvc.HandlerRef(
+</span></td>
+          </tr><tr>
+            <td class="black">185</td>
+            <td>   controllers.Application.project(projectName), HandlerDef(this, &quot;controllers.Application&quot;, &quot;project&quot;, Seq(classOf[String]), &quot;GET&quot;, &quot;&quot;&quot; Project views&quot;&quot;&quot;, _prefix + &quot;&quot;&quot;project/$projectName&lt;.+&gt;&quot;&quot;&quot;)
+</td>
+          </tr><tr>
+            <td class="black">186</td>
+            <td>)
+</td>
+          </tr><tr>
+            <td class="black">187</td>
+            <td>                      
+</td>
+          </tr><tr>
+            <td class="black">188</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">189</td>
+            <td>// @LINE:12
+</td>
+          </tr><tr>
+            <td class="red">190</td>
+            <td>def issues(projectName:String): play.api.mvc.HandlerRef[_] = <span class="non">new play.api.mvc.HandlerRef(
+</span></td>
+          </tr><tr>
+            <td class="black">191</td>
+            <td>   controllers.Application.issues(projectName), HandlerDef(this, &quot;controllers.Application&quot;, &quot;issues&quot;, Seq(classOf[String]), &quot;GET&quot;, &quot;&quot;&quot; Issues views&quot;&quot;&quot;, _prefix + &quot;&quot;&quot;issues/$projectName&lt;.+&gt;&quot;&quot;&quot;)
+</td>
+          </tr><tr>
+            <td class="black">192</td>
+            <td>)
+</td>
+          </tr><tr>
+            <td class="black">193</td>
+            <td>                      
+</td>
+          </tr><tr>
+            <td class="black">194</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">195</td>
+            <td>// @LINE:6
+</td>
+          </tr><tr>
+            <td class="red">196</td>
+            <td>def index(): play.api.mvc.HandlerRef[_] = <span class="non">new play.api.mvc.HandlerRef(
+</span></td>
+          </tr><tr>
+            <td class="black">197</td>
+            <td>   controllers.Application.index(), HandlerDef(this, &quot;controllers.Application&quot;, &quot;index&quot;, Seq(), &quot;GET&quot;, &quot;&quot;&quot; Home page&quot;&quot;&quot;, _prefix + &quot;&quot;&quot;&quot;&quot;&quot;)
+</td>
+          </tr><tr>
+            <td class="black">198</td>
+            <td>)
+</td>
+          </tr><tr>
+            <td class="black">199</td>
+            <td>                      
+</td>
+          </tr><tr>
+            <td class="black">200</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">201</td>
+            <td>// @LINE:15
+</td>
+          </tr><tr>
+            <td class="red">202</td>
+            <td>def coverage(projectName:String): play.api.mvc.HandlerRef[_] = <span class="non">new play.api.mvc.HandlerRef(
+</span></td>
+          </tr><tr>
+            <td class="black">203</td>
+            <td>   controllers.Application.coverage(projectName), HandlerDef(this, &quot;controllers.Application&quot;, &quot;coverage&quot;, Seq(classOf[String]), &quot;GET&quot;, &quot;&quot;&quot; Coverage views&quot;&quot;&quot;, _prefix + &quot;&quot;&quot;coverage/$projectName&lt;.+&gt;&quot;&quot;&quot;)
+</td>
+          </tr><tr>
+            <td class="black">204</td>
+            <td>)
+</td>
+          </tr><tr>
+            <td class="black">205</td>
+            <td>                      
+</td>
+          </tr><tr>
+            <td class="black">206</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="black">207</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">208</td>
+            <td>                          
+</td>
+          </tr><tr>
+            <td class="black">209</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">210</td>
+            <td>        
+</td>
+          </tr><tr>
+            <td class="black">211</td>
+            <td>    
+</td>
+          </tr></tbody></table>

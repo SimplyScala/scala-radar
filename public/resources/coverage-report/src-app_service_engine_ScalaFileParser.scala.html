@@ -1,0 +1,217 @@
+<table class="classes"><tbody><tr>
+      <td class="barContainerLeft"><a href="#">&#x200B;file:/&#x200B;Users/&#x200B;ugobourdon/&#x200B;Dev/&#x200B;Projects/&#x200B;ScalaQuality/&#x200B;scala-radar/&#x200B;app/&#x200B;service/&#x200B;engine/<span class="header">&#x200B;ScalaFileParser.scala</span></a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-app_service_engine_ScalaFileParser.scala.html#Object_service_engine_ScalaFileParser"><img src="object.png"/>ScalaFileParser</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr></tbody></table><table class="source"><tbody><tr>
+            <td class="black">1</td>
+            <td>package service.engine
+</td>
+          </tr><tr>
+            <td class="black">2</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">3</td>
+            <td>import model.{ScalaMetadatas, ScalaFileMetadatas}
+</td>
+          </tr><tr>
+            <td class="black">4</td>
+            <td>import util.RichString
+</td>
+          </tr><tr>
+            <td class="black">5</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">6</td>
+            <td><a id="Object_service_engine_ScalaFileParser"/>object ScalaFileParser extends RichString {
+</td>
+          </tr><tr>
+            <td class="black">7</td>
+            <td>    // TODO use FileLines label instead of Iterable[String]
+</td>
+          </tr><tr>
+            <td class="black">8</td>
+            <td>    def produceFileMetadatas(fileLines: Iterable[String]): ScalaFileMetadatas = {
+</td>
+          </tr><tr>
+            <td class="green">9</td>
+            <td>        val linesNumber = fileLines.size
+</td>
+          </tr><tr>
+            <td class="green">10</td>
+            <td>        val blankLinesNumber = fileLines.count( _.isBlank )
+</td>
+          </tr><tr>
+            <td class="green">11</td>
+            <td>        val simpleCommentLinesNumber = fileLines.count( _.trim.startsWith(&quot;//&quot;) )
+</td>
+          </tr><tr>
+            <td class="black">12</td>
+            <td>        val multiLineCommentLineNumber = {
+</td>
+          </tr><tr>
+            <td class="green">13</td>
+            <td>            var count = 0
+</td>
+          </tr><tr>
+            <td class="green">14</td>
+            <td>            var isMultiComment = false
+</td>
+          </tr><tr>
+            <td class="green">15</td>
+            <td>            for(line &lt;- fileLines) {
+</td>
+          </tr><tr>
+            <td class="green">16</td>
+            <td>                if(isMultiComment) count += 1
+</td>
+          </tr><tr>
+            <td class="green">17</td>
+            <td>                if(line.trim.startsWith(&quot;/*&quot;)) { count += 1; isMultiComment = true }
+</td>
+          </tr><tr>
+            <td class="green">18</td>
+            <td>                if(line.trim.endsWith(&quot;*/&quot;)) isMultiComment = false
+</td>
+          </tr><tr>
+            <td class="black">19</td>
+            <td>            }
+</td>
+          </tr><tr>
+            <td class="black">20</td>
+            <td>            // TODO refaire le calcul de manière fonctionnelle
+</td>
+          </tr><tr>
+            <td class="black">21</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="green">22</td>
+            <td>            count
+</td>
+          </tr><tr>
+            <td class="black">23</td>
+            <td>        }
+</td>
+          </tr><tr>
+            <td class="green">24</td>
+            <td>        val headerLine = fileLines.count { line =&gt; line.trim.startsWith(&quot;import&quot;) || line.trim.startsWith(&quot;package&quot;) }
+</td>
+          </tr><tr>
+            <td class="green">25</td>
+            <td>        val codeLine = linesNumber - blankLinesNumber - simpleCommentLinesNumber - multiLineCommentLineNumber - headerLine
+</td>
+          </tr><tr>
+            <td class="black">26</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="green">27</td>
+            <td>        ScalaFileMetadatas(linesNumber, blankLinesNumber, simpleCommentLinesNumber + multiLineCommentLineNumber, headerLine, codeLine)
+</td>
+          </tr><tr>
+            <td class="black">28</td>
+            <td>    }
+</td>
+          </tr><tr>
+            <td class="black">29</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">30</td>
+            <td>    def produceScalaMetadatas(fileLines: Iterable[String]): ScalaMetadatas = {
+</td>
+          </tr><tr>
+            <td class="green">31</td>
+            <td>        val classNumber = countOccurenceWithoutMultiLineComment(line =&gt; line.trim.startsWith(&quot;class&quot;), fileLines)
+</td>
+          </tr><tr>
+            <td class="green">32</td>
+            <td>        val caseClassNumber = countOccurenceWithoutMultiLineComment(line =&gt; line.trim.startsWith(&quot;case class&quot;), fileLines)
+</td>
+          </tr><tr>
+            <td class="green">33</td>
+            <td>        val traitNumber = countOccurenceWithoutMultiLineComment(line =&gt; line.trim.startsWith(&quot;trait&quot;) || line.trim.startsWith(&quot;sealed trait&quot;), fileLines)
+</td>
+          </tr><tr>
+            <td class="green">34</td>
+            <td>        val objectNumber = countOccurenceWithoutMultiLineComment(line =&gt; line.trim.startsWith(&quot;object&quot;), fileLines)
+</td>
+          </tr><tr>
+            <td class="black">35</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="green">36</td>
+            <td>        ScalaMetadatas(classNumber, caseClassNumber, traitNumber, objectNumber)
+</td>
+          </tr><tr>
+            <td class="black">37</td>
+            <td>    }
+</td>
+          </tr><tr>
+            <td class="black">38</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">39</td>
+            <td>    private def countOccurenceWithoutMultiLineComment(testOccurence: String =&gt; Boolean, fileLines: Iterable[String]): Int = {
+</td>
+          </tr><tr>
+            <td class="green">40</td>
+            <td>        var isMultiComment = false
+</td>
+          </tr><tr>
+            <td class="green">41</td>
+            <td>        var count = 0
+</td>
+          </tr><tr>
+            <td class="green">42</td>
+            <td>        for(line &lt;- fileLines) {
+</td>
+          </tr><tr>
+            <td class="green">43</td>
+            <td>            if(line.trim.startsWith(&quot;/*&quot;)) isMultiComment = true
+</td>
+          </tr><tr>
+            <td class="green">44</td>
+            <td>            if(line.trim.endsWith(&quot;*/&quot;)) isMultiComment = false
+</td>
+          </tr><tr>
+            <td class="green">45</td>
+            <td>            if(!isMultiComment &amp;&amp; testOccurence(line)) count += 1
+</td>
+          </tr><tr>
+            <td class="black">46</td>
+            <td>        }
+</td>
+          </tr><tr>
+            <td class="black">47</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="green">48</td>
+            <td>        count
+</td>
+          </tr><tr>
+            <td class="black">49</td>
+            <td>    }
+</td>
+          </tr><tr>
+            <td class="black">50</td>
+            <td>}
+</td>
+          </tr></tbody></table>

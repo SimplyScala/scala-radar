@@ -1,0 +1,305 @@
+<table class="classes"><tbody><tr>
+      <td class="barContainerLeft"><a href="#">&#x200B;file:/&#x200B;Users/&#x200B;ugobourdon/&#x200B;Dev/&#x200B;Projects/&#x200B;ScalaQuality/&#x200B;scala-radar/&#x200B;target/&#x200B;scala-2.10/&#x200B;src_managed/&#x200B;main/&#x200B;views/&#x200B;html/<span class="header">&#x200B;coverage.template.scala</span></a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">0 %</div>
+        <div class="greenBar" style="width:0px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-target_scala-2.10_src_managed_main_views_html_coverage.template.scala.html#Object_views_html_coverage"><img src="object.png"/>coverage</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">0 %</div>
+        <div class="greenBar" style="width:0px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr></tbody></table><table class="source"><tbody><tr>
+            <td class="black">1</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">2</td>
+            <td>package views.html
+</td>
+          </tr><tr>
+            <td class="black">3</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">4</td>
+            <td>import play.templates._
+</td>
+          </tr><tr>
+            <td class="black">5</td>
+            <td>import play.templates.TemplateMagic._
+</td>
+          </tr><tr>
+            <td class="black">6</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">7</td>
+            <td>import play.api.templates._
+</td>
+          </tr><tr>
+            <td class="black">8</td>
+            <td>import play.api.templates.PlayMagic._
+</td>
+          </tr><tr>
+            <td class="black">9</td>
+            <td>import models._
+</td>
+          </tr><tr>
+            <td class="black">10</td>
+            <td>import controllers._
+</td>
+          </tr><tr>
+            <td class="black">11</td>
+            <td>import play.api.i18n._
+</td>
+          </tr><tr>
+            <td class="black">12</td>
+            <td>import play.api.mvc._
+</td>
+          </tr><tr>
+            <td class="black">13</td>
+            <td>import play.api.data._
+</td>
+          </tr><tr>
+            <td class="black">14</td>
+            <td>import views.html._
+</td>
+          </tr><tr>
+            <td class="black">15</td>
+            <td>/**/
+</td>
+          </tr><tr>
+            <td class="black">16</td>
+            <td><a id="Object_views_html_coverage"/>object coverage extends BaseScalaTemplate[play.api.templates.HtmlFormat.Appendable,Format[play.api.templates.HtmlFormat.Appendable]](play.api.templates.HtmlFormat) with play.api.templates.Template2[String,Html,play.api.templates.HtmlFormat.Appendable] {
+</td>
+          </tr><tr>
+            <td class="black">17</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">18</td>
+            <td>    /**/
+</td>
+          </tr><tr>
+            <td class="black">19</td>
+            <td>    def apply/*1.2*/(projectName: String, coverageView: Html):play.api.templates.HtmlFormat.Appendable = {
+</td>
+          </tr><tr>
+            <td class="red">20</td>
+            <td>        <span class="non">_display_ {
+</span></td>
+          </tr><tr>
+            <td class="black">21</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">22</td>
+            <td>Seq[Any](format.raw/*1.43*/(&quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">23</td>
+            <td>&lt;!DOCTYPE html&gt;
+</td>
+          </tr><tr>
+            <td class="black">24</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">25</td>
+            <td>&lt;html lang=&quot;fr&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">26</td>
+            <td>&lt;head&gt;
+</td>
+          </tr><tr>
+            <td class="black">27</td>
+            <td>    &lt;title&gt;Scala Radar&lt;/title&gt;
+</td>
+          </tr><tr>
+            <td class="black">28</td>
+            <td>    &lt;meta charset=&quot;utf-8&quot;/&gt;
+</td>
+          </tr><tr>
+            <td class="black">29</td>
+            <td>    &lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href='&quot;&quot;&quot;),_display_(Seq[Any](/*8.50*/routes/*8.56*/.Assets.at(&quot;stylesheets/main.css&quot;))),format.raw/*8.90*/(&quot;&quot;&quot;'&gt;
+</td>
+          </tr><tr>
+            <td class="black">30</td>
+            <td>    &lt;script src=&quot;http://code.jquery.com/jquery.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+</td>
+          </tr><tr>
+            <td class="black">31</td>
+            <td>&lt;/head&gt;
+</td>
+          </tr><tr>
+            <td class="black">32</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">33</td>
+            <td>&lt;body&gt;
+</td>
+          </tr><tr>
+            <td class="black">34</td>
+            <td>    &lt;header&gt;
+</td>
+          </tr><tr>
+            <td class="black">35</td>
+            <td>        &lt;a href=&quot;/&quot;&gt;Dashboards&lt;/a&gt;
+</td>
+          </tr><tr>
+            <td class="black">36</td>
+            <td>    &lt;/header&gt;
+</td>
+          </tr><tr>
+            <td class="black">37</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">38</td>
+            <td>    &lt;div id=&quot;path&quot;&gt;
+</td>
+          </tr><tr>
+            <td class="black">39</td>
+            <td>        &lt;ul&gt;
+</td>
+          </tr><tr>
+            <td class="red">40</td>
+            <td>            &quot;&quot;&quot;),_display_(Seq[Any](/*19.14*/defining(&quot;/project/&quot; + projectName)/*19.49*/ { projectLink =&gt;<span class="non">_display_(Seq[Any](format.raw/*19.66*/(&quot;&quot;&quot;
+</span></td>
+          </tr><tr>
+            <td class="black">41</td>
+            <td>            &lt;li&gt;&lt;a href=&quot;&quot;&quot;),_display_(Seq[Any](/*20.26*/projectLink)),format.raw/*20.37*/(&quot;&quot;&quot; class=&quot;stub&quot;&gt;&quot;&quot;&quot;),_display_(Seq[Any](/*20.52*/projectName)),format.raw/*20.63*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/li&gt;
+</td>
+          </tr><tr>
+            <td class="black">42</td>
+            <td>            &quot;&quot;&quot;)))})),format.raw/*21.14*/(&quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">43</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">44</td>
+            <td>        &lt;/ul&gt;
+</td>
+          </tr><tr>
+            <td class="black">45</td>
+            <td>    &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">46</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">47</td>
+            <td>    &lt;div&gt;
+</td>
+          </tr><tr>
+            <td class="black">48</td>
+            <td>        &quot;&quot;&quot;),_display_(Seq[Any](/*27.10*/coverageView)),format.raw/*27.22*/(&quot;&quot;&quot;
+</td>
+          </tr><tr>
+            <td class="black">49</td>
+            <td>    &lt;/div&gt;
+</td>
+          </tr><tr>
+            <td class="black">50</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">51</td>
+            <td>&lt;/body&gt;
+</td>
+          </tr><tr>
+            <td class="black">52</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">53</td>
+            <td>&lt;/html&gt;&quot;&quot;&quot;))}
+</td>
+          </tr><tr>
+            <td class="black">54</td>
+            <td>    }
+</td>
+          </tr><tr>
+            <td class="black">55</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="red">56</td>
+            <td>    def render(projectName:String,coverageView:Html): play.api.templates.HtmlFormat.Appendable = <span class="non">apply(projectName,coverageView)
+</span></td>
+          </tr><tr>
+            <td class="black">57</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="red">58</td>
+            <td>    def f:((String,Html) =&gt; play.api.templates.HtmlFormat.Appendable) = (projectName,coverageView) =&gt; <span class="non">apply(projectName,coverageView)
+</span></td>
+          </tr><tr>
+            <td class="black">59</td>
+            <td>    
+</td>
+          </tr><tr>
+            <td class="red">60</td>
+            <td>    def ref: this.type = <span class="non">this
+</span></td>
+          </tr><tr>
+            <td class="black">61</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">62</td>
+            <td>}
+</td>
+          </tr><tr>
+            <td class="black">63</td>
+            <td>                /*
+</td>
+          </tr><tr>
+            <td class="black">64</td>
+            <td>                    -- GENERATED --
+</td>
+          </tr><tr>
+            <td class="black">65</td>
+            <td>                    DATE: Fri Jan 03 23:51:28 CET 2014
+</td>
+          </tr><tr>
+            <td class="black">66</td>
+            <td>                    SOURCE: /Users/ugobourdon/Dev/Projects/ScalaQuality/scala-radar/app/views/coverage.scala.html
+</td>
+          </tr><tr>
+            <td class="black">67</td>
+            <td>                    HASH: 733cb255b659e24633806cb1b6bbac4a7885b0c9
+</td>
+          </tr><tr>
+            <td class="black">68</td>
+            <td>                    MATRIX: 564-&gt;1|699-&gt;42|884-&gt;192|898-&gt;198|953-&gt;232|1205-&gt;448|1249-&gt;483|1304-&gt;500|1366-&gt;526|1399-&gt;537|1450-&gt;552|1483-&gt;563|1538-&gt;586|1621-&gt;633|1655-&gt;645
+</td>
+          </tr><tr>
+            <td class="black">69</td>
+            <td>                    LINES: 19-&gt;1|22-&gt;1|29-&gt;8|29-&gt;8|29-&gt;8|40-&gt;19|40-&gt;19|40-&gt;19|41-&gt;20|41-&gt;20|41-&gt;20|41-&gt;20|42-&gt;21|48-&gt;27|48-&gt;27
+</td>
+          </tr><tr>
+            <td class="black">70</td>
+            <td>                    -- GENERATED --
+</td>
+          </tr><tr>
+            <td class="black">71</td>
+            <td>                */
+</td>
+          </tr><tr>
+            <td class="black">72</td>
+            <td>            
+</td>
+          </tr></tbody></table>

@@ -1,0 +1,61 @@
+<table class="classes"><tbody><tr>
+      <td class="barContainerLeft"><a href="#">&#x200B;file:/&#x200B;Users/&#x200B;ugobourdon/&#x200B;Dev/&#x200B;Projects/&#x200B;ScalaQuality/&#x200B;scala-radar/&#x200B;app/&#x200B;util/<span class="header">&#x200B;RichString.scala</span></a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-app_util_RichString.scala.html#Trait_util_RichString"><img src="trait.png"/>RichString</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-app_util_RichString.scala.html#Class_util_RichString_RichString"><img src="class.png"/>RichString.RichString</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr></tbody></table><table class="source"><tbody><tr>
+            <td class="black">1</td>
+            <td>package util
+</td>
+          </tr><tr>
+            <td class="black">2</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">3</td>
+            <td><a id="Trait_util_RichString"/>trait RichString {
+</td>
+          </tr><tr>
+            <td class="green">4</td>
+            <td>    implicit def string2RichString(string: String): RichString = RichString(string)
+</td>
+          </tr><tr>
+            <td class="black">5</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="green">6</td>
+            <td><a id="Class_util_RichString_RichString"/>    case class RichString(string: String) {
+</td>
+          </tr><tr>
+            <td class="green">7</td>
+            <td>        def isBlank: Boolean = string.trim.isEmpty
+</td>
+          </tr><tr>
+            <td class="black">8</td>
+            <td>    }
+</td>
+          </tr><tr>
+            <td class="black">9</td>
+            <td>}
+</td>
+          </tr></tbody></table>

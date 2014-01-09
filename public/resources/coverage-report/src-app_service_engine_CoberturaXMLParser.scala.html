@@ -1,0 +1,57 @@
+<table class="classes"><tbody><tr>
+      <td class="barContainerLeft"><a href="#">&#x200B;file:/&#x200B;Users/&#x200B;ugobourdon/&#x200B;Dev/&#x200B;Projects/&#x200B;ScalaQuality/&#x200B;scala-radar/&#x200B;app/&#x200B;service/&#x200B;engine/<span class="header">&#x200B;CoberturaXMLParser.scala</span></a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr><tr>
+      <td class="barContainerLeft"><a href="src-app_service_engine_CoberturaXMLParser.scala.html#Object_service_engine_CoberturaXMLParser"><img src="object.png"/>CoberturaXMLParser</a></td>
+      <td class="barContainerRight"><div class="percentages">
+      <div class="bar">
+        <div class="percentage">100 %</div>
+        <div class="greenBar" style="width:200px;">&nbsp;</div>
+      </div>
+    </div></td>
+    </tr></tbody></table><table class="source"><tbody><tr>
+            <td class="black">1</td>
+            <td>package service.engine
+</td>
+          </tr><tr>
+            <td class="black">2</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">3</td>
+            <td>import model.CoberturaReport
+</td>
+          </tr><tr>
+            <td class="black">4</td>
+            <td>import model.CoberturaReport.CoberturaXMLReport
+</td>
+          </tr><tr>
+            <td class="black">5</td>
+            <td>
+</td>
+          </tr><tr>
+            <td class="black">6</td>
+            <td><a id="Object_service_engine_CoberturaXMLParser"/>object CoberturaXMLParser {
+</td>
+          </tr><tr>
+            <td class="black">7</td>
+            <td>    def produceCodeCoverageReport(coberturaReport: CoberturaXMLReport): CoberturaReport = {
+</td>
+          </tr><tr>
+            <td class="green">8</td>
+            <td>        CoberturaReport( ( coberturaReport \ &quot;@line-rate&quot; ).text.toDouble * 100 )
+</td>
+          </tr><tr>
+            <td class="black">9</td>
+            <td>    }
+</td>
+          </tr><tr>
+            <td class="black">10</td>
+            <td>}
+</td>
+          </tr></tbody></table>

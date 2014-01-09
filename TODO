@@ -31,3 +31,15 @@ ecran de build permet de voir ou en est chaque étape
 métriques d'évolutions
     - flèche progression, regresison, stagnation
     - différents graphiques (eventsourcing ???...)
+
+
+Objectif
+    utiliser plugin scct dans le play/sbt du serveur scala-radar
+    installer scalastyle-batch
+
+Questions :
+    Comment je sais si le build play/sbt est fini ?
+    Comment je sais combien de tests sont passés/échoués ? Y-a-t-il un moyen de la savoir programmatiquement parlant via sbt api ?
+    Utiliser un watcher java pour voir si tel ou tel fichier est créer ? ou utiliser des run bloquant avec ping quand fini ?
+
+exclude some path pour scct sur playframework
