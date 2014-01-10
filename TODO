@@ -1,17 +1,19 @@
 # PENSE BETE
 
+####################       FAIRE UN BACKLOG DIGNE DE CE NOM       ###################### ^^
+
 chaque build doit avoir un écran log
 
 calcul de complexité
 
 fumer les TODO (dans le code)
 
-chaque build lance asynchronement et non intrusivement dans le projet :
+chaque build lance asynchronement et non intrusivement dans le projet :                                                             ####### WIP
     - calcul metadatas
     - test code covergae
     - scalastyle
 
-récupérer le code à scanner via git
+récupérer le code à scanner via git                                                                                                 ####### WIP
 
 permettre un build avec des données déjà produites (checkstyle.xml, scct report, etc...)
 
@@ -34,8 +36,8 @@ métriques d'évolutions
 
 
 Objectif
-    utiliser plugin scct dans le play/sbt du serveur scala-radar
-    installer scalastyle-batch
+    utiliser plugin scct dans le play/sbt du serveur scala-radar                                                                    ####### OK
+    installer scalastyle-batch                                                                                                      ####### OK
 
 Questions :
     Comment je sais si le build play/sbt est fini ?
@@ -43,3 +45,7 @@ Questions :
     Utiliser un watcher java pour voir si tel ou tel fichier est créer ? ou utiliser des run bloquant avec ping quand fini ?
 
 exclude some path pour scct sur playframework
+
+vérifié que tous les soft nécessaire au fonctionnement de scala-radar sont présent au démarrage de l'appli (sbt/play avec scct, scala-style batch)
+
+permettre des sandbox build (en shintant certaisn sub-build par exemple) pour des feedback plus rapide pour dev

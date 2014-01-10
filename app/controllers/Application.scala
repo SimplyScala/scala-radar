@@ -6,7 +6,7 @@ import service.engine.{ScalaProjectParser, CoberturaXMLParser, CheckstyleXMLPars
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
 import play.api.libs.json.Writes._
-import scalax.file.{Path, PathSet}
+import scalax.file.Path
 
 object Application extends Controller {
 

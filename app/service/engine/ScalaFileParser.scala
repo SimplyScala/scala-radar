@@ -28,6 +28,9 @@ object ScalaFileParser extends RichString {
     }
 
     def produceScalaMetadatas(fileLines: Iterable[String]): ScalaMetadatas = {
+        // TODO sealed case class, sealed class
+        // TODO case object
+
         val classNumber = countOccurenceWithoutMultiLineComment(line => line.trim.startsWith("class"), fileLines)
         val caseClassNumber = countOccurenceWithoutMultiLineComment(line => line.trim.startsWith("case class"), fileLines)
         val traitNumber = countOccurenceWithoutMultiLineComment(line => line.trim.startsWith("trait") || line.trim.startsWith("sealed trait"), fileLines)

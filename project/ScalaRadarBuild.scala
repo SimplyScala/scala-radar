@@ -6,18 +6,17 @@ object ScalaRadarBuild extends Build {
     val appVersion = "1.0-SNAPSHOT"
 
     val appDependencies = Seq(
-        "org.scalatest" %% "scalatest" % "2.0" % "test",
         "com.github.scala-incubator.io" %% "scala-io-core" % "0.4.2",
-        "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.2"
+        "com.github.scala-incubator.io" %% "scala-io-file" % "0.4.2",
+        "joda-time"                     %  "joda-time"     % "2.3",
+        "org.scalatest"                 %% "scalatest"     % "2.0"      % "test",
+        "com.typesafe.akka"             %% "akka-testkit"  % "2.2.1"    % "test",
+        "org.mockito"                   %  "mockito-all"   % "1.9.5"    % "test"
     )
 
     val main = play.Project(appName, appVersion, appDependencies).settings(
 
-        //testOptions in Test := Nil, //to run scalatest in play2 console arghhhh!!!
-
         // available test resources in play2 classpath
-        unmanagedClasspath in Test <+= (baseDirectory) map {
-            bd => Attributed.blank(bd / "test")
-        }
+        unmanagedClasspath in Test <+= (baseDirectory) map { bd => Attributed.blank(bd / "test") }
     )
 }

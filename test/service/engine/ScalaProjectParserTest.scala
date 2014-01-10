@@ -65,7 +65,6 @@ class ScalaProjectParserTest extends FunSuite with Matchers {
 
     test("[integration] should count class number") {
         val scalaFile = ("test" \ "resources" \ "stubedProject" \ "simplePackage" * "*.scala").toSet
-        scalaFile.foreach(println)
         ScalaProjectParser.produceScalaProjectMetadatas(scalaFile) shouldBe ScalaProjectMetaDatas(3, 1, 1, 1, 1, 22, 7, 4, 4, 7)
     }
 }

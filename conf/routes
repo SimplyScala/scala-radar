@@ -16,5 +16,9 @@ GET     /coverage/*projectName          controllers.Application.coverage(project
 #GET     / controllers.Assets.at(path="/public/html", file="index.html")
 
 
+### Build Controller
+#GET     /build                          controllers.ProjectBuildController.index
+GET     /build/*projectId               controllers.ProjectBuildController.launch(projectId)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                   controllers.Assets.at(path="/public", file)
