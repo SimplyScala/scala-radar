@@ -3,7 +3,11 @@ package service.engine
 import model.ScalaProjectMetaDatas
 import scalax.file.Path
 
-object ScalaProjectParser {
+trait ScalaProjectParser {
+    def produceScalaProjectMetadatas(files: Set[Path]): ScalaProjectMetaDatas
+}
+
+object ScalaProjectParser extends ScalaProjectParser {
     def produceScalaProjectMetadatas(files: Set[Path]): ScalaProjectMetaDatas = {
         val filesNumber = files.size
 

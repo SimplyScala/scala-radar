@@ -2,8 +2,10 @@ package service.build
 
 import akka.actor._
 
-class TestCodeCoverageSubBuilder(val ref: ActorRef) {
-    def this(system: ActorSystem) = this(system.actorOf(TestCodeCoverageSubBuilder.props, TestCodeCoverageSubBuilder.name))
+case object TestCodeCoverageSubBuilderName extends SubBuilderName
+
+class TestCodeCoverageSubBuilder(val ref: ActorRef) extends SubBuilder {
+    def this(context: ActorRefFactory) = this(context.actorOf(TestCodeCoverageSubBuilder.props, TestCodeCoverageSubBuilder.name))
 }
 
 object TestCodeCoverageSubBuilder {

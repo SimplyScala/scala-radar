@@ -1,9 +1,12 @@
 package service.build
 
 import akka.actor._
+import service.engine.ScalaProjectParser
 
-class MetadataProjectSubBuilder(val ref: ActorRef) {
-    def this(system: ActorSystem) = this(system.actorOf(MetadataProjectSubBuilder.props, MetadataProjectSubBuilder.name))
+case object MetadataProjectSubBuilderName extends SubBuilderName
+
+class MetadataProjectSubBuilder(val ref: ActorRef) extends SubBuilder {
+    def this(context: ActorRefFactory) = this(context.actorOf(MetadataProjectSubBuilder.props, MetadataProjectSubBuilder.name))
 }
 
 object MetadataProjectSubBuilder {
@@ -11,7 +14,10 @@ object MetadataProjectSubBuilder {
     def props = Props[MetadataProjectSubBuilderActor]
 }
 
-class MetadataProjectSubBuilderActor extends Actor with ActorLogging {
+class MetadataProjectSubBuilderActor(scalaProjectParser: ScalaProjectParser = ScalaProjectParser) extends Actor with ActorLogging {
 
-    def receive = ???
+    def receive = {
+        case LaunchSubBuild(project) => ???
+            // TODO ScalaProjectParser.produceScalaProjectMetadatas
+    }
 }

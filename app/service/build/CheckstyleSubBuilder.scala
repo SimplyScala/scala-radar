@@ -2,8 +2,10 @@ package service.build
 
 import akka.actor._
 
-class CheckstyleSubBuilder(val ref: ActorRef) {
-    def this(system: ActorSystem) = this(system.actorOf(CheckstyleSubBuilder.props, CheckstyleSubBuilder.name))
+case object CheckstyleSubBuilderName extends SubBuilderName
+
+class CheckstyleSubBuilder(val ref: ActorRef) extends SubBuilder {
+    def this(context: ActorRefFactory) = this(context.actorOf(CheckstyleSubBuilder.props, CheckstyleSubBuilder.name))
 }
 
 object CheckstyleSubBuilder {

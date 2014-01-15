@@ -2,4 +2,5 @@ package model
 
 import scalax.file.Path
 
-case class Project(name: String, id: String, url: String, path: Path)
+// TODO rajouetr une référence au build en cours ???
+case class Project(name: String, url: String, path: Path)

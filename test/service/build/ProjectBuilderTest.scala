@@ -2,7 +2,7 @@ package service.build
 
 import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll, FunSuiteLike, Matchers}
 import akka.testkit.{TestProbe, TestActorRef, TestKit}
-import akka.actor.ActorSystem
+import akka.actor.{ActorRefFactory, ActorSystem}
 import model.Project
 import scalax.file.Path
 import testing.tools.ActorTestingTools
@@ -16,32 +16,32 @@ class ProjectBuilderTest extends TestKit(ActorSystem("ProjectBuilderTest"))
     after { closeDummyActors(ProjectBuilder.name) }
 
     test("when receive LaunchProjectBuild should launch LaunchSubBuild(project) to all SubBuilder (3)") {
-        val metadataSubBuilderProbe = TestProbe()
-        val metadataSubBuilder = new MetadataProjectSubBuilder(metadataSubBuilderProbe.ref)
+        val metadataProbe = TestProbe()
+        val testCodeCoverageProbe = TestProbe()
+        val checkstyleProbe = TestProbe()
 
-        val testCodeCoverageSubBuilderProbe = TestProbe()
-        val testCodeCoverageSubBuilder = new TestCodeCoverageSubBuilder(testCodeCoverageSubBuilderProbe.ref)
+        val subBuilderFactoryStub = { (subBuilder: SubBuilderName) =>
+            val subBuilderInstance = subBuilder match {
+                case MetadataProjectSubBuilderName => new MetadataProjectSubBuilder(metadataProbe.ref) 
+                case TestCodeCoverageSubBuilderName => new TestCodeCoverageSubBuilder(testCodeCoverageProbe.ref)
+                case CheckstyleSubBuilderName => new CheckstyleSubBuilder(checkstyleProbe.ref)
+            }
 
-        val checkstyleSubBuilderProbe = TestProbe()
-        val checkstyleSubBuilder = new CheckstyleSubBuilder(checkstyleSubBuilderProbe.ref)
+            (_: ActorRefFactory) => subBuilderInstance
+        }
+                    
+        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub, StubBashExecutor), ProjectBuilder.name)
 
+        underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")))
 
-        val underTest = TestActorRef(ProjectBuilder.props(metadataSubBuilder, 
-                                                          testCodeCoverageSubBuilder,
-                                                          checkstyleSubBuilder,
-                                                          StubBashExecutor), 
-                                     ProjectBuilder.name)
-
-        underTest ! LaunchProjectBuild(Project("project", "id", "gitUrl", Path("")))
-
-        val msg = LaunchSubBuild(Project("project", "id", "gitUrl", Path("thePath")))
+        val msg = LaunchSubBuild(Project("project", "gitUrl", Path("thePath")))
         
-        metadataSubBuilderProbe           expectMsg  msg
-        testCodeCoverageSubBuilderProbe   expectMsg  msg
-        checkstyleSubBuilderProbe         expectMsg  msg
+        metadataProbe           expectMsg  msg
+        testCodeCoverageProbe   expectMsg  msg
+        checkstyleProbe         expectMsg  msg
     }
 }
 
 object StubBashExecutor extends BashExecutor {
-    def gitCloneProject(gitUrl: String): Path = Path("thePath")
+    def gitCloneProject(project: Project): Path = Path("thePath")
 }
