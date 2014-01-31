@@ -2,6 +2,18 @@ package controllers
 
 import play.api._
 import play.api.mvc._
+import play.api.libs.iteratee.{Concurrent, Enumeratee}
+import play.api.libs.concurrent.Akka
+import play.api.libs.json.{Json, JsValue}
+import play.api.libs.EventSource
+import service.build.{ProjectBuildEvent, LaunchProjectBuild, ProjectBuilder}
+import model.Project
+import scalax.file.Path
+import play.api.Play.current
+import play.api.libs.EventSource.EventNameExtractor
+import concurrent.ExecutionContext.Implicits.global
+import model.reactive.event.EventProducer
+
 
 object ProjectBuildController extends Controller {
 
@@ -9,12 +21,15 @@ object ProjectBuildController extends Controller {
         Ok("build page")
     }
 
-    def launch(projectId: String) = Action {
+    val buildEventProducer = EventProducer(Concurrent.broadcast[ProjectBuildEvent])
+    val projectBuilder = Akka.system.actorOf(ProjectBuilder.props(), ProjectBuilder.name)
+
+    def launch(projectName: String) = Action {
 
         /**
          * workflow de build
          *  lancer le workflow via 1 actor router (pour pouvoir lancer plusieurs build en même temps - 1 par défaut - Build Manager)  async
-         *      launch metadata build
+         *      launch metadata build     KO    use this in controller
          *          when finished ping BuildManager ! OperationFinished
          *      launch scct build
          *          when finished ping BuildManager ! OperationFinished
@@ -26,6 +41,23 @@ object ProjectBuildController extends Controller {
          *  afficher la page de statut du build mise à jour de façon asynchrone pour chaque sub-build
          */
 
-        Ok(s"launch project build $projectId")
+        val project = Project(projectName, "git@github.com:SimplyScala/scala-radar.git", Path(""))
+
+        projectBuilder ! LaunchProjectBuild(project, buildEventProducer)
+
+        Ok(views.html.build(projectName))
     }
+
+    def test = Action {
+        implicit val eventNameExtractor = EventNameExtractor[JsValue]( (event) => event.\("event").asOpt[String] )
+
+        Ok.feed(buildEventProducer.enumerator &> asJson.compose(EventSource())).as("text/event-stream")
+    }
+
+    private def asJson: Enumeratee[ProjectBuildEvent, JsValue] = Enumeratee.map[ProjectBuildEvent] { buildEvent =>
+        Json.toJson(Map("event" -> Json.toJson(buildEvent.eventName)))
+    }
+
+    // http://mandubian.com/2013/09/22/play-actor-room/
+    // http://www.touilleur-express.fr/2012/08/05/realtime-web-application-un-exemple-avec-play2/
 }

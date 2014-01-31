@@ -14,10 +14,10 @@ object MetadataProjectSubBuilder {
     def props = Props[MetadataProjectSubBuilderActor]
 }
 
-class MetadataProjectSubBuilderActor(scalaProjectParser: ScalaProjectParser = ScalaProjectParser) extends Actor with ActorLogging {
+class MetadataProjectSubBuilderActor(/*scalaProjectParser: ScalaProjectParser = ScalaProjectParser*/) extends Actor with ActorLogging {
 
-    def receive = {
-        case LaunchSubBuild(project) => ???
+    def receive = ???
+        /*case LaunchSubBuild(project) =>
+            sender ! SubBuildDone(MetadataSubBuild(project))*/
             // TODO ScalaProjectParser.produceScalaProjectMetadatas
-    }
 }

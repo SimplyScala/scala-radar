@@ -1,0 +1,35 @@
+@(projectName: String)
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <title>Scala Radar</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/build.css")'>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <script src='@routes.Assets.at("javascripts/build.min.js")' type="text/javascript"></script>
+</head>
+
+<body>
+<header>
+    <a href="/">Dashboards</a>
+</header>
+
+<div id="path">
+    <ul>
+        @defining("/project/" + projectName) { projectLink =>
+        <li><a href=@projectLink class="stub">@projectName</a></li>
+        }
+    </ul>
+</div>
+<section>
+    <p id="projectCloned">Le projet a été cloné</p>
+    <p id="scctDone">L'analyse de la couverture du code par les tests est finie</p>
+    <p id="checkstyleDone">L'analyse scalastyle est finie</p>
+    <p id="buildDone">Build is done !</p>
+</section>
+
+
+</body>
+</html>

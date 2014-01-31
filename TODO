@@ -13,7 +13,7 @@ chaque build lance asynchronement et non intrusivement dans le projet :         
     - test code covergae
     - scalastyle
 
-récupérer le code à scanner via git                                                                                                 ####### WIP
+récupérer le code à scanner via git                                                                                                 ####### OK
 
 permettre un build avec des données déjà produites (checkstyle.xml, scct report, etc...)
 
@@ -46,6 +46,16 @@ Questions :
 
 exclude some path pour scct sur playframework
 
-vérifié que tous les soft nécessaire au fonctionnement de scala-radar sont présent au démarrage de l'appli (sbt/play avec scct, scala-style batch)
+vérifier que tous les soft nécessaire au fonctionnement de scala-radar sont présent au démarrage de l'appli (sbt/play avec scct, scala-style batch)
 
 permettre des sandbox build (en shintant certaisn sub-build par exemple) pour des feedback plus rapide pour dev
+
+liens utiles :
+    SSE + play :
+        https://gist.github.com/sadache/3072893
+        http://www.touilleur-express.fr/2012/08/05/realtime-web-application-un-exemple-avec-play2/
+        http://www.html5rocks.com/en/tutorials/eventsource/basics/
+        http://mandubian.com/2013/09/22/play-actor-room/
+
+    Testing actor :
+        http://hs.ljungblad.nu/post/69922869833/testing-parent-child-relationships-in-akka

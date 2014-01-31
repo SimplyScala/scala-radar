@@ -15,5 +15,9 @@ object CheckstyleSubBuilder {
 
 class CheckstyleSubBuilderActor extends Actor with ActorLogging {
 
-    def receive = ???
+    def receive = {
+        case LaunchSubBuild(project) =>
+            Thread.sleep(1000)
+            context.parent ! SubBuildDone(CheckstyleBuild(project))
+    }
 }

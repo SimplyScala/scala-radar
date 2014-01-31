@@ -13,12 +13,13 @@ GET     /issues/*projectName            controllers.Application.issues(projectNa
 
 # Coverage views
 GET     /coverage/*projectName          controllers.Application.coverage(projectName)
-#GET     / controllers.Assets.at(path="/public/html", file="index.html")
+#GET     /controllers.Assets.at(path="/public/html", file="index.html")
 
 
 ### Build Controller
 #GET     /build                          controllers.ProjectBuildController.index
-GET     /build/*projectId               controllers.ProjectBuildController.launch(projectId)
+GET     /build/project/*projectName     controllers.ProjectBuildController.launch(projectName)
+GET     /build/test                     controllers.ProjectBuildController.test
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                   controllers.Assets.at(path="/public", file)

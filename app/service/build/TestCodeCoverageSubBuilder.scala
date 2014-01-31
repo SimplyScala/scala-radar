@@ -15,5 +15,9 @@ object TestCodeCoverageSubBuilder {
 
 class TestCodeCoverageSubBuilderActor extends Actor with ActorLogging {
 
-    def receive = ???
+    def receive = {
+        case LaunchSubBuild(project) =>
+            Thread.sleep(3000)
+            context.parent ! SubBuildDone(TestCodeCoverageBuild(project))
+    }
 }
