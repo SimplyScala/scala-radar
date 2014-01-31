@@ -5,7 +5,7 @@ $(document).ready ->
 
   eventSource: ->
     if (!!window.EventSource)
-      source = new EventSource('http://localhost:9000/build/test')
+      source = new EventSource('/build/test')
 
       ###source.onmessage = (event) ->
         console.log "temoin"
