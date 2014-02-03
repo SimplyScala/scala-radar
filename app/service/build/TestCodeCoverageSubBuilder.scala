@@ -1,6 +1,8 @@
 package service.build
 
 import akka.actor._
+import java.io.File
+import scala.sys.process.Process
 
 case object TestCodeCoverageSubBuilderName extends SubBuilderName
 
@@ -17,7 +19,9 @@ class TestCodeCoverageSubBuilderActor extends Actor with ActorLogging {
 
     def receive = {
         case LaunchSubBuild(project) =>
-            Thread.sleep(3000)
+            val play_cmd = "/Users/ugobourdon/Dev/apps/play-2.2.1/play"
+            val logs = Process(Seq(play_cmd, "scct:test"), project.path.fileOption) !!
+
             context.parent ! SubBuildDone(TestCodeCoverageBuild(project))
     }
 }

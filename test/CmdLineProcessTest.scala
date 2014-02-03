@@ -39,4 +39,19 @@ class CmdLineProcessTest extends FunSuite with Matchers {
 
         result_2.foreach(println)
     }
+
+    ignore("scala check style") {
+        import scala.sys.process._
+
+        val scalastyleDir = "/Users/ugobourdon/Dev/apps/scalastyle-batch_2.10-0.3.2"
+        val scalastyleJar = s"$scalastyleDir/scalastyle-batch_2.10.jar"
+        val scalastyleConfig = s"$scalastyleDir/scalastyle_config.xml"
+
+        val resultDir = "/Users/ugobourdon/test/scala-radar_style.xml"
+
+        val appUnderTest = "/Users/ugobourdon/Dev/Projects/ScalaQuality/scala-radar/app"
+        //val appUnderTest = "/Users/ugobourdon/test/scala-radar-1391359829433/app"
+
+        val result = s"java -jar $scalastyleJar --xmlOutput $resultDir --config $scalastyleConfig $appUnderTest" !!
+    }
 }
