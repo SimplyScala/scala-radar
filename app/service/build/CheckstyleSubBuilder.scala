@@ -1,6 +1,7 @@
 package service.build
 
 import akka.actor._
+import scalax.file.Path
 
 case object CheckstyleSubBuilderName extends SubBuilderName
 
@@ -22,7 +23,9 @@ class CheckstyleSubBuilderActor extends Actor with ActorLogging {
             val scalastyleJar = s"$scalastyleDir/scalastyle-batch_2.10.jar"
             val scalastyleConfig = s"$scalastyleDir/scalastyle_config.xml"
 
-            val resultDir = s"${project.path.path}/scala-radar_checkstylereport.xml"
+            val scalastyleReportDir = Path.fromString(project.path.path + "/target/scalastyle-report").createDirectory()
+
+            val resultDir = s"${scalastyleReportDir.path}/${project.name}_report.xml"
 
             val appUnderTest = project.path.path
 
