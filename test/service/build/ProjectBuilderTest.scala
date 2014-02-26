@@ -36,7 +36,7 @@ class ProjectBuilderTest extends TestKit(ActorSystem("ProjectBuilderTest"))
         checkstyleProbe         expectMsg  msg
     }
 
-    test("when receive LaunchProjectBuild should push ProjectCloned(project) into corresponding event channel  ") {
+    test("when receive LaunchProjectBuild should push ProjectCloned(project) into corresponding event channel") {
         val testCodeCoverageProbe = TestProbe()
         val checkstyleProbe = TestProbe()
 
@@ -47,6 +47,49 @@ class ProjectBuilderTest extends TestKit(ActorSystem("ProjectBuilderTest"))
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
 
         verify(stubChannel).push(ProjectCloned(Project("project", "gitUrl", Path(""))))
+    }
+
+    test("when receive SubBuildDone(TestCodeCoverageBuild) should push ScctDone event into corresponding event channel") {
+        val testCodeCoverageProbe = TestProbe()
+        val checkstyleProbe = TestProbe()
+
+        val (stubEventProvider, stubChannel) = eventProducer()
+
+        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+
+        underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
+        underTest ! SubBuildDone(TestCodeCoverageBuild(Project("project", "gitUrl", Path(""))))
+
+        verify(stubChannel).push(ScctDone(Project("project", "gitUrl", Path(""))))
+    }
+
+    test("when receive SubBuildDone(CheckstyleBuild) should push CheckstyleDone event into corresponding event channel") {
+        val testCodeCoverageProbe = TestProbe()
+        val checkstyleProbe = TestProbe()
+
+        val (stubEventProvider, stubChannel) = eventProducer()
+
+        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+
+        underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
+        underTest ! SubBuildDone(CheckstyleBuild(Project("project", "gitUrl", Path(""))))
+
+        verify(stubChannel).push(CheckstyleDone(Project("project", "gitUrl", Path(""))))
+    }
+
+    test("if all subBuilds is done when receive SubBuildDone(any[SubBuild]) should push BuildDone event in to corresponding event channel") {
+        val testCodeCoverageProbe = TestProbe()
+        val checkstyleProbe = TestProbe()
+
+        val (stubEventProvider, stubChannel) = eventProducer()
+
+        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+
+        underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
+        underTest ! SubBuildDone(CheckstyleBuild(Project("project", "gitUrl", Path(""))))
+        underTest ! SubBuildDone(TestCodeCoverageBuild(Project("project", "gitUrl", Path(""))))
+
+        verify(stubChannel).push(BuildDone(Project("project", "gitUrl", Path(""))))
     }
 
     private def eventProducer(): (EventProducer[ProjectBuildEvent], Channel[ProjectBuildEvent]) = {
