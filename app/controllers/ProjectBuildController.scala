@@ -6,7 +6,7 @@ import play.api.libs.iteratee.{Concurrent, Enumeratee}
 import play.api.libs.concurrent.Akka
 import play.api.libs.json.{Json, JsValue}
 import play.api.libs.EventSource
-import service.build.{ProjectBuildEvent, LaunchProjectBuild, ProjectBuilderActor}
+import service.build.{ProjectBuilder, ProjectBuildEvent, LaunchProjectBuild}
 import model.Project
 import scalax.file.Path
 import play.api.Play.current
@@ -17,12 +17,12 @@ import model.reactive.event.EventProducer
 
 object ProjectBuildController extends Controller {
 
+    private val buildEventProducer = EventProducer(Concurrent.broadcast[ProjectBuildEvent])
+    private val projectBuilder = Akka.system.actorOf(ProjectBuilder.props(), ProjectBuilder.name)
+
     def index = Action {
         Ok("build page")
     }
-
-    val buildEventProducer = EventProducer(Concurrent.broadcast[ProjectBuildEvent])
-    val projectBuilder = Akka.system.actorOf(ProjectBuilderActor.props(), ProjectBuilderActor.name)
 
     def launch(projectName: String) = Action {
 

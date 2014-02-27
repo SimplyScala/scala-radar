@@ -10,7 +10,7 @@ import org.scalatest.mock.MockitoSugar
 import play.api.libs.iteratee.Concurrent.Channel
 import org.mockito.Mockito._
 import model.Project
-import service.build.SubBuilderFactory.SubBuilderFactory
+import service.build.ProjectBuilder.SubBuilderFactory
 
 class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
                               with FunSuiteLike with Matchers with BeforeAndAfterAll
@@ -18,7 +18,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
 
     override def afterAll() { system.shutdown() }
 
-    after { closeDummyActors(ProjectBuilderActor.name) }
+    after { closeDummyActors(ProjectBuilder.name) }
 
     test("when receive LaunchProjectBuild should launch LaunchSubBuild(project) to all SubBuilder (2)") {
         val testCodeCoverageProbe = TestProbe()
@@ -26,7 +26,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
 
         val (stubEventProvider, _) = eventProducer()
 
-        val underTest = TestActorRef(ProjectBuilderActor.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilderActor.name)
+        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
 
@@ -42,7 +42,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
 
         val (stubEventProvider, stubChannel) = eventProducer()
 
-        val underTest = TestActorRef(ProjectBuilderActor.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilderActor.name)
+        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
 
@@ -55,7 +55,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
 
         val (stubEventProvider, stubChannel) = eventProducer()
 
-        val underTest = TestActorRef(ProjectBuilderActor.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilderActor.name)
+        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
         underTest ! SubBuildDone(TestCodeCoverageBuild(Project("project", "gitUrl", Path(""))))
@@ -69,7 +69,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
 
         val (stubEventProvider, stubChannel) = eventProducer()
 
-        val underTest = TestActorRef(ProjectBuilderActor.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilderActor.name)
+        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
         underTest ! SubBuildDone(CheckstyleBuild(Project("project", "gitUrl", Path(""))))
@@ -83,7 +83,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
 
         val (stubEventProvider, stubChannel) = eventProducer()
 
-        val underTest = TestActorRef(ProjectBuilderActor.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilderActor.name)
+        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
         underTest ! SubBuildDone(CheckstyleBuild(Project("project", "gitUrl", Path(""))))
