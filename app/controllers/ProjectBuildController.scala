@@ -6,7 +6,7 @@ import play.api.libs.iteratee.{Concurrent, Enumeratee}
 import play.api.libs.concurrent.Akka
 import play.api.libs.json.{Json, JsValue}
 import play.api.libs.EventSource
-import service.build.{ProjectBuildEvent, LaunchProjectBuild, ProjectBuilder}
+import service.build.{ProjectBuildEvent, LaunchProjectBuild, ProjectBuilderActor}
 import model.Project
 import scalax.file.Path
 import play.api.Play.current
@@ -22,11 +22,11 @@ object ProjectBuildController extends Controller {
     }
 
     val buildEventProducer = EventProducer(Concurrent.broadcast[ProjectBuildEvent])
-    val projectBuilder = Akka.system.actorOf(ProjectBuilder.props(), ProjectBuilder.name)
+    val projectBuilder = Akka.system.actorOf(ProjectBuilderActor.props(), ProjectBuilderActor.name)
 
     def launch(projectName: String) = Action {
 
-        /**
+        /** TODO
          * workflow de build
          *  lancer le workflow via 1 actor router (pour pouvoir lancer plusieurs build en même temps - 1 par défaut - Build Manager)  async
          *      launch metadata build     KO    use this in controller
@@ -35,7 +35,7 @@ object ProjectBuildController extends Controller {
          *          when finished ping BuildManager ! OperationFinished
          *      launch scala-style build
          *          when finished ping BuildManager ! OperationFinished
-         *      quand les 3 sub-build sont finis alors indiquer à scala-radar où son les nouvaux rapports à récupérer (BDD ou/et filepath etc...)
+         *      quand les 3 sub-build sont finis alors indiquer à scala-radar où son les nouveaux rapports à récupérer (BDD ou/et filepath etc...)
          *      a chaque évènement de sub-build et à la fin mettre à jour la page de statut du build
          *
          *  afficher la page de statut du build mise à jour de façon asynchrone pour chaque sub-build

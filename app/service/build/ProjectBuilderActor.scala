@@ -5,26 +5,18 @@ import model.Project
 import service.build.SubBuilderFactory.SubBuilderFactory
 import model.reactive.event.EventProducer
 
-object SubBuilderFactory {
-    type SubBuilderFactory = (SubBuilderName) => (ActorRefFactory) => SubBuilder
-
-    val factory: SubBuilderFactory = (subBuilder: SubBuilderName) =>
-        subBuilder match {
-            case TestCodeCoverageSubBuilderName => (context: ActorRefFactory) => new TestCodeCoverageSubBuilder(context)
-            case CheckstyleSubBuilderName => (context: ActorRefFactory) => new CheckstyleSubBuilder(context)
-        }
+class ProjectBuilder(val ref: ActorRef) extends SubBuilder {
+    def this(context: ActorRefFactory) = this(context.actorOf(ProjectBuilderActor.props(), ProjectBuilderActor.name))
 }
 
-object ProjectBuilder {
+object ProjectBuilderActor {
     val name = "projectBuildManager"
 
     def props(subBuilderFactory: SubBuilderFactory = SubBuilderFactory.factory, bashExecutor: BashExecutor = BashExecutor) =
-        Props(new ProjectBuilder(subBuilderFactory, bashExecutor))
+        Props(new ProjectBuilderActor(subBuilderFactory, bashExecutor))
 }
 
-// TODO typer cet acteur
-// TODO rename
-class ProjectBuilder(subBuilderFactory: SubBuilderFactory, bashExecutor: BashExecutor) extends Actor with ActorLogging {
+class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: BashExecutor) extends Actor with ActorLogging {
 
     // TODO context -> implicit ???
     val testCodeCoverageSubBuilder = subBuilderFactory(TestCodeCoverageSubBuilderName)(context)
@@ -60,6 +52,16 @@ class ProjectBuilder(subBuilderFactory: SubBuilderFactory, bashExecutor: BashExe
     }
 
     private def allSubBuildAreDone: Boolean = buildDone.size == 2
+}
+
+object SubBuilderFactory {
+    type SubBuilderFactory = (SubBuilderName) => (ActorRefFactory) => SubBuilder
+
+    val factory: SubBuilderFactory = (subBuilder: SubBuilderName) =>
+        subBuilder match {
+            case TestCodeCoverageSubBuilderName => (context: ActorRefFactory) => new TestCodeCoverageSubBuilder(context)
+            case CheckstyleSubBuilderName => (context: ActorRefFactory) => new CheckstyleSubBuilder(context)
+        }
 }
 
 sealed case class LaunchProjectBuild(project: Project, eventProducer: EventProducer[ProjectBuildEvent])

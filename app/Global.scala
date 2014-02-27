@@ -1,6 +1,5 @@
 import play.api._
 import play.api.libs.concurrent._
-import service.build.ProjectBuilder
 import play.api.Play.current
 
 object Global extends GlobalSettings {
