@@ -3,6 +3,7 @@ package service.engine
 import org.scalatest.{Matchers, FunSuite}
 import model.{ScalaMetadatas, ScalaFileMetadatas, ScalaProjectMetaDatas}
 import scalax.file.ImplicitConversions._
+import util.Config
 
 class ScalaProjectParserTest extends FunSuite with Matchers {
 
@@ -13,7 +14,7 @@ class ScalaProjectParserTest extends FunSuite with Matchers {
         import scalax.file.PathSet
 
         // find all .scala files in a sourcePath or one of its sub-directories
-        val sourcePath = "/Users/ugobourdon/Dev/Projects/ScalaQuality/scala-radar/app"
+        val sourcePath = Config.getApplicationPath() + "/app"
         val scalaFiles: PathSet[Path] = sourcePath ** "*.scala"
         //scalaFiles.toSet.foreach(println)
     }

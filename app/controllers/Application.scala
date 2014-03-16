@@ -1,5 +1,6 @@
 package controllers
 
+import _root_.util.Config
 import play.api._
 import play.api.mvc._
 import service.engine.{ScalaProjectParser, CoberturaXMLParser, CheckstyleXMLParser}
@@ -26,7 +27,7 @@ object Application extends Controller {
         val coberturaReport = CoberturaXMLParser.produceCodeCoverageReport(loadFile("public/resources/coverage-report/cobertura.xml"))
         val checkstyleIssues = CheckstyleXMLParser.produceIssues(loadFile("public/resources/scala-radar_style.xml"))
 
-        val sourcePath = "/Users/ugobourdon/Dev/Projects/ScalaQuality/scala-radar/app"
+        val sourcePath = Config.getApplicationPath + "/app"
         val scalaFiles: Set[Path] = (sourcePath ** "*.scala").toSet
 
         val projectMetadatas = ScalaProjectParser.produceScalaProjectMetadatas(scalaFiles)
