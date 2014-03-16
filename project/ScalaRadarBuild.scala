@@ -11,7 +11,8 @@ object ScalaRadarBuild extends Build {
         "joda-time"                     %  "joda-time"     % "2.3",
         "org.scalatest"                 %% "scalatest"     % "2.0"      % "test",
         "com.typesafe.akka"             %% "akka-testkit"  % "2.2.1"    % "test",
-        "org.mockito"                   %  "mockito-all"   % "1.9.5"    % "test"
+        "org.mockito"                   %  "mockito-all"   % "1.9.5"    % "test",
+        "org.scala-lang"                %  "scala-compiler" % "2.10.3"
     )
 
     val main = play.Project(appName, appVersion, appDependencies).settings(
