@@ -3,17 +3,21 @@ package service.build
 import akka.actor._
 import model.Project
 import service.build.MainBuilder.ProjectBuilderFactory
+import model.reactive.event.EventProducer
 
 object MainBuilder {
     val name = "mainBuilder"
+    def props() = Props(new MainBuilder())
 
     type ProjectBuilderFactory = (String, ActorRefFactory) => ProjectBuilder
     val factory: ProjectBuilderFactory = (name: String, context: ActorRefFactory) => new ProjectBuilder(context)
 }
 
 class MainBuilder(factory: ProjectBuilderFactory = MainBuilder.factory) extends Actor with ActorLogging {
+
     def receive = {
-        case LaunchBuild(project) => factory(project.name, context).ref ! LaunchBuild(project)
+        case LaunchBuild(project, eventProducer) =>
+            factory(project.name, context).ref ! LaunchProjectBuild(project, eventProducer)
     }
 
     /*
@@ -26,4 +30,4 @@ class MainBuilder(factory: ProjectBuilderFactory = MainBuilder.factory) extends 
     * */
 }
 
-sealed case class LaunchBuild(project: Project)
+sealed case class LaunchBuild(project: Project, eventProducer: EventProducer[ProjectBuildEvent])

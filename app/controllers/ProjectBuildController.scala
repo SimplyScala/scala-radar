@@ -6,19 +6,19 @@ import play.api.libs.iteratee.{Concurrent, Enumeratee}
 import play.api.libs.concurrent.Akka
 import play.api.libs.json.{Json, JsValue}
 import play.api.libs.EventSource
-import service.build.{ProjectBuilder, ProjectBuildEvent, LaunchProjectBuild}
-import model.Project
+import service.build._
 import scalax.file.Path
 import play.api.Play.current
 import play.api.libs.EventSource.EventNameExtractor
 import concurrent.ExecutionContext.Implicits.global
 import model.reactive.event.EventProducer
+import model.Project
 
 
 object ProjectBuildController extends Controller {
 
     private val buildEventProducer = EventProducer(Concurrent.broadcast[ProjectBuildEvent])
-    private val projectBuilder = Akka.system.actorOf(ProjectBuilder.props(), ProjectBuilder.name)
+    private val mainBuilder = Akka.system.actorOf(MainBuilder.props(), MainBuilder.name)
 
     def index = Action {
         Ok("build page")
@@ -42,13 +42,12 @@ object ProjectBuildController extends Controller {
          */
 
         val project = Project(projectName, "git@github.com:SimplyScala/scala-radar.git", Path(""))
-
-        projectBuilder ! LaunchProjectBuild(project, buildEventProducer)
+        mainBuilder ! LaunchBuild(project, buildEventProducer)
 
         Ok(views.html.build(projectName))
     }
 
-    def test = Action {
+    def test = Action {      // TODO build id pour filtrer les events suivant quel build
         implicit val eventNameExtractor = EventNameExtractor[JsValue]( (event) => event.\("event").asOpt[String] )
 
         Ok.feed(buildEventProducer.enumerator &> asJson.compose(EventSource())).as("text/event-stream")
