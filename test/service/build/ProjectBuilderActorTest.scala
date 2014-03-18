@@ -1,6 +1,6 @@
 package service.build
 
-import org.scalatest._
+import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll, FunSuiteLike}
 import akka.testkit.{TestProbe, TestActorRef, TestKit}
 import akka.actor.{ActorRefFactory, ActorSystem}
 import scalax.file.Path
@@ -8,12 +8,14 @@ import testing.tools.ActorTestingTools
 import model.reactive.event.EventProducer
 import org.scalatest.mock.MockitoSugar
 import play.api.libs.iteratee.Concurrent.Channel
-import org.mockito.Mockito._
-import model.Project
+import model.{Build, SuccessfulBuild, Project}
 import service.build.ProjectBuilder.SubBuilderFactory
+import org.mockito.Mockito._
+import org.joda.time.DateTime
+import org.mockito.Matchers._
 
 class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
-                              with FunSuiteLike with Matchers with BeforeAndAfterAll
+                              with FunSuiteLike with org.scalatest.Matchers with BeforeAndAfterAll
                               with BeforeAndAfter with ActorTestingTools with MockitoSugar {
 
     override def afterAll() { system.shutdown() }
@@ -24,28 +26,35 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
         val testCodeCoverageProbe = TestProbe()
         val checkstyleProbe = TestProbe()
 
-        val (stubEventProvider, _) = eventProducer()
+        val (stubEventProvider, _) = stubEventProducer()
 
-        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+        val underTest = TestActorRef(ProjectBuilder.props(null, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
+        // When
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
 
-        val msg = LaunchSubBuild(Project("project", "gitUrl", Path("thePath")))
+        // Then
+        val result1 = testCodeCoverageProbe   expectMsgClass classOf[LaunchSubBuild]
 
-        testCodeCoverageProbe   expectMsg  msg
-        checkstyleProbe         expectMsg  msg
+        val expectedProject = Project("project", "gitUrl", Path("thePath"))
+        val result2 = checkstyleProbe         expectMsgClass classOf[LaunchSubBuild]
+
+        result1.build.project shouldBe expectedProject
+        result2.build.project shouldBe expectedProject
     }
 
     test("when receive LaunchProjectBuild should push ProjectCloned(project) into corresponding event channel") {
         val testCodeCoverageProbe = TestProbe()
         val checkstyleProbe = TestProbe()
 
-        val (stubEventProvider, stubChannel) = eventProducer()
+        val (stubEventProvider, stubChannel) = stubEventProducer()
 
-        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+        val underTest = TestActorRef(ProjectBuilder.props(null, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
+        // When
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
 
+        // Then
         verify(stubChannel).push(ProjectCloned(Project("project", "gitUrl", Path(""))))
     }
 
@@ -53,13 +62,15 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
         val testCodeCoverageProbe = TestProbe()
         val checkstyleProbe = TestProbe()
 
-        val (stubEventProvider, stubChannel) = eventProducer()
+        val (stubEventProvider, stubChannel) = stubEventProducer()
 
-        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+        val underTest = TestActorRef(ProjectBuilder.props(null, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
+        // When
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
-        underTest ! SubBuildDone(TestCodeCoverageBuild(Project("project", "gitUrl", Path(""))))
+        underTest ! SubBuildDone(TestCodeCoverageBuild(Build("id", DateTime.now(), Project("project", "gitUrl", Path("")))))
 
+        // Then
         verify(stubChannel).push(ScctDone(Project("project", "gitUrl", Path(""))))
     }
 
@@ -67,32 +78,82 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
         val testCodeCoverageProbe = TestProbe()
         val checkstyleProbe = TestProbe()
 
-        val (stubEventProvider, stubChannel) = eventProducer()
+        val (stubEventProvider, stubChannel) = stubEventProducer()
 
-        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+        val underTest = TestActorRef(ProjectBuilder.props(null, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
+        // When
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
-        underTest ! SubBuildDone(CheckstyleBuild(Project("project", "gitUrl", Path(""))))
+        underTest ! SubBuildDone(CheckstyleBuild(Project("project", "gitUrl", Path("")).toBuild()))
 
+        // Then
         verify(stubChannel).push(CheckstyleDone(Project("project", "gitUrl", Path(""))))
     }
 
-    test("if all subBuilds is done when receive SubBuildDone(any[SubBuild]) should push BuildDone event in to corresponding event channel") {
+    test("if all subBuilds is done after receive SubBuildDone(any[SubBuild]) should push BuildDone event into corresponding event channel") {
         val testCodeCoverageProbe = TestProbe()
         val checkstyleProbe = TestProbe()
 
-        val (stubEventProvider, stubChannel) = eventProducer()
+        val (stubEventProvider, stubChannel) = stubEventProducer()
 
-        val underTest = TestActorRef(ProjectBuilder.props(subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+        val underTest = TestActorRef(ProjectBuilder.props(mock[sorm.Instance], subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
-        underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
-        underTest ! SubBuildDone(CheckstyleBuild(Project("project", "gitUrl", Path(""))))
-        underTest ! SubBuildDone(TestCodeCoverageBuild(Project("project", "gitUrl", Path(""))))
+        val expectedProject = Project("name", "url", Path(""))
 
-        verify(stubChannel).push(BuildDone(Project("project", "gitUrl", Path(""))))
+        // When
+        underTest ! LaunchProjectBuild(expectedProject, stubEventProvider)
+        underTest ! SubBuildDone(CheckstyleBuild(Build("id", DateTime.now(), expectedProject)))
+        underTest ! SubBuildDone(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
+
+        // Then
+        verify(stubChannel).push(BuildDone(expectedProject))
     }
 
-    private def eventProducer(): (EventProducer[ProjectBuildEvent], Channel[ProjectBuildEvent]) = {
+    test("if all subBuilds is done after receive SubBuildDone(any[SubBuild]) should save SuccessfulBuild") {
+        val testCodeCoverageProbe = TestProbe()
+        val checkstyleProbe = TestProbe()
+
+        val db = mock[sorm.Instance]
+
+        val (stubEventProvider, _) = stubEventProducer()
+        val expectedProject = Project("name", "url", Path(""))
+
+        val underTest = TestActorRef(ProjectBuilder.props(db, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+
+        // When
+        underTest ! LaunchProjectBuild(expectedProject, stubEventProvider)
+        underTest ! SubBuildDone(CheckstyleBuild(Build("id", DateTime.now(), expectedProject)))
+        underTest ! SubBuildDone(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
+
+        // Then
+        verify(db).save(SuccessfulBuild("id", anyLong(), anyLong(), expectedProject.name, expectedProject.url, expectedProject.path.path))
+    }
+
+    test("if all subBuilds is done after receive SubBuildDone(any[SubBuild]) should kill itself") {
+        val testCodeCoverageProbe = TestProbe()
+        val checkstyleProbe = TestProbe()
+
+        val db = mock[sorm.Instance]
+
+        val (stubEventProvider, _) = stubEventProducer()
+        val expectedProject = Project("name", "url", Path(""))
+
+        val underTest = TestActorRef(ProjectBuilder.props(db, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+
+        watch(underTest)
+
+        // When
+        underTest ! LaunchProjectBuild(expectedProject, stubEventProvider)
+        underTest ! SubBuildDone(CheckstyleBuild(Build("id", DateTime.now(), expectedProject)))
+        underTest ! SubBuildDone(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
+
+        // Then
+        expectTerminated(underTest)
+
+        unwatch(underTest)
+    }
+
+    private def stubEventProducer(): (EventProducer[ProjectBuildEvent], Channel[ProjectBuildEvent]) = {
         val stubChannel = mock[Channel[ProjectBuildEvent]]
         val stubEventProvider = mock[EventProducer[ProjectBuildEvent]]
         when(stubEventProvider.channel).thenReturn(stubChannel)

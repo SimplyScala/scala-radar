@@ -18,10 +18,12 @@ object TestCodeCoverageSubBuilder {
 class TestCodeCoverageSubBuilderActor extends Actor with ActorLogging {
 
     def receive = {
-        case LaunchSubBuild(project) =>
+        case LaunchSubBuild(build) =>
             val play_cmd = "/Users/ugobourdon/Dev/apps/play-2.2.1/play"
-            val logs = Process(Seq(play_cmd, "scct:test"), project.path.fileOption) !!
+            val logs = Process(Seq(play_cmd, "scct:test"), build.project.path.fileOption) !!
 
-            context.parent ! SubBuildDone(TestCodeCoverageBuild(project))
+            //log.info(logs)
+
+            context.parent ! SubBuildDone(TestCodeCoverageBuild(build))
     }
 }

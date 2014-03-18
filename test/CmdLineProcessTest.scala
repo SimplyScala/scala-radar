@@ -1,4 +1,6 @@
+import dao.Db
 import java.io.File
+import model.SuccessfulBuild
 import org.scalatest.{Matchers, FunSuite}
 
 class CmdLineProcessTest extends FunSuite with Matchers {
@@ -54,4 +56,30 @@ class CmdLineProcessTest extends FunSuite with Matchers {
 
         val result = s"java -jar $scalastyleJar --xmlOutput $resultDir --config $scalastyleConfig $appUnderTest" !!
     }
+
+    ignore("spike sorm with hsqldb") {
+        /*case class Toto(titi: String)  // case class must be in other file
+
+        import sorm._
+        object Db extends Instance(
+            entities = Set(Entity[Toto]()),
+            url = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test",
+//            url = "jdbc:h2:mem:test",
+            user = "SA",
+            password = "",
+            initMode = InitMode.Create
+        )
+
+        Db.query[Toto].count() shouldBe 0
+        Db.save(Toto("titi"))
+        Db.query[Toto].count() shouldBe 1*/
+    }
+
+    ignore("spike") {
+        val db = new Db()
+        val result = db.query[SuccessfulBuild].fetchOne()
+
+        println(result)
+    }
+
 }
