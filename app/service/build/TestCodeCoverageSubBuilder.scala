@@ -17,6 +17,7 @@ object TestCodeCoverageSubBuilder {
 
 class TestCodeCoverageSubBuilderActor extends Actor with ActorLogging {
 
+    // TODO avoir l'info de combien prend en temps l'éxecution des tests
     def receive = {
         case LaunchSubBuild(build) =>
             val play_cmd = "/Users/ugobourdon/Dev/apps/play-2.2.1/play"

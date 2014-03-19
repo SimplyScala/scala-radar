@@ -7,8 +7,11 @@ import play.api.libs.json._
 import play.api.libs.functional.syntax._
 import play.api.libs.json.Writes._
 import scalax.file.Path
+import dao.{ProdDatabase, Dao}
+import model.SuccessfulBuild
+import sorm.Persisted
 
-object Application extends Controller {
+object Application extends Controller with ProdDatabase {
 
     /*implicit val issueWriter = Json.writes[CheckstyleIssue]
     implicit val issuesWriter = Writes.seq(issueWriter)*/
@@ -17,26 +20,33 @@ object Application extends Controller {
         Ok(views.html.index())
     }
 
-    // TODO récupérer le checkstyle non stubber
-    // TODO récupérer le cobertura non stubber
-    def project(projectName: String) = Action {
+    def project(projectName: String) = Action {          // TODO in fact => last project() uri
         import scala.xml.XML.loadFile
         import scalax.file.ImplicitConversions._
 
-        val coberturaReport = CoberturaXMLParser.produceCodeCoverageReport(loadFile("public/resources/coverage-report/cobertura.xml"))
-        val checkstyleIssues = CheckstyleXMLParser.produceIssues(loadFile("public/resources/scala-radar_style.xml"))
+        val mayBeLastBuild = Dao.retrieveLastBuild()
 
-        val sourcePath = "/Users/ugobourdon/Dev/Projects/ScalaQuality/scala-radar/app"
-        val scalaFiles: Set[Path] = (sourcePath ** "*.scala").toSet
+        mayBeLastBuild
+            .map { build =>
+                val projectPath = build.projectPath
 
-        val projectMetadatas = ScalaProjectParser.produceScalaProjectMetadatas(scalaFiles)
+                val coberturaReportFilePath = s"$projectPath/target/scala-2.10/coverage-report/cobertura.xml"
+                val checkStyleFilePath = s"$projectPath/target/scalastyle-report/${projectName}_report.xml"
+                val scalaFiles: Set[Path] = (s"$projectPath/app" ** "*.scala").toSet
 
-        Ok (views.html.project(projectName, coberturaReport, checkstyleIssues, projectMetadatas))
+                val coberturaReport = CoberturaXMLParser.produceCodeCoverageReport(loadFile(coberturaReportFilePath))
+                val checkstyleIssues = CheckstyleXMLParser.produceIssues(loadFile(checkStyleFilePath))
+                val projectMetadatas = ScalaProjectParser.produceScalaProjectMetadatas(scalaFiles)
+
+                Ok(views.html.project(projectName, coberturaReport, checkstyleIssues, projectMetadatas))
+            }
+            .getOrElse { NotFound(s"project $projectName not found !") }
     }
 
     // TODO récupérer le checkstyle non stubber
     // TODO récupérer le cobertura non stubber
     def issues(projectName: String) = Action { implicit request =>
+
         val report = scala.xml.XML.loadFile("public/resources/scala-radar_style.xml")
         val checkstyleIssues = CheckstyleXMLParser.produceIssues(report)
 
@@ -53,13 +63,16 @@ object Application extends Controller {
         Ok(views.html.issues(projectName, checkstyleIssues, groupedMessages))
     }
 
+    // NOT USED
     def coverage(projectName: String) = Action {
         //val indexFile = io.Source.fromFile("/assets/resources/scctReport/index.html").mkString
         //val result = io.Source.fromFile("public/resources/scctReport/index.html").mkString
         //val result = Assets.Found("/assets/resources/scctReport/index.html").toString()
 
         //Ok(views.html.coverage(projectName, Html(result)))
+        val mayBeLastBuild = Dao.retrieveLastBuild()
 
+        //Ok(mayBeLastBuild.get.buildId + mayBeLastBuild.get.projectPath)
         Assets.Found("/assets/resources/coverage-report/index.html")
     }
 }

@@ -10,7 +10,6 @@ object ScalaRadarBuild extends Build {
         "com.github.scala-incubator.io" %% "scala-io-file"  % "0.4.2",
         "joda-time"                     %  "joda-time"      % "2.3",
         "org.hsqldb"                    %  "hsqldb"         % "2.3.2",
-//        "com.h2database"                %  "h2"             % "1.3.168",
         "org.sorm-framework"            %  "sorm"           % "0.3.8",
         "org.scalatest"                 %% "scalatest"      % "2.0"      % "test",
         "com.typesafe.akka"             %% "akka-testkit"   % "2.2.1"    % "test",
