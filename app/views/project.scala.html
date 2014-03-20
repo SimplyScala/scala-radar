@@ -193,8 +193,8 @@
                             <div class="dashbox">
                                 <h3>Unit Tests Coverage</h3>
                                 @defining("/coverage/" + projectName) { coverageLink =>
-                                <p><span class="big"><a href="/assets/resources/coverage-report/index.html">@coberturaReport.lineRate %</a></span></p>
-                                }
+                                <p><span class="big"><a href="@coverageLink">@coberturaReport.lineRate %</a></span></p>
+                                }         <!-- /assets/resources/coverage-report/index.html -->
                             </div>
                         </td>
                         <td>

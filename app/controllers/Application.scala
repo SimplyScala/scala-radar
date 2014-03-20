@@ -10,6 +10,8 @@ import scalax.file.Path
 import dao.{ProdDatabase, Dao}
 import model.SuccessfulBuild
 import sorm.Persisted
+import scala.xml.XML._
+import java.io.File
 
 object Application extends Controller with ProdDatabase {
 
@@ -20,7 +22,7 @@ object Application extends Controller with ProdDatabase {
         Ok(views.html.index())
     }
 
-    def project(projectName: String) = Action {          // TODO in fact => last project() uri
+    def project(projectName: String) = Action {
         import scala.xml.XML.loadFile
         import scalax.file.ImplicitConversions._
 
@@ -43,36 +45,30 @@ object Application extends Controller with ProdDatabase {
             .getOrElse { NotFound(s"project $projectName not found !") }
     }
 
-    // TODO récupérer le checkstyle non stubber
-    // TODO récupérer le cobertura non stubber
     def issues(projectName: String) = Action { implicit request =>
 
-        val report = scala.xml.XML.loadFile("public/resources/scala-radar_style.xml")
-        val checkstyleIssues = CheckstyleXMLParser.produceIssues(report)
-
-        val groupedMessages = checkstyleIssues
-            .groupBy(x => x.message)
-            .values
-            .map( seq => (seq.head.message, seq.size) )
-            .toSeq
-
-        /*render {
-            case Accepts.Html() => Ok(views.html.issues(checkstyleIssues, groupedMessages))
-            case Accepts.Json() => Ok(Json.toJson(checkstyleIssues))
-        }*/
-        Ok(views.html.issues(projectName, checkstyleIssues, groupedMessages))
-    }
-
-    // NOT USED
-    def coverage(projectName: String) = Action {
-        //val indexFile = io.Source.fromFile("/assets/resources/scctReport/index.html").mkString
-        //val result = io.Source.fromFile("public/resources/scctReport/index.html").mkString
-        //val result = Assets.Found("/assets/resources/scctReport/index.html").toString()
-
-        //Ok(views.html.coverage(projectName, Html(result)))
         val mayBeLastBuild = Dao.retrieveLastBuild()
 
-        //Ok(mayBeLastBuild.get.buildId + mayBeLastBuild.get.projectPath)
-        Assets.Found("/assets/resources/coverage-report/index.html")
+        mayBeLastBuild
+            .map {  build =>
+                val checkStyleFilePath = s"${build.projectPath}/target/scalastyle-report/${projectName}_report.xml"
+
+                val checkstyleIssues = CheckstyleXMLParser.produceIssues(loadFile(checkStyleFilePath))
+                val groupedMessages = checkstyleIssues
+                    .groupBy(x => x.message)
+                    .values
+                    .map( seq => (seq.head.message, seq.size) )
+                    .toSeq
+
+                Ok(views.html.issues(projectName, checkstyleIssues, groupedMessages))
+            }
+            .getOrElse { NotFound(s"project $projectName not found !") }
+    }
+
+    def coverage(projectName: String) = Action {
+        Dao.retrieveLastBuild() map {    build =>
+            val coberturaReportFilePath = s"${build.projectPath}/target/scala-2.10/coverage-report/index.html"
+            Ok(coberturaReportFilePath)
+        } getOrElse { NotFound(s"project $projectName not found !") }
     }
 }

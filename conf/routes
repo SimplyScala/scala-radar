@@ -13,11 +13,9 @@ GET     /issues/*projectName            controllers.Application.issues(projectNa
 
 # Coverage views
 GET     /coverage/*projectName          controllers.Application.coverage(projectName)
-#GET     /controllers.Assets.at(path="/public/html", file="index.html")
 
 
 ### Build Controller
-#GET     /build                          controllers.ProjectBuildController.index
 GET     /build/project/*projectName     controllers.ProjectBuildController.launch(projectName)
 GET     /build/test                     controllers.ProjectBuildController.test
 
