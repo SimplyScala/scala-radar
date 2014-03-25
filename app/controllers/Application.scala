@@ -67,8 +67,8 @@ object Application extends Controller with ProdDatabase {
 
     def coverage(projectName: String) = Action {
         Dao.retrieveLastBuild() map {    build =>
-            val coberturaReportFilePath = s"${build.projectPath}/target/scala-2.10/coverage-report/index.html"
-            Ok(coberturaReportFilePath)
+            val coberturaReportFileUrl = s"/public/build/${build.projectName}/${build.buildId}/target/scala-2.10/coverage-report/index.html"
+            Ok(coberturaReportFileUrl)
         } getOrElse { NotFound(s"project $projectName not found !") }
     }
 }

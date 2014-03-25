@@ -22,6 +22,7 @@ object ProjectBuilder {
         }
 }
 
+// TODO use Dao instead of sorm.Instance
 class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: BashExecutor, db: sorm.Instance) extends Actor with ActorLogging {
 
     // TODO context -> implicit ???
@@ -53,7 +54,7 @@ class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: Ba
     }
 
     private def doneBuild(fromSubBuild: SubBuild) {
-        if( allSubBuildAreDone ) {
+        if(allSubBuildAreDone) {
             pushEventToWebClient(fromSubBuild.build.project, BuildDone(fromSubBuild.build.project))
             db.save(fromSubBuild.build.toSuccessfulBuild())
             context.stop(self)

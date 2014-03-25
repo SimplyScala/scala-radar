@@ -17,7 +17,9 @@ trait BashExecutor {
 object BashExecutor extends BashExecutor {
     // TODO git clone project via project.url dans scalaradarTmpHome/projectId-timestampValue/
     def gitCloneProject(project: Project): Path = {
-        val projectBuildDirectoryPath = Path.fromString(s"/Users/ugobourdon/test/${project.name}-${DateTime.now().getMillis}")
+        //val path = s"/Users/ugobourdon/test/${project.name}/${project.name}-${DateTime.now().getMillis}"
+        val path = new File(s"public/builds/${project.name}/${project.name}-${DateTime.now().getMillis}").getAbsolutePath
+        val projectBuildDirectoryPath = Path.fromString(path)
         val result = s"git clone ${project.url} ${projectBuildDirectoryPath.path}" !!
 
         projectBuildDirectoryPath
