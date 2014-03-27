@@ -1,7 +1,9 @@
 package dao
 
 import sorm._
+import scala.slick.driver.JdbcDriver._
 import model.SuccessfulBuild
+import scala.slick.driver.HsqldbDriver.simple._
 
 class Db(entities: Traversable[Entity] = Set(Entity[SuccessfulBuild]()),
          url: String = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test")
@@ -24,9 +26,9 @@ object ProdDb extends Instance (
 )
 
 trait Database {
-    implicit val db: sorm.Instance
+    implicit def db: Backend#DatabaseDef
 }
 
-trait ProdDatabase extends Database {
-    implicit val db = ProdDb
+trait ProdDatabase extends Database { // TODO thread safe ??? + connection pool ? + init mode create ??
+    implicit val db: Backend#DatabaseDef = Database.forURL(url = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test", user = "SA")
 }

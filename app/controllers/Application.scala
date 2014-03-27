@@ -7,11 +7,8 @@ import play.api.libs.json._
 import play.api.libs.functional.syntax._
 import play.api.libs.json.Writes._
 import scalax.file.Path
-import dao.{ProdDatabase, Dao}
-import model.SuccessfulBuild
-import sorm.Persisted
+import dao.{ProdDatabase, SlickDao}
 import scala.xml.XML._
-import java.io.File
 
 object Application extends Controller with ProdDatabase {
 
@@ -26,7 +23,7 @@ object Application extends Controller with ProdDatabase {
         import scala.xml.XML.loadFile
         import scalax.file.ImplicitConversions._
 
-        val mayBeLastBuild = Dao.retrieveLastBuild()
+        val mayBeLastBuild = SlickDao.retrieveLastBuild(projectName)
 
         mayBeLastBuild
             .map { build =>
@@ -47,7 +44,7 @@ object Application extends Controller with ProdDatabase {
 
     def issues(projectName: String) = Action { implicit request =>
 
-        val mayBeLastBuild = Dao.retrieveLastBuild()
+        val mayBeLastBuild = SlickDao.retrieveLastBuild(projectName)
 
         mayBeLastBuild
             .map {  build =>
@@ -66,7 +63,7 @@ object Application extends Controller with ProdDatabase {
     }
 
     def coverage(projectName: String) = Action {
-        Dao.retrieveLastBuild() map {    build =>
+        SlickDao.retrieveLastBuild(projectName) map {    build =>
             val coberturaReportFileUrl = s"/public/build/${build.projectName}/${build.buildId}/target/scala-2.10/coverage-report/index.html"
             Ok(coberturaReportFileUrl)
         } getOrElse { NotFound(s"project $projectName not found !") }
