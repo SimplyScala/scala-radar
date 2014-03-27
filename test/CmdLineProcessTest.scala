@@ -1,7 +1,6 @@
-import dao.Db
 import java.io.File
-import model.SuccessfulBuild
 import org.scalatest.{Matchers, FunSuite}
+import scalax.file.Path
 
 class CmdLineProcessTest extends FunSuite with Matchers {
 
@@ -42,6 +41,19 @@ class CmdLineProcessTest extends FunSuite with Matchers {
         result_2.foreach(println)
     }
 
+    ignore("spike2") {
+        import scala.sys.process._
+        // commit ea1c86e OK
+        // commit e82f443
+        val t = Option(new File("/Users/ugobourdon/Dev/Projects/ScalaQuality/scala-radar/public/builds/scala-radar/scala-radar-1395323701715"))
+        //val t = Option(new File("/Users/ugobourdon/test/scala-radar/scala-radar-1395331169487"))
+        //val t = Option(new File("/Users/ugobourdon/test/scala-radar-1395167987078"))
+        val play_cmd = "/Users/ugobourdon/Dev/apps/play-2.2.1/play"
+        val result = Process(Seq(play_cmd, "scct:test"), t) !!
+
+        println(result)
+    }
+
     ignore("scala check style") {
         import scala.sys.process._
 
@@ -75,11 +87,9 @@ class CmdLineProcessTest extends FunSuite with Matchers {
         Db.query[Toto].count() shouldBe 1*/
     }
 
-    ignore("spike") {
-        val db = new Db()
-        val result = db.query[SuccessfulBuild].fetchOne()
-
-        println(result)
+    ignore("toto") {
+        println(new File("public/builds").getAbsolutePath)
+        println(Path.fromString("public/builds").path)
     }
 
 }

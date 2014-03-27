@@ -1,20 +1,22 @@
 package service.build
 
 import akka.actor._
-import model.{Build, SuccessfulBuild, Project}
+import model.{Build, Project}
 import model.reactive.event.EventProducer
 import service.build.ProjectBuilder.SubBuilderFactory
+import dao.{ProdDatabase, Dao}
 
 class ProjectBuilder(val ref: ActorRef) extends SubBuilder {
-    def this(context: ActorRefFactory, db: sorm.Instance) = this(context.actorOf(ProjectBuilder.props(db), ProjectBuilder.name))
+    def this(context: ActorRefFactory) = this(context.actorOf(ProjectBuilder.props(), ProjectBuilder.name))
 }
 
 object ProjectBuilder {
     val name = "projectBuildManager"
-    def props(db: sorm.Instance, subBuilderFactory: SubBuilderFactory = ProjectBuilder.factory, bashExecutor: BashExecutor = BashExecutor) =
-        Props(new ProjectBuilderActor(subBuilderFactory, bashExecutor, db))
+    def props(dao: Dao = Dao, subBuilderFactory: SubBuilderFactory = ProjectBuilder.factory, bashExecutor: BashExecutor = BashExecutor) =
+        Props(new ProjectBuilderActor(subBuilderFactory, bashExecutor, dao))
 
     type SubBuilderFactory = (SubBuilderName) => (ActorRefFactory) => SubBuilder
+
     val factory: SubBuilderFactory = (subBuilder: SubBuilderName) =>
         subBuilder match {
             case TestCodeCoverageSubBuilderName => (context: ActorRefFactory) => new TestCodeCoverageSubBuilder(context)
@@ -22,8 +24,8 @@ object ProjectBuilder {
         }
 }
 
-// TODO use Dao instead of sorm.Instance
-class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: BashExecutor, db: sorm.Instance) extends Actor with ActorLogging {
+class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: BashExecutor, dao: Dao) extends Actor
+    with ActorLogging with ProdDatabase {
 
     // TODO context -> implicit ???
     val testCodeCoverageSubBuilder = subBuilderFactory(TestCodeCoverageSubBuilderName)(context)
@@ -34,18 +36,7 @@ class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: Ba
 
     def receive = {
         case LaunchProjectBuild(project, eventProducer) =>    // TODO a mettre dans le constructeur ?
-            eventProducers += (project.name -> eventProducer)
-            // TODO log the result of clone cmd
-            val projectBuildDirectoryPath = bashExecutor.gitCloneProject(project)
-
-            eventProducers.get(project.name).map { producer => producer.channel.push(ProjectCloned(project)) }
-
-            val project_withPath = project.copy(path = projectBuildDirectoryPath)
-
-            val build = project_withPath.toBuild()
-
-            testCodeCoverageSubBuilder.ref ! LaunchSubBuild(build)
-            checkstyleSubBuilder.ref ! LaunchSubBuild(build)
+            launchSubBuilds( cloneProjectFromDistantRepo(project, eventProducer) )
 
         case SubBuildDone(fromSubBuild) =>
             buildDone :+= true
@@ -53,10 +44,25 @@ class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: Ba
             doneBuild(fromSubBuild)
     }
 
+    private def cloneProjectFromDistantRepo(project: Project, eventProducer: EventProducer[ ProjectBuildEvent ]): Build = {
+        eventProducers += ( project.name -> eventProducer )
+        // TODO log the result of clone cmd
+        val projectBuildDirectoryPath = bashExecutor.gitCloneProject(project)
+
+        eventProducers.get(project.name).map { producer => producer.channel.push(ProjectCloned(project)) }
+
+        project.copy(path = projectBuildDirectoryPath).toBuild()
+    }
+
+    private def launchSubBuilds(build: Build) {
+        testCodeCoverageSubBuilder.ref ! LaunchSubBuild(build)
+        checkstyleSubBuilder.ref ! LaunchSubBuild(build)
+    }
+
     private def doneBuild(fromSubBuild: SubBuild) {
         if(allSubBuildAreDone) {
             pushEventToWebClient(fromSubBuild.build.project, BuildDone(fromSubBuild.build.project))
-            db.save(fromSubBuild.build.toSuccessfulBuild())
+            dao.save(fromSubBuild.build.toSuccessfulBuild())
             context.stop(self)
         }
     }

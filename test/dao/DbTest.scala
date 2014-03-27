@@ -5,9 +5,66 @@ import model.SuccessfulBuild
 
 class DbTest extends FunSuite with Matchers {
 
+    import scala.slick.driver.HsqldbDriver.simple._
+    import dao.schema.BuildSchema
+    import scala.slick.driver.JdbcDriver
+
+    test("test slick") {
+        val build = SuccessfulBuild("id", 123L, 321L, "name", "url", "path")
+        val build2 = SuccessfulBuild("id2", 123L, 421L, "name", "url2", "path2")
+
+        val db: JdbcDriver.Backend#DatabaseDef = Database.forURL(url = "jdbc:hsqldb:mem:test", user = "SA")
+
+        db.withSession { implicit session =>
+            BuildSchema.builds.ddl.create
+
+            BuildSchema.builds.length.run shouldBe 0
+
+            BuildSchema.builds.insert(build) shouldBe 1      // renvoie la taille de l'insert
+
+            BuildSchema.builds.length.run shouldBe 1
+
+            BuildSchema.builds.first shouldBe build
+        }
+
+        db.withSession { implicit session =>
+            BuildSchema.builds.insert(build2) shouldBe 1
+
+            BuildSchema.builds.length.run shouldBe 2
+
+            BuildSchema.builds.where(_.projectName === "name").sortBy(_.endDate.desc).firstOption shouldBe Option(build2)
+        }
+    }
+
+    ignore("init database file") {
+        Database.forURL(url = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test", user = "SA").withSession { implicit session =>
+            BuildSchema.builds.ddl.create
+        }
+    }
+
+    /*class Db(entities: Traversable[Entity] = Set(Entity[SuccessfulBuild]()),
+             url: String = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test")
+        extends Instance(
+            entities = entities,
+            url = url,    // TODO user.home or scala-radar.home
+            user = "SA",
+            password = "",
+            initMode = InitMode.Create,
+            poolSize = 1
+        )
+
+    object ProdDb extends Instance (
+        entities = Set(Entity[SuccessfulBuild]()),
+        url = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test",
+        user = "SA",
+        password = "",
+        initMode = InitMode.Create,
+        poolSize = 1
+    )*/
+
     ignore("test sorm") {
         val expectedBuild = SuccessfulBuild("id", 123L, 321L, "name", "url", "")
-        val db = new Db(url = "jdbc:hsqldb:mem:test")
+        /*val db = new Db(url = "jdbc:hsqldb:mem:test")
 
         db.save(expectedBuild)
         db.query[SuccessfulBuild].fetchOne().map { build =>
@@ -17,7 +74,7 @@ class DbTest extends FunSuite with Matchers {
             build.projectName   shouldBe    expectedBuild.projectName
             build.projectUrl    shouldBe    expectedBuild.projectUrl
             build.projectPath   shouldBe    expectedBuild.projectPath
-        }.getOrElse(fail("return None instead of Option[SuccessfulBuild]")) 
+        }.getOrElse(fail("return None instead of Option[SuccessfulBuild]"))*/
     }
 
     import org.squeryl.SessionFactory
@@ -52,42 +109,5 @@ class DbTest extends FunSuite with Matchers {
     object ScalaRadarSchema extends Schema {
         // TODO id decorator
         val builds = table[SuccessfulBuild]("SUCCESSFUL_BUILDS")
-    }
-
-    import scala.slick.driver.HsqldbDriver.simple._
-    import dao.schema.BuildSchema
-    import scala.slick.driver.JdbcDriver
-
-    test("test slick") {
-        val build = SuccessfulBuild("id", 123L, 321L, "name", "url", "path")
-        val build2 = SuccessfulBuild("id2", 123L, 421L, "name", "url2", "path2")
-        
-        val db: JdbcDriver.Backend#DatabaseDef = Database.forURL(url = "jdbc:hsqldb:mem:test", user = "SA")
-
-        db.withSession { implicit session =>
-            BuildSchema.builds.ddl.create
-
-            BuildSchema.builds.length.run shouldBe 0
-
-            BuildSchema.builds.insert(build) shouldBe 1      // renvoie la taille de l'insert
-
-            BuildSchema.builds.length.run shouldBe 1
-
-            BuildSchema.builds.first shouldBe build
-        }
-
-        db.withSession { implicit session =>
-            BuildSchema.builds.insert(build2) shouldBe 1
-
-            BuildSchema.builds.length.run shouldBe 2
-
-            BuildSchema.builds.where(_.projectName === "name").sortBy(_.endDate.desc).firstOption shouldBe Option(build2)
-        }        
-    }
-
-    ignore("init database file") {
-        Database.forURL(url = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test", user = "SA").withSession { implicit session =>
-            BuildSchema.builds.ddl.create
-        }
     }
 }

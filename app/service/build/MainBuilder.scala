@@ -4,22 +4,21 @@ import akka.actor._
 import model.Project
 import service.build.MainBuilder.ProjectBuilderFactory
 import model.reactive.event.EventProducer
-import dao.Db
 
 object MainBuilder {
     val name = "mainBuilder"
     def props() = Props(new MainBuilder())
 
-    type ProjectBuilderFactory = (String, sorm.Instance, ActorRefFactory) => ProjectBuilder
+    type ProjectBuilderFactory = (String, ActorRefFactory) => ProjectBuilder
     // TODO delete name ? sert à quoi ?
-    val factory: ProjectBuilderFactory = (name: String, db: sorm.Instance, context: ActorRefFactory) => new ProjectBuilder(context, db)
+    val factory: ProjectBuilderFactory = (name: String, context: ActorRefFactory) => new ProjectBuilder(context)
 }
 
-class MainBuilder(factory: ProjectBuilderFactory = MainBuilder.factory, db: sorm.Instance = new Db()) extends Actor with ActorLogging {
+class MainBuilder(factory: ProjectBuilderFactory = MainBuilder.factory) extends Actor with ActorLogging {
 
     def receive = {
         case LaunchBuild(project, eventProducer) =>
-            factory(project.name, db, context).ref ! LaunchProjectBuild(project, eventProducer)
+            factory(project.name, context).ref ! LaunchProjectBuild(project, eventProducer)
     }
 
     /*
@@ -29,6 +28,8 @@ class MainBuilder(factory: ProjectBuilderFactory = MainBuilder.factory, db: sorm
     *
     *   si limite est dépassée
     *       mettre les builds en attente
+    *
+    *   si un build d'un projet donné est déjà en cours, mettre le prochain build en attente
     * */
 }
 

@@ -4,7 +4,7 @@ import org.scalatest.{BeforeAndAfter, BeforeAndAfterAll, FunSuiteLike}
 import akka.testkit.{TestProbe, TestActorRef, TestKit}
 import akka.actor.{ActorRefFactory, ActorSystem}
 import scalax.file.Path
-import testing.tools.ActorTestingTools
+import testing.tools.{StubDatabase, ActorTestingTools}
 import model.reactive.event.EventProducer
 import org.scalatest.mock.MockitoSugar
 import play.api.libs.iteratee.Concurrent.Channel
@@ -13,10 +13,11 @@ import service.build.ProjectBuilder.SubBuilderFactory
 import org.mockito.Mockito._
 import org.joda.time.DateTime
 import org.mockito.Matchers._
+import dao.Dao
 
 class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
                               with FunSuiteLike with org.scalatest.Matchers with BeforeAndAfterAll
-                              with BeforeAndAfter with ActorTestingTools with MockitoSugar {
+                              with BeforeAndAfter with ActorTestingTools with MockitoSugar with StubDatabase {
 
     override def afterAll() { system.shutdown() }
 
@@ -96,7 +97,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
 
         val (stubEventProvider, stubChannel) = stubEventProducer()
 
-        val underTest = TestActorRef(ProjectBuilder.props(mock[sorm.Instance], subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+        val underTest = TestActorRef(ProjectBuilder.props(mock[Dao], subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
         val expectedProject = Project("name", "url", Path(""))
 
@@ -113,12 +114,12 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
         val testCodeCoverageProbe = TestProbe()
         val checkstyleProbe = TestProbe()
 
-        val db = mock[sorm.Instance]
+        val dao = mock[Dao]
 
         val (stubEventProvider, _) = stubEventProducer()
         val expectedProject = Project("name", "url", Path(""))
 
-        val underTest = TestActorRef(ProjectBuilder.props(db, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+        val underTest = TestActorRef(ProjectBuilder.props(dao, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
         // When
         underTest ! LaunchProjectBuild(expectedProject, stubEventProvider)
@@ -126,19 +127,19 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
         underTest ! SubBuildDone(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
 
         // Then
-        verify(db).save(SuccessfulBuild("id", anyLong(), anyLong(), expectedProject.name, expectedProject.url, expectedProject.path.path))
+        verify(dao).save(SuccessfulBuild("id", anyLong(), anyLong(), expectedProject.name, expectedProject.url, expectedProject.path.path))
     }
 
     test("if all subBuilds is done after receive SubBuildDone(any[SubBuild]) should kill itself") {
         val testCodeCoverageProbe = TestProbe()
         val checkstyleProbe = TestProbe()
 
-        val db = mock[sorm.Instance]
+        val dao = mock[Dao]
 
         val (stubEventProvider, _) = stubEventProducer()
         val expectedProject = Project("name", "url", Path(""))
 
-        val underTest = TestActorRef(ProjectBuilder.props(db, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+        val underTest = TestActorRef(ProjectBuilder.props(dao, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
 
         watch(underTest)
 
