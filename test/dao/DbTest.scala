@@ -36,6 +36,12 @@ class DbTest extends FunSuite with Matchers {
         }
     }
 
+    ignore("fetch database") { // Think stop play to release lock
+        Database.forURL(url = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test", user = "SA").withSession { implicit session =>
+            println(BuildSchema.builds.length.run)
+        }
+    }
+
     ignore("init database file") {
         Database.forURL(url = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test", user = "SA").withSession { implicit session =>
             BuildSchema.builds.ddl.create

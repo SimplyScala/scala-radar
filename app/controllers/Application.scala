@@ -15,9 +15,7 @@ object Application extends Controller with ProdDatabase {
     /*implicit val issueWriter = Json.writes[CheckstyleIssue]
     implicit val issuesWriter = Writes.seq(issueWriter)*/
 
-    def index = Action {
-        Ok(views.html.index())
-    }
+    def index = Action { Ok(views.html.index()) }
 
     def project(projectName: String) = Action {
         import scala.xml.XML.loadFile
@@ -64,8 +62,8 @@ object Application extends Controller with ProdDatabase {
 
     def coverage(projectName: String) = Action {
         Dao.retrieveLastBuild(projectName) map {    build =>
-            val coberturaReportFileUrl = s"/public/build/${build.projectName}/${build.buildId}/target/scala-2.10/coverage-report/index.html"
-            Ok(coberturaReportFileUrl)
+            val coberturaReportFileUrl = s"/assets/builds/${build.projectName}/${build.buildId}/target/scala-2.10/coverage-report/index.html"
+            Found(coberturaReportFileUrl)
         } getOrElse { NotFound(s"project $projectName not found !") }
     }
 }

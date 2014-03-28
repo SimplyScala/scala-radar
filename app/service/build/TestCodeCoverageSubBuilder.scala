@@ -23,7 +23,7 @@ class TestCodeCoverageSubBuilderActor extends Actor with ActorLogging {
         case LaunchSubBuild(build) =>
             val play_cmd = "/Users/ugobourdon/Dev/apps/play-2.2.1/play"
             val logs =
-                try { Process(Seq(play_cmd, "clean scct:test"), build.project.path.fileOption) !! }
+                try { Process(Seq(play_cmd, "scct:test"), build.project.path.fileOption) !! }
                 catch { case e: Throwable => log.error(e, "toto"); "error" }
             // TODO renvoyé KO si KO : context.parent ! SubBuildKO(TestCodeCoverageBuild(build))
 

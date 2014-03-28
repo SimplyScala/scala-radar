@@ -14,6 +14,7 @@ import org.mockito.Mockito._
 import org.joda.time.DateTime
 import org.mockito.Matchers._
 import dao.Dao
+import org.mockito.Matchers
 
 class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
                               with FunSuiteLike with org.scalatest.Matchers with BeforeAndAfterAll
@@ -175,7 +176,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
 
     private val stubBashExecutor: BashExecutor = {
         val stubBashExecutor = mock[BashExecutor]
-        when(stubBashExecutor.gitCloneProject(Project("project", "gitUrl", Path("")))).thenReturn(Path("thePath"))
+        when(stubBashExecutor.gitCloneProject(Matchers.eq(Project("project", "gitUrl", Path(""))), any[DateTime])).thenReturn(Path("thePath"))
 
         stubBashExecutor
     }

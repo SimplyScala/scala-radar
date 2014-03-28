@@ -5,6 +5,7 @@ import model.{Build, Project}
 import model.reactive.event.EventProducer
 import service.build.ProjectBuilder.SubBuilderFactory
 import dao.{ProdDatabase, Dao}
+import org.joda.time.DateTime
 
 class ProjectBuilder(val ref: ActorRef) extends SubBuilder {
     def this(context: ActorRefFactory) = this(context.actorOf(ProjectBuilder.props(), ProjectBuilder.name))
@@ -44,14 +45,16 @@ class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: Ba
             doneBuild(fromSubBuild)
     }
 
-    private def cloneProjectFromDistantRepo(project: Project, eventProducer: EventProducer[ ProjectBuildEvent ]): Build = {
+    private def cloneProjectFromDistantRepo(project: Project, eventProducer: EventProducer[ProjectBuildEvent]): Build = {
+        val startDate = DateTime.now()
+
         eventProducers += ( project.name -> eventProducer )
         // TODO log the result of clone cmd
-        val projectBuildDirectoryPath = bashExecutor.gitCloneProject(project)
+        val projectBuildDirectoryPath = bashExecutor.gitCloneProject(project, startDate)
 
         eventProducers.get(project.name).map { producer => producer.channel.push(ProjectCloned(project)) }
 
-        project.copy(path = projectBuildDirectoryPath).toBuild()
+        project.copy(path = projectBuildDirectoryPath).toBuild(startDate)
     }
 
     private def launchSubBuilds(build: Build) {

@@ -10,7 +10,7 @@ object MainBuilder {
     def props() = Props(new MainBuilder())
 
     type ProjectBuilderFactory = (String, ActorRefFactory) => ProjectBuilder
-    // TODO delete name ? sert à quoi ?
+    // TODO name du project à builder
     val factory: ProjectBuilderFactory = (name: String, context: ActorRefFactory) => new ProjectBuilder(context)
 }
 
