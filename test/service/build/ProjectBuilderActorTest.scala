@@ -16,7 +16,7 @@ import org.mockito.Matchers._
 import dao.Dao
 import org.mockito.Matchers
 
-class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
+class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderActorTest"))
                               with FunSuiteLike with org.scalatest.Matchers with BeforeAndAfterAll
                               with BeforeAndAfter with ActorTestingTools with MockitoSugar with StubDatabase {
 
@@ -128,7 +128,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderTest"))
         underTest ! SubBuildDone(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
 
         // Then
-        verify(dao).save(SuccessfulBuild("id", anyLong(), anyLong(), expectedProject.name, expectedProject.url, expectedProject.path.path))
+        verify(dao).save(SuccessfulBuild("id", anyLong(), anyLong(), expectedProject.name, expectedProject.gitUrl, expectedProject.path.path))
     }
 
     test("if all subBuilds is done after receive SubBuildDone(any[SubBuild]) should kill itself") {

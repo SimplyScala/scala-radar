@@ -4,7 +4,8 @@ import scalax.file.Path
 import org.joda.time.DateTime
 
 // TODO Path is unused so delete it
-case class Project(name: String, url: String, path: Path) {
+// TODO add builder app (use enum : APP_BUILDER => MAVEN, SBT, PLAY)
+case class Project(name: String, gitUrl: String, path: Path) {
     def toBuild(startDate: DateTime = DateTime.now()): Build = Build(s"$name-${startDate.getMillis}", startDate, this)
 }
 
@@ -12,7 +13,7 @@ case class Project(name: String, url: String, path: Path) {
 // TODO buildId is not useful here
 case class Build(buildId: String, startDate: DateTime, project: Project) {
     def toSuccessfulBuild(endDate: DateTime = DateTime.now()): SuccessfulBuild =
-        SuccessfulBuild(buildId, startDate.getMillis(), endDate.getMillis(), project.name, project.url, project.path.path)
+        SuccessfulBuild(buildId, startDate.getMillis(), endDate.getMillis(), project.name, project.gitUrl, project.path.path)
 }
 
 //TODO use other constructeur to build buildId from startDate + projectName

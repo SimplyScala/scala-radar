@@ -76,15 +76,19 @@ class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: Ba
     private def allSubBuildAreDone: Boolean = buildDone.size == 2
 }
 
+// TODO faire le ménage là dedans
+
 sealed case class LaunchProjectBuild(project: Project, eventProducer: EventProducer[ProjectBuildEvent])
-sealed case class SubBuildDone(fromSubBuild: SubBuild)
 sealed case class LaunchSubBuild(build: Build)
+
+sealed trait SubBuildResult { def fromSubBuild: SubBuild }
+sealed case class SubBuildDone(fromSubBuild: SubBuild) extends SubBuildResult
+sealed case class SubBuildFailed(fromSubBuild: SubBuild) extends SubBuildResult
 
 trait SubBuilder { def ref: ActorRef }
 trait SubBuilderName
 
 sealed trait SubBuild {
-    //def project: Project
     def build: Build
     def toBuildEvent: ProjectBuildEvent
 }
