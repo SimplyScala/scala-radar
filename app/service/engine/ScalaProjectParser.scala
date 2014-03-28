@@ -1,7 +1,7 @@
 package service.engine
 
-import model.ScalaProjectMetaDatas
 import scalax.file.Path
+import model.engine.ScalaProjectMetaDatas
 
 trait ScalaProjectParser {
     def produceScalaProjectMetadatas(files: Set[Path]): ScalaProjectMetaDatas

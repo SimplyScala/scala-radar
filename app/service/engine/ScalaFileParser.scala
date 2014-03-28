@@ -1,7 +1,7 @@
 package service.engine
 
-import model.{ScalaMetadatas, ScalaFileMetadatas}
 import util.RichString
+import model.engine.{ScalaMetadatas, ScalaFileMetadatas}
 
 object ScalaFileParser extends RichString {
     // TODO use FileLines label instead of Iterable[String]

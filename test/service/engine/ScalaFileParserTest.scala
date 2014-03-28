@@ -1,8 +1,8 @@
 package service.engine
 
 import org.scalatest.{Matchers, FunSuite}
-import model.{ScalaMetadatas, ScalaFileMetadatas}
 import util.RichString
+import model.engine.{ScalaMetadatas, ScalaFileMetadatas}
 
 class ScalaFileParserTest extends FunSuite with Matchers with RichString {
 

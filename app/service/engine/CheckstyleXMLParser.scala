@@ -1,8 +1,8 @@
 package service.engine
 
 import scala.xml.{NodeSeq, Node}
-import model.CheckstyleIssue.CheckStyleReport
-import model.CheckstyleIssue
+import model.engine.CheckstyleIssue
+import CheckstyleIssue.CheckStyleReport
 
 object CheckstyleXMLParser {
     def produceIssues(checkstyleReport: CheckStyleReport): Seq[CheckstyleIssue] = {

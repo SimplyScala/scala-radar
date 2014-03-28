@@ -3,7 +3,7 @@ package service.engine
 import org.scalatest.{Matchers, FunSuite}
 import scala.xml.XML
 import service.engine.CheckstyleXMLParser
-import model.CheckstyleIssue
+import model.engine.CheckstyleIssue
 
 class CheckstyleXMLParserTest extends FunSuite with Matchers {
     val pathFile = "/somepath/src/main/scala/some/package/ResourceReader.scala"

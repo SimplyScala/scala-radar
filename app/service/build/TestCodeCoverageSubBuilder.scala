@@ -2,8 +2,7 @@ package service.build
 
 import akka.actor._
 import scala.util.{Failure, Success}
-
-case object TestCodeCoverageSubBuilderName extends SubBuilderName
+import model.build.TestCodeCoverageBuild
 
 class TestCodeCoverageSubBuilder(val ref: ActorRef) extends SubBuilder {
     def this(context: ActorRefFactory) =
@@ -20,7 +19,7 @@ class TestCodeCoverageSubBuilderActor(bashExecutor: BashExecutor) extends Actor 
     // TODO avoir l'info de combien prend en temps l'éxecution des tests
     def receive = {
         case LaunchSubBuild(build) => bashExecutor.executeScctTestCmd(build) match {
-                case Success(log) => context.parent ! SubBuildDone(TestCodeCoverageBuild(build))
+                case Success(log) => context.parent ! SubBuildSucceed(TestCodeCoverageBuild(build))
                 case Failure(e) => context.parent ! SubBuildFailed(TestCodeCoverageBuild(build))
             }
             // TODO qui log le résultat : cet acteur ou l'acteur parent ?

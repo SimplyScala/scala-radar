@@ -1,4 +1,4 @@
-package model
+package model.engine
 
 case class ScalaFileMetadatas(totalLineNumber: Int,
                               blankLineNumber: Int,

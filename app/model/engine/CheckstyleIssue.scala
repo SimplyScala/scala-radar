@@ -1,7 +1,6 @@
-package model
+package model.engine
 
 import scala.xml.Elem
-import model.CheckstyleIssue.Severity
 
 object CheckstyleIssue {
     type CheckStyleReport = Elem

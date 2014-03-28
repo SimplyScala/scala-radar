@@ -3,7 +3,7 @@ package service.build
 import akka.actor._
 import model.Project
 import service.build.MainBuilder.ProjectBuilderFactory
-import model.reactive.event.EventProducer
+import model.reactive.event.{ProjectBuildEvent, EventProducer}
 
 object MainBuilder {
     val name = "mainBuilder"

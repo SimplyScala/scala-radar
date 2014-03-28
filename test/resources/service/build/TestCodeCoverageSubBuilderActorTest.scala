@@ -11,6 +11,7 @@ import org.joda.time.DateTime
 import scalax.file.Path
 import scala.util.Try
 import service.build.BashExecutor.Logs
+import model.build.TestCodeCoverageBuild
 
 class TestCodeCoverageSubBuilderActorTest extends TestKit(ActorSystem("TestCodeCoverageSubBuilderActorTest"))
         with FunSuiteLike with org.scalatest.Matchers with BeforeAndAfterAll
@@ -31,7 +32,7 @@ class TestCodeCoverageSubBuilderActorTest extends TestKit(ActorSystem("TestCodeC
         underTest ! LaunchSubBuild(build)
 
         // Then
-        parent.expectMsg(SubBuildDone(TestCodeCoverageBuild(build)))
+        parent.expectMsg(SubBuildSucceed(TestCodeCoverageBuild(build)))
     }
 
     test("when receive LaunchSubBuild(build) message & test code coverage action is Failed, " +

@@ -1,8 +1,8 @@
 package service.engine
 
 import org.scalatest.{Matchers, FunSuite}
-import model.{ScalaMetadatas, ScalaFileMetadatas, ScalaProjectMetaDatas}
 import scalax.file.ImplicitConversions._
+import model.engine.{ScalaMetadatas, ScalaProjectMetaDatas, ScalaFileMetadatas}
 
 class ScalaProjectParserTest extends FunSuite with Matchers {
 

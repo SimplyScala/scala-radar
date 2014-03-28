@@ -5,16 +5,22 @@ import akka.testkit.{TestProbe, TestActorRef, TestKit}
 import akka.actor.{ActorRefFactory, ActorSystem}
 import scalax.file.Path
 import testing.tools.{StubDatabase, ActorTestingTools}
-import model.reactive.event.EventProducer
+import model.reactive.event._
 import org.scalatest.mock.MockitoSugar
 import play.api.libs.iteratee.Concurrent.Channel
-import model.{Build, SuccessfulBuild, Project}
 import service.build.ProjectBuilder.SubBuilderFactory
 import org.mockito.Mockito._
 import org.joda.time.DateTime
 import org.mockito.Matchers._
 import dao.Dao
 import org.mockito.Matchers
+import model.build._
+import model.reactive.event.ProjectCloned
+import model.build.CheckstyleBuild
+import model.Build
+import model.Project
+import model.build.TestCodeCoverageBuild
+import model.SuccessfulBuild
 
 class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderActorTest"))
                               with FunSuiteLike with org.scalatest.Matchers with BeforeAndAfterAll
@@ -70,7 +76,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderActorTe
 
         // When
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
-        underTest ! SubBuildDone(TestCodeCoverageBuild(Build("id", DateTime.now(), Project("project", "gitUrl", Path("")))))
+        underTest ! SubBuildSucceed(TestCodeCoverageBuild(Build("id", DateTime.now(), Project("project", "gitUrl", Path("")))))
 
         // Then
         verify(stubChannel).push(ScctDone(Project("project", "gitUrl", Path(""))))
@@ -102,7 +108,7 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderActorTe
 
         // When
         underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
-        underTest ! SubBuildDone(CheckstyleBuild(Project("project", "gitUrl", Path("")).toBuild()))
+        underTest ! SubBuildSucceed(CheckstyleBuild(Project("project", "gitUrl", Path("")).toBuild()))
 
         // Then
         verify(stubChannel).push(CheckstyleDone(Project("project", "gitUrl", Path(""))))
@@ -120,8 +126,8 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderActorTe
 
         // When
         underTest ! LaunchProjectBuild(expectedProject, stubEventProvider)
-        underTest ! SubBuildDone(CheckstyleBuild(Build("id", DateTime.now(), expectedProject)))
-        underTest ! SubBuildDone(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
+        underTest ! SubBuildSucceed(CheckstyleBuild(Build("id", DateTime.now(), expectedProject)))
+        underTest ! SubBuildSucceed(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
 
         // Then
         verify(stubChannel).push(BuildDone(expectedProject))
@@ -140,8 +146,8 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderActorTe
 
         // When
         underTest ! LaunchProjectBuild(expectedProject, stubEventProvider)
-        underTest ! SubBuildDone(CheckstyleBuild(Build("id", DateTime.now(), expectedProject)))
-        underTest ! SubBuildDone(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
+        underTest ! SubBuildSucceed(CheckstyleBuild(Build("id", DateTime.now(), expectedProject)))
+        underTest ! SubBuildSucceed(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
 
         // Then
         verify(dao).save(SuccessfulBuild("id", anyLong(), anyLong(), expectedProject.name, expectedProject.gitUrl, expectedProject.path.path))
@@ -162,8 +168,8 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderActorTe
 
         // When
         underTest ! LaunchProjectBuild(expectedProject, stubEventProvider)
-        underTest ! SubBuildDone(CheckstyleBuild(Build("id", DateTime.now(), expectedProject)))
-        underTest ! SubBuildDone(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
+        underTest ! SubBuildSucceed(CheckstyleBuild(Build("id", DateTime.now(), expectedProject)))
+        underTest ! SubBuildSucceed(TestCodeCoverageBuild(Build("id", DateTime.now(), expectedProject)))
 
         // Then
         expectTerminated(underTest)

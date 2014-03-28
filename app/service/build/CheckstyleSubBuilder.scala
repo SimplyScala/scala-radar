@@ -2,9 +2,7 @@ package service.build
 
 import akka.actor._
 import scalax.file.Path
-import model.Build
-
-case object CheckstyleSubBuilderName extends SubBuilderName
+import model.build.CheckstyleBuild
 
 class CheckstyleSubBuilder(val ref: ActorRef) extends SubBuilder {
     def this(context: ActorRefFactory) = this(context.actorOf(CheckstyleSubBuilder.props, CheckstyleSubBuilder.name))
@@ -32,6 +30,6 @@ class CheckstyleSubBuilderActor extends Actor with ActorLogging {
 
             val result = s"java -jar $scalastyleJar --xmlOutput $resultDir --config $scalastyleConfig $appUnderTest/app" !!
 
-            context.parent ! SubBuildDone(CheckstyleBuild(build))
+            context.parent ! SubBuildSucceed(CheckstyleBuild(build))
     }
 }

@@ -11,7 +11,7 @@ import scalax.file.Path
 import play.api.Play.current
 import play.api.libs.EventSource.EventNameExtractor
 import concurrent.ExecutionContext.Implicits.global
-import model.reactive.event.EventProducer
+import model.reactive.event.{ProjectBuildEvent, EventProducer}
 import model.Project
 
 

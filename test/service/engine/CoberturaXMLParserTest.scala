@@ -1,7 +1,7 @@
 package service.engine
 
 import org.scalatest.{Matchers, FunSuite}
-import model.CoberturaReport
+import model.engine.CoberturaReport
 
 class CoberturaXMLParserTest extends FunSuite with Matchers {
     test("retrieve global code coverage") {  // TODO use string xml instead of file in public/resources

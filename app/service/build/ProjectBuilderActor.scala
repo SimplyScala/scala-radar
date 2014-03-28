@@ -1,13 +1,17 @@
 package service.build
 
 import akka.actor._
-import model.{Build, Project}
-import model.reactive.event.EventProducer
+import model.reactive.event._
 import service.build.ProjectBuilder.SubBuilderFactory
 import dao.{ProdDatabase, Dao}
 import org.joda.time.DateTime
+import model.Build
+import model.Project
+import model.reactive.event.ScctDone
+import model.reactive.event.CheckstyleDone
+import model.build.{SubBuild, CheckstyleSubBuilderName, TestCodeCoverageSubBuilderName, SubBuilderName}
 
-class ProjectBuilder(val ref: ActorRef) extends SubBuilder {
+class ProjectBuilder(val ref: ActorRef) {
     def this(context: ActorRefFactory) = this(context.actorOf(ProjectBuilder.props(), ProjectBuilder.name))
 }
 
@@ -39,7 +43,7 @@ class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: Ba
         case LaunchProjectBuild(project, eventProducer) =>    // TODO a mettre dans le constructeur ?
             launchSubBuilds( cloneProjectFromDistantRepo(project, eventProducer) )
 
-        case SubBuildDone(fromSubBuild) =>
+        case SubBuildSucceed(fromSubBuild) =>
             buildDone :+= true
             pushEventToWebClient(fromSubBuild.build.project, fromSubBuild.toBuildEvent)
             doneBuild(fromSubBuild)
@@ -86,35 +90,8 @@ class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: Ba
 sealed case class LaunchProjectBuild(project: Project, eventProducer: EventProducer[ProjectBuildEvent])
 sealed case class LaunchSubBuild(build: Build)
 
-sealed trait SubBuildResult { def fromSubBuild: SubBuild }
-sealed case class SubBuildDone(fromSubBuild: SubBuild) extends SubBuildResult
-sealed case class SubBuildFailed(fromSubBuild: SubBuild) extends SubBuildResult
+sealed trait SubBuildDone { def fromSubBuild: SubBuild }
+sealed case class SubBuildSucceed(fromSubBuild: SubBuild) extends SubBuildDone
+sealed case class SubBuildFailed(fromSubBuild: SubBuild) extends SubBuildDone
 
 trait SubBuilder { def ref: ActorRef }
-trait SubBuilderName
-
-sealed trait SubBuild {
-    def build: Build
-    def toBuildEvent: ProjectBuildEvent
-}
-sealed case class TestCodeCoverageBuild(build: Build) extends SubBuild {
-    def toBuildEvent: ProjectBuildEvent = ScctDone(build.project)
-}
-sealed case class CheckstyleBuild(build: Build) extends SubBuild {
-    def toBuildEvent: ProjectBuildEvent = CheckstyleDone(build.project)
-}
-
-sealed trait ProjectBuildEvent { def eventName: String; def project: Project }
-sealed case class ProjectCloned(project: Project) extends ProjectBuildEvent {
-    def eventName: String = "projectCloned"
-}
-sealed case class ScctDone(project: Project) extends ProjectBuildEvent {
-    def eventName: String = "scctDone"
-}
-sealed case class ScctFailed(project: Project) extends ProjectBuildEvent {
-    def eventName: String = "scctFailed"
-}
-sealed case class CheckstyleDone(project: Project) extends ProjectBuildEvent {
-    def eventName: String = "checkstyleDone"
-}
-case class BuildDone(project: Project) extends ProjectBuildEvent { def eventName: String = "buildDone" }

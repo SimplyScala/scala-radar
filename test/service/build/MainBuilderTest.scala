@@ -8,7 +8,7 @@ import org.scalatest.mock.MockitoSugar
 import model.Project
 import scalax.file.Path
 import service.build.MainBuilder.ProjectBuilderFactory
-import model.reactive.event.EventProducer
+import model.reactive.event.{ProjectBuildEvent, EventProducer}
 
 class MainBuilderTest extends TestKit(ActorSystem("MainBuilderTest"))
     with FunSuiteLike with Matchers with BeforeAndAfterAll

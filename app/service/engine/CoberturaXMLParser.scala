@@ -1,7 +1,8 @@
 package service.engine
 
-import model.CoberturaReport
-import model.CoberturaReport.CoberturaXMLReport
+import model.engine.CoberturaReport
+import CoberturaReport.CoberturaXMLReport
+import model.engine.CoberturaReport
 
 object CoberturaXMLParser {
     def produceCodeCoverageReport(coberturaReport: CoberturaXMLReport): CoberturaReport = {
