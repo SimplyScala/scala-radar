@@ -43,6 +43,11 @@ class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: Ba
             buildDone :+= true
             pushEventToWebClient(fromSubBuild.build.project, fromSubBuild.toBuildEvent)
             doneBuild(fromSubBuild)
+
+        // TODO implements this case
+        case SubBuildFailed(fromSubBuild) =>
+            log.error(s"$fromSubBuild failed")
+            eventProducers.get(fromSubBuild.build.project.name).map { _.channel.push(ScctFailed(fromSubBuild.build.project)) }
     }
 
     private def cloneProjectFromDistantRepo(project: Project, eventProducer: EventProducer[ProjectBuildEvent]): Build = {
@@ -105,6 +110,9 @@ sealed case class ProjectCloned(project: Project) extends ProjectBuildEvent {
 }
 sealed case class ScctDone(project: Project) extends ProjectBuildEvent {
     def eventName: String = "scctDone"
+}
+sealed case class ScctFailed(project: Project) extends ProjectBuildEvent {
+    def eventName: String = "scctFailed"
 }
 sealed case class CheckstyleDone(project: Project) extends ProjectBuildEvent {
     def eventName: String = "checkstyleDone"

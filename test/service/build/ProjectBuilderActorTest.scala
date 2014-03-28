@@ -76,6 +76,22 @@ class ProjectBuilderActorTest extends TestKit(ActorSystem("ProjectBuilderActorTe
         verify(stubChannel).push(ScctDone(Project("project", "gitUrl", Path(""))))
     }
 
+    test("when receive SubBuildFailed(TestCodeCoverageBuild) should push ScctFailed event into corresponding event channel") {
+        val testCodeCoverageProbe = TestProbe()
+        val checkstyleProbe = TestProbe()
+
+        val (stubEventProvider, stubChannel) = stubEventProducer()
+
+        val underTest = TestActorRef(ProjectBuilder.props(null, subBuilderFactoryStub(testCodeCoverageProbe, checkstyleProbe), stubBashExecutor), ProjectBuilder.name)
+
+        // When
+        underTest ! LaunchProjectBuild(Project("project", "gitUrl", Path("")), stubEventProvider)
+        underTest ! SubBuildFailed(TestCodeCoverageBuild(Build("id", DateTime.now(), Project("project", "gitUrl", Path("")))))
+
+        // Then
+        verify(stubChannel).push(ScctFailed(Project("project", "gitUrl", Path(""))))
+    }
+
     test("when receive SubBuildDone(CheckstyleBuild) should push CheckstyleDone event into corresponding event channel") {
         val testCodeCoverageProbe = TestProbe()
         val checkstyleProbe = TestProbe()
