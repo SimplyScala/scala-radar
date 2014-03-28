@@ -30,6 +30,8 @@ ecran de build permet de voir ou en est chaque étape
     - analyse métriques
     - ...
 
+scala-radar fournit API REST (html, json) => permet aux utilisateurs de charger une page "buildwall" custom en html/css/js
+
 métriques d'évolutions
     - flèche progression, regresison, stagnation
     - différents graphiques (eventsourcing ???...)
