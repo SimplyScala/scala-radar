@@ -21,7 +21,7 @@ class TestCodeCoverageSubBuilderActorTest extends TestKit(ActorSystem("TestCodeC
 
     after { closeDummyActors(TestCodeCoverageSubBuilder.name) }
 
-    val build = Build("buildId", DateTime.now(), Project("project", "url", Path("")))
+    val build = Build("buildId", DateTime.now(), Path(""), Project("project", "url"))
 
     test("when receive LaunchSubBuild(build) message & test code coverage action is Succeed, " +
          "should send ProjectBuilderActor ! SubBuildDone(TestCodeCoverageBuild(build))") {

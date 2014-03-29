@@ -25,7 +25,7 @@ object Application extends Controller with ProdDatabase {
 
         mayBeLastBuild
             .map { build =>
-                val projectPath = build.projectPath
+                val projectPath = build.path
 
                 val coberturaReportFilePath = s"$projectPath/target/scala-2.10/coverage-report/cobertura.xml"
                 val checkStyleFilePath = s"$projectPath/target/scalastyle-report/${projectName}_report.xml"
@@ -46,7 +46,7 @@ object Application extends Controller with ProdDatabase {
 
         mayBeLastBuild
             .map {  build =>
-                val checkStyleFilePath = s"${build.projectPath}/target/scalastyle-report/${projectName}_report.xml"
+                val checkStyleFilePath = s"${build.path}/target/scalastyle-report/${projectName}_report.xml"
 
                 val checkstyleIssues = CheckstyleXMLParser.produceIssues(loadFile(checkStyleFilePath))
                 val groupedMessages = checkstyleIssues

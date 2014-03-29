@@ -6,45 +6,45 @@ import model.SuccessfulBuild
 class DbTest extends FunSuite with Matchers {
 
     import scala.slick.driver.HsqldbDriver.simple._
-    import dao.schema.BuildSchema
+    import dao.schema.ScalaRadarSchemas
     import scala.slick.driver.JdbcDriver
 
     test("test slick") {
-        val build = SuccessfulBuild("id", 123L, 321L, "name", "url", "path")
-        val build2 = SuccessfulBuild("id2", 123L, 421L, "name", "url2", "path2")
+        val build = SuccessfulBuild("id", 123L, 321L, "path", "name", "url")
+        val build2 = SuccessfulBuild("id2", 123L, 421L, "path", "name", "url2")
 
         val db: JdbcDriver.Backend#DatabaseDef = Database.forURL(url = "jdbc:hsqldb:mem:test", user = "SA")
 
         db.withSession { implicit session =>
-            BuildSchema.builds.ddl.create
+            ScalaRadarSchemas.builds.ddl.create
 
-            BuildSchema.builds.length.run shouldBe 0
+            ScalaRadarSchemas.builds.length.run shouldBe 0
 
-            BuildSchema.builds.insert(build) shouldBe 1      // renvoie la taille de l'insert
+            ScalaRadarSchemas.builds.insert(build) shouldBe 1      // renvoie la taille de l'insert
 
-            BuildSchema.builds.length.run shouldBe 1
+            ScalaRadarSchemas.builds.length.run shouldBe 1
 
-            BuildSchema.builds.first shouldBe build
+            ScalaRadarSchemas.builds.first shouldBe build
         }
 
         db.withSession { implicit session =>
-            BuildSchema.builds.insert(build2) shouldBe 1
+            ScalaRadarSchemas.builds.insert(build2) shouldBe 1
 
-            BuildSchema.builds.length.run shouldBe 2
+            ScalaRadarSchemas.builds.length.run shouldBe 2
 
-            BuildSchema.builds.where(_.projectName === "name").sortBy(_.endDate.desc).firstOption shouldBe Option(build2)
+            ScalaRadarSchemas.builds.where(_.projectName === "name").sortBy(_.endDate.desc).firstOption shouldBe Option(build2)
         }
     }
 
     ignore("fetch database") { // Think stop play to release lock
         Database.forURL(url = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test", user = "SA").withSession { implicit session =>
-            println(BuildSchema.builds.length.run)
+            println(ScalaRadarSchemas.builds.length.run)
         }
     }
 
     ignore("init database file") {
         Database.forURL(url = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test", user = "SA").withSession { implicit session =>
-            BuildSchema.builds.ddl.create
+            ScalaRadarSchemas.builds.ddl.create
         }
     }
 
@@ -69,7 +69,7 @@ class DbTest extends FunSuite with Matchers {
     )*/
 
     ignore("test sorm") {
-        val expectedBuild = SuccessfulBuild("id", 123L, 321L, "name", "url", "")
+        val expectedBuild = SuccessfulBuild("id", 123L, 321L, "", "name", "url")
         /*val db = new Db(url = "jdbc:hsqldb:mem:test")
 
         db.save(expectedBuild)

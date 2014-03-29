@@ -21,7 +21,7 @@ class MainBuilderTest extends TestKit(ActorSystem("MainBuilderTest"))
     test("when receive LaunchBuild(project) should send LaunchBuild(project) to ProjectBuilder actor") {
         val projectBuilderProbe = TestProbe()
 
-        val project = Project("project", "gitUrl", Path("thePath"))
+        val project = Project("project", "gitUrl")
         val stubEventProducer = mock[EventProducer[ProjectBuildEvent]]
 
         val underTest = TestActorRef(new MainBuilder(stubFactory(projectBuilderProbe)), MainBuilder.name)
@@ -34,22 +34,21 @@ class MainBuilderTest extends TestKit(ActorSystem("MainBuilderTest"))
     }
 
     // TODO le test a-t-il un intérêt ? J'ai l'impression qu'on teste seulement la stubsFactoryForTwo
-    ignore("when receive more than one LaunchBuild(projectN) should send each message to different ProjectBuilder actor") {
+    test("when receive more than one LaunchBuild(projectN) should send each message to different ProjectBuilder actor") {
         val projectBuilderProbe1 = TestProbe()
         val projectBuilderProbe2 = TestProbe()
 
+        val eventProducerStub = mock[EventProducer[ProjectBuildEvent]]
+
         val underTest = TestActorRef(new MainBuilder(stubsFactoryForTwo(projectBuilderProbe1, projectBuilderProbe2)), MainBuilder.name)
 
-        val message1 = LaunchBuild(Project("project1", "gitUrl", Path("thePath")), mock[EventProducer[ProjectBuildEvent]])
-        val message2 = LaunchBuild(Project("project2", "gitUrl", Path("thePath")), mock[EventProducer[ProjectBuildEvent]])
-
         // When
-        underTest ! message1
-        underTest ! message2
+        underTest ! LaunchBuild(Project("project1", "gitUrl"), eventProducerStub)
+        underTest ! LaunchBuild(Project("project2", "gitUrl"), eventProducerStub)
 
         // Then
-        projectBuilderProbe1 expectMsg message1
-        projectBuilderProbe2 expectMsg message2
+        projectBuilderProbe1 expectMsg LaunchProjectBuild(Project("project1", "gitUrl"), eventProducerStub)
+        projectBuilderProbe2 expectMsg LaunchProjectBuild(Project("project2", "gitUrl"), eventProducerStub)
     }
 
     ignore("if limit of ProjectBuilder are reached") {}

@@ -33,6 +33,6 @@ object BashExecutor extends BashExecutor {
     // TODO add builder app (use enum : APP_BUILDER => MAVEN, SBT, PLAY)
     def executeScctTestCmd(build: Build): Try[Logs] = {
         val play_cmd = "/Users/ugobourdon/Dev/apps/play-2.2.1/play"
-        Try(Process(Seq(play_cmd, "scct:test"), build.project.path.fileOption) !!)
+        Try(Process(Seq(play_cmd, "scct:test"), build.path.fileOption) !!)
     }
 }

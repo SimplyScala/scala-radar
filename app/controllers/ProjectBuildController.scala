@@ -7,7 +7,6 @@ import play.api.libs.concurrent.Akka
 import play.api.libs.json.{Json, JsValue}
 import play.api.libs.EventSource
 import service.build._
-import scalax.file.Path
 import play.api.Play.current
 import play.api.libs.EventSource.EventNameExtractor
 import concurrent.ExecutionContext.Implicits.global
@@ -24,8 +23,8 @@ object ProjectBuildController extends Controller {
 
     def launch(projectName: String) = Action {
         // TODO request project from his name
+        val project = Project(projectName, "git@github.com:SimplyScala/scala-radar.git")
 
-        val project = Project(projectName, "git@github.com:SimplyScala/scala-radar.git", Path(""))
         mainBuilder ! LaunchBuild(project, buildEventProducer)
 
         Ok(views.html.build(projectName))

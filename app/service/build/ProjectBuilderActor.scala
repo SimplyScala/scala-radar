@@ -7,8 +7,6 @@ import dao.{ProdDatabase, Dao}
 import org.joda.time.DateTime
 import model.Build
 import model.Project
-import model.reactive.event.ScctDone
-import model.reactive.event.CheckstyleDone
 import model.build.{SubBuild, CheckstyleSubBuilderName, TestCodeCoverageSubBuilderName, SubBuilderName}
 
 class ProjectBuilder(val ref: ActorRef) {
@@ -27,6 +25,13 @@ object ProjectBuilder {
             case TestCodeCoverageSubBuilderName => (context: ActorRefFactory) => new TestCodeCoverageSubBuilder(context)
             case CheckstyleSubBuilderName => (context: ActorRefFactory) => new CheckstyleSubBuilder(context)
         }
+
+    /*def factory(subBuilder: SubBuilderName)(implicit context: ActorRefFactory): SubBuilder = {
+        subBuilder match {
+            case TestCodeCoverageSubBuilderName => new TestCodeCoverageSubBuilder(context)
+            case CheckstyleSubBuilderName => new CheckstyleSubBuilder(context)
+        }
+    }*/
 }
 
 class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: BashExecutor, dao: Dao) extends Actor
@@ -36,7 +41,7 @@ class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: Ba
     val testCodeCoverageSubBuilder = subBuilderFactory(TestCodeCoverageSubBuilderName)(context)
     val checkstyleSubBuilder = subBuilderFactory(CheckstyleSubBuilderName)(context)
 
-    var eventProducers = Map[String, EventProducer[ProjectBuildEvent]]()
+    var eventProducers = Map[String, EventProducer[ProjectBuildEvent]]() // TODO project name aucun interet ici
     var buildDone: List[Boolean] = Nil
 
     def receive = {
@@ -63,7 +68,7 @@ class ProjectBuilderActor(subBuilderFactory: SubBuilderFactory, bashExecutor: Ba
 
         eventProducers.get(project.name).map { producer => producer.channel.push(ProjectCloned(project)) }
 
-        project.copy(path = projectBuildDirectoryPath).toBuild(startDate)
+        project.toBuild(projectBuildDirectoryPath, startDate)
     }
 
     private def launchSubBuilds(build: Build) {

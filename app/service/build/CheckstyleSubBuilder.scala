@@ -22,11 +22,11 @@ class CheckstyleSubBuilderActor extends Actor with ActorLogging {
             val scalastyleJar = s"$scalastyleDir/scalastyle-batch_2.10.jar"
             val scalastyleConfig = s"$scalastyleDir/scalastyle_config.xml"
 
-            val scalastyleReportDir = Path.fromString(build.project.path.path + "/target/scalastyle-report").createDirectory()
+            val scalastyleReportDir = Path.fromString(build.path.path + "/target/scalastyle-report").createDirectory()
 
             val resultDir = s"${scalastyleReportDir.path}/${build.project.name}_report.xml"
 
-            val appUnderTest = build.project.path.path
+            val appUnderTest = build.path.path
 
             val result = s"java -jar $scalastyleJar --xmlOutput $resultDir --config $scalastyleConfig $appUnderTest/app" !!
 

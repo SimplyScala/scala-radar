@@ -2,7 +2,6 @@ package service.engine
 
 import org.scalatest.{Matchers, FunSuite}
 import scala.xml.XML
-import service.engine.CheckstyleXMLParser
 import model.engine.CheckstyleIssue
 
 class CheckstyleXMLParserTest extends FunSuite with Matchers {

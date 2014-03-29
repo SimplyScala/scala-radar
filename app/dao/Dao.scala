@@ -2,7 +2,7 @@ package dao
 
 import model.SuccessfulBuild
 import scala.slick.driver.JdbcDriver.Backend
-import dao.schema.BuildSchema
+import dao.schema.ScalaRadarSchemas
 import scala.slick.driver.HsqldbDriver.simple._              // Not remove
 
 trait Dao {
@@ -14,11 +14,11 @@ trait Dao {
 
 object Dao extends Dao {
     def save(build: SuccessfulBuild)(implicit db: Backend#DatabaseDef): Unit = db.withSession { implicit session =>
-        BuildSchema.builds.insert(build)
+        ScalaRadarSchemas.builds.insert(build)
     }
 
     def retrieveLastBuild(projectName: String)(implicit db: Backend#DatabaseDef): Option[SuccessfulBuild] = db.withSession { implicit session =>
-        BuildSchema.builds.where(_.projectName === projectName).sortBy(_.endDate.desc).firstOption
+        ScalaRadarSchemas.builds.where(_.projectName === projectName).sortBy(_.endDate.desc).firstOption
     }
 }
 
