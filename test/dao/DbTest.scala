@@ -42,7 +42,7 @@ class DbTest extends FunSuite with Matchers {
         }
     }
 
-    ignore("init database file") {
+    ignore("init database file") {  // Think stop play to release lock
         Database.forURL(url = "jdbc:hsqldb:file:/Users/ugobourdon/test/db/test", user = "SA").withSession { implicit session =>
             ScalaRadarSchemas.builds.ddl.create
         }

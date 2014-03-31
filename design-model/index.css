@@ -1,0 +1,189 @@
+html, body {
+    color: #666666;
+    font-family: "Source Sans Pro",Helvetica,sans-serif;
+    font-size: 13px;
+    height: 100%;
+    line-height: 22px;
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #666666;
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    background: none repeat scroll 0 0 #40454F;
+    font-size: 14px;
+    line-height: 55px;
+    color: #FFFFFF;
+}
+
+header a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+header h1 {
+    margin: 0;
+    margin-left: 15px;
+    margin-right: 40px;
+    font-size: 18px;
+    float: left;
+}
+
+header ul {
+    list-style: none;
+}
+
+header li {
+    display: inline-block;
+}
+
+header li a {
+    padding: 0 15px;
+}
+
+header li.user-profile {
+    float: right;
+    margin-right: 15px;
+}
+
+#main-view {
+    display: flex;
+    min-height: 100%;
+}
+
+#menu {
+    background-color: #FBFBFA;
+    border-right: 1px solid #C4CBCC;
+    width: 23%;
+}
+
+#search-app {
+    background-color: #E9E9E7;
+    height: 75px;
+    padding: 32px 20px 12px;
+}
+
+#search-app input[type="text"] {
+    width: 100%;
+    padding: 0 0 0 10px;
+    font-size: 13px;
+    height: 28px;
+    border: 0;
+    color: #666666;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-sizing: border-box;
+}
+
+.tabs {
+    height: 29px;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.tabs li {
+    border: 1px solid #DDDDDD;
+    cursor: pointer;
+    height: 28px;
+    display: inline-block;
+    padding: 0 10px;
+    background-color: #F2F2EB;
+}
+
+.tabs li h5 {
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 30px;
+    margin: 0;
+}
+
+li.active {
+    background-color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
+}
+
+#app-list-title ul {
+    padding-left: 20px;
+    margin-top: -29px;
+}
+
+#app-list li {
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #DDDDDD;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 15px 20px 15px 15px;
+    position: relative;
+}
+
+#app-list li:nth-child(2n+1), #app-list li:nth-child(2n+1) .indicator span, #app-list li:nth-child(2n+1) li.icon {
+    background-color: #FFFFFF;
+}
+
+#app-list li:nth-child(2n), #app-list li:nth-child(2n) .indicator span, #app-list li:nth-child(2n) li.icon {
+    background-color: #F2F2EB;
+}
+
+#app-list li .indicator {
+    display: none;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    right: -20px;
+    top: -13px;
+    width: 20px;
+}
+
+#app-list li.selected .indicator {
+    display: block;
+}
+
+#app-list li .indicator span {
+    border: 1px solid #C4CBCC;
+    display: block;
+    height: 20px;
+    left: -15px;
+    position: relative;
+    top: 45px;
+    transform: rotate(45deg);
+    width: 20px;
+}
+
+#app-list li p {
+    margin: 0;
+}
+
+#app-list li p.last-build {
+    color: #999999;
+    font-size: 13px;
+    font-style: italic;
+}
+
+#app-list ul.icons {
+    display: flex;
+}
+
+#app-list li.icon {
+    border-bottom: 0;
+    padding: 0;
+    font-size: 11px;
+    padding-right: 15px;
+}
+
+#app-board {
+    padding: 20px 40px 80px 30px;
+    width: 72%;
+}

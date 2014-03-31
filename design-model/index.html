@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scala Radar</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="index.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="project.css" type="text/css" media="screen" />
+</head>
+<body>
+    <header>
+        <a href="#"><h1>ScalaRadar</h1></a>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Status</a></li>
+            <li><a href="#">Help</a></li>
+            <li class="user-profile"><a href="#">avatar github</a></li>
+        </ul>
+    </header>
+    <section id="main-view">
+        <div id="menu">
+            <div id="search-app">
+                <input type="text" placeholder="Search your application" class="" />
+            </div>
+            <div id="app-list-title">
+                <ul class="tabs">
+                    <li class="active"><h5>My applications</h5></li>
+                    <li><h5>Search</h5></li>
+                </ul>
+            </div>
+            <div id="app-list">
+                <ul>
+                    <li class="selected">
+                        <p>SimplyScala/Scala-radar</p>
+                        <p class="last-build">last build: 2 weeks</p>
+                        <ul class="icons">
+                            <li class="icon">Test coverage</li>
+                            <li class="icon">Rules violation</li>
+                        </ul>
+                        <div class="indicator"><span></span></div>
+                    </li>
+                    <li>
+                        <p>ubourdon/My app 2</p>
+                        <p class="last-build">last build: 12/01/2014</p>
+                        <ul class="icons">
+                            <li class="icon">Test coverage ^</li>
+                            <li class="icon">Rules violation =</li>
+                        </ul>
+                        <div class="indicator"><span></span></div>
+                    </li>
+                    <li>
+                        <p>ubourdon/My app 3</p>
+                        <p class="last-build">last build: 1 year</p>
+                        <ul class="icons">
+                            <li class="icon">Test coverage</li>
+                            <li class="icon">Rules violation</li>
+                        </ul>
+                        <div class="indicator"><span></span></div>
+                    </li>
+                    <li>
+                        <p>ubourdon/My app 4</p>
+                        <p class="last-build">last build: 2 hours</p>
+                        <ul class="icons">
+                            <li class="icon">Test coverage</li>
+                            <li class="icon">Rules violation</li>
+                        </ul>
+                        <div class="indicator"><span></span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="app-board">
+            <h1>App Name</h1>
+            <ul class="tabs">
+                <li class="active"><a href="#"><h5>Last Build</h5></a></li>
+                <li><a href="#"><h5>Tests Coverage</h5></a></li>
+                <li><a href="#"><h5>Rules Violations</h5></a></li>
+                <li><a href="#"><h5>App Config</h5></a></li>
+            </ul>
+            <section id="project_board">
+                <div class="board_column_wrapper">
+                    <section class="widget" id="lines">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="dashbox">
+                                        <h3>Lines of code</h3>
+                                        <p><span class="big"><a href="#"><span id="m_ncloc">373</span></a></span></p>
+                                        <p><a href="#"><span id="m_lines">690</span> lines</a></p>
+                                        <p><a href="#"><span class="stub" id="m_statements">807</span> statements</a></p>
+                                        <p><a href="#"><span id="m_files">24</span> files</a></p>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="dashbox">
+                                        <h3>Class</h3>
+                                        <p>
+                                    <span class="big"><a href="#"><span id="m_classes">
+                                    53
+                                </span></a></span>
+                                            whose :
+                                        </p>
+                                        <p><a href="#"><span id="m_class">11</span> classes</a></p>
+                                        <p><a href="#"><span id="m_caseClass">9</span> case classes</a></p>
+                                        <p><a href="#"><span id="m_trait">13</span> traits</a></p>
+                                        <p><a href="#"><span id="m_object">20</span> objects</a></p>
+                                        <p><a href="#"><span class="stub" id="m_packages">10</span> packages</a></p>
+                                        <p><a href="#"><span class="stub" id="m_functions">112</span> methods</a></p>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="clear"></div>
+                    </section>
+
+                    <section class="widget" id="docs">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="dashbox">
+                                        <h3>Documentation</h3>
+                                        <p><span class="big"><a href="#"><span class="stub" id="m_public_documented_api_density">2,4%</span></a></span> docu. API</p>
+                                        <p><a href="#"><span class="stub" id="m_public_api">253</span> public API</a></p>
+                                        <p><a href="#"><span class="stub" id="m_public_undocumented_api">247</span> undocu. API</a></p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dashbox">
+                                        <h3>Comments</h3>
+                                        <p><span class="big"><a href="#"><span class="stub" id="m_comment_lines_density">5,4%</span></a></span></p>
+                                        <p><a href="#"><span id="m_comment_lines">63</span> lines</a></p>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="clear"></div>
+                    </section>
+                </div>
+
+                <div class="board_column_wrapper">
+                    <section class="widget" id="rules">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td width="50%" valign="top">
+                                    <div class="dashbox">
+                                        <h3>Issues</h3>
+                                        <div class="marginbottom10">
+
+                                            <span class="big"><a href="/issues/scala-radar">96</a></span>
+
+                                        </div>
+
+                                        <!--<h3>Technical Debt</h3>
+                                        <div>
+                                            <span class="big">
+                                            <a href="/drilldown/measures/25?metric=sqale_index"><span id="m_sqale_index">0,0</span></a>
+                                            </span>
+                                                <span>days</span>
+                                                <span></span>
+                                        </div>-->
+
+                                    </div>
+                                </td>
+                                <td width="50%" valign="top" nowrap="">
+
+                                    <table class="clear width100">
+                                        <tbody><tr>
+                                            <td><img src="/images/priority/BLOCKER.png?1383751212" alt="Blocker"></td>
+                                            <td> &nbsp;<a href="/drilldown/issues/valuation:valuation?severity=BLOCKER">Blocker</a></td>
+                                            <td align="right" style="padding: 0 5px;">
+                                                <span class="stub" id="m_blocker_violations">0</span></td>
+                                            <td>
+                                                <img width="10" height="10" title="" src="/images/trend/0.png?1383751212" alt=""></td>
+                                            <td>&nbsp;</td>
+                                            <td align="left" style="padding-bottom:2px; padding-top:2px;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/images/priority/CRITICAL.png?1383751212" alt="Critical"></td>
+                                            <td> &nbsp;<a href="/drilldown/issues/valuation:valuation?severity=CRITICAL">Critical</a></td>
+                                            <td align="right" style="padding: 0 5px;">
+                                                <span class="stub" id="m_critical_violations">0</span></td>
+                                            <td>
+                                                <img width="10" height="10" title="" src="/images/trend/0.png?1383751212" alt=""></td>
+                                            <td>&nbsp;</td>
+                                            <td align="left" style="padding-bottom:2px; padding-top:2px;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/images/priority/MAJOR.png?1383751212" alt="Major"></td>
+                                            <td> &nbsp;<a href="/drilldown/issues/valuation:valuation?severity=MAJOR">Major</a></td>
+                                            <td align="right" style="padding: 0 5px;">
+                                                <span class="stub" id="m_major_violations">0</span></td>
+                                            <td>
+                                                <img width="10" height="10" title="" src="/images/trend/0.png?1383751212" alt=""></td>
+                                            <td>&nbsp;</td>
+                                            <td align="left" style="padding-bottom:2px; padding-top:2px;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/images/priority/MINOR.png?1383751212" alt="Minor"></td>
+                                            <td> &nbsp;<a href="/drilldown/issues/valuation:valuation?severity=MINOR">Minor</a></td>
+                                            <td align="right" style="padding: 0 5px;">
+                                                <span class="stub" id="m_minor_violations">0</span></td>
+                                            <td>
+                                                <img width="10" height="10" title="" src="/images/trend/0.png?1383751212" alt=""></td>
+                                            <td>&nbsp;</td>
+                                            <td align="left" style="padding-bottom:2px; padding-top:2px;">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/images/priority/INFO.png?1383751212" alt="Info"></td>
+                                            <td> &nbsp;<a href="/drilldown/issues/valuation:valuation?severity=INFO">Info</a></td>
+                                            <td align="right" style="padding: 0 5px;">
+                                                <span class="stub" id="m_info_violations">0</span></td>
+                                            <td>
+                                                <img width="10" height="10" title="" src="/images/trend/0.png?1383751212" alt=""></td>
+                                            <td>&nbsp;</td>
+                                            <td align="left" style="padding-bottom:2px; padding-top:2px;">
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="clear"></div>
+
+                    </section>
+                    <section class="widget" id="#tests">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="dashbox">
+                                        <h3>Unit Tests Coverage</h3>
+
+                                        <p><span class="big"><a href="/coverage/scala-radar">61.0 %</a></span></p>
+                                        <!-- /assets/resources/coverage-report/index.html -->
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dashbox">
+                                        <h3>Unit test success</h3>
+                                        <p><a class="stub" href="#">142 tests</a></p>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+
+                <div class="clear"></div>
+            </section>
+        </div>
+    </section>
+</body>
+</html>

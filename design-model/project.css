@@ -1,0 +1,115 @@
+#project_board {
+    width: 90%;
+    margin-top: 30px;
+}
+
+#project_board table {
+    width: 100%;
+}
+
+#project_board td {
+    width: 50%;
+    vertical-align: top;
+}
+
+#project_board h1, #project_board h2, #project_board h3,
+#project_board th, #project_board td, #project_board p {
+    margin: 0;
+    padding: 0;
+}
+
+#project_board h3 {
+    font-size: 1em;
+}
+
+#lines, #docs, #rules, #tests {
+    margin-bottom: 10px;
+    width: 97%;
+}
+
+.dashbox {
+    float: left;
+    vertical-align: top;
+    text-align: left;
+    padding: 0px 10px 7px 0px;
+}
+
+.dashbox a {
+    text-decoration: none;
+}
+
+.big {
+    font-size: 152%;
+    font-weight: bold;
+}
+
+.board_column_wrapper {
+    width: 44%;
+    margin: 0;
+    padding: 20px;
+
+    float: left;             /* TODO use flex */
+}
+
+.board_column_wrapper {
+    margin-right: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+div.widget_title {
+    background-color: rgb(75, 159, 213);
+    color: rgb(254, 254, 254);
+    padding: 0px 5px;
+    height: 24px;
+    line-height: 24px;
+}
+
+section.widget, div.widget {
+    padding: 10px;
+    border: 1px solid rgb(221, 221, 221);
+}
+
+a.nolink:hover, .dashbox a:hover, .dashbox a.action, .dashbox a.action:visited {
+    text-decoration: underline;
+}
+
+.clear {
+    height: 0px;
+    clear: both;
+}
+
+#path {
+    color: rgb(68, 68, 68);
+    background: none repeat scroll 0% 0% rgb(239, 239, 239);
+    height: 26px;
+    line-height: 26px;
+    font-size: 93%;
+    margin: 0px;
+    margin-bottom: 30px;
+    padding: 0px 10px 0px 21px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+#path ul, #path ol {
+    margin: 0;
+    padding: 0;
+    list-style: none outside none;
+}
+
+#path a {
+    text-decoration: none;
+}
+
+#path a:hover {
+    text-decoration: underline;
+}
+
+.stub {
+    color: chocolate;
+    font-size: 1.2em;
+    font-weight: bold;
+}

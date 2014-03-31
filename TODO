@@ -1,5 +1,11 @@
 # PENSE BETE
 
+####################       IDEES DE NOM                           ######################
+
+your-project-dashboard.io
+project-dashboard.io
+scala-dashboard.io
+
 ####################       FAIRE UN BACKLOG DIGNE DE CE NOM       ###################### ^^
 
 chaque build doit avoir un écran log
@@ -8,7 +14,7 @@ calcul de complexité
 
 fumer les TODO (dans le code)
 
-chaque build lance asynchronement et non intrusivement dans le projet :                                                             ####### WIP
+chaque build lance asynchronement et non intrusivement dans le projet :                                                             ####### OK
     - calcul metadatas
     - test code covergae
     - scalastyle
@@ -30,6 +36,10 @@ ecran de build permet de voir ou en est chaque étape
     - analyse métriques
     - ...
 
+permettre de tester différente branches de git
+
+comparaison de qualité entre branches, entre commit, etc...
+
 scala-radar fournit API REST (html, json) => permet aux utilisateurs de charger une page "buildwall" custom en html/css/js
 
 métriques d'évolutions
@@ -46,11 +56,11 @@ Questions :
     Comment je sais combien de tests sont passés/échoués ? Y-a-t-il un moyen de la savoir programmatiquement parlant via sbt api ?
     Utiliser un watcher java pour voir si tel ou tel fichier est créer ? ou utiliser des run bloquant avec ping quand fini ?
 
-exclude some path pour scct sur playframework
+exclude some path pour scct sur playframework                                                                                       ####### OK
 
 vérifier que tous les soft nécessaire au fonctionnement de scala-radar sont présent au démarrage de l'appli (sbt/play avec scct, scala-style batch)
 
-permettre des sandbox build (en shintant certaisn sub-build par exemple) pour des feedback plus rapide pour dev
+permettre des sandbox build (en chintant certains sub-build par exemple) pour des feedback plus rapide pour dev
 
 liens utiles :
     SSE + play :
