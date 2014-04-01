@@ -1,16 +1,52 @@
-p#build-intro {
+#build-intro {
     font-size: 11px;
     color: #777777;
     margin-left: 20px;
+    display: flex;
+    margin-top: 20px;
 }
 
-select#evolution {
+#build-intro div:first-child {
+    padding-top: 2.5px;
+}
+
+#evolution-select {
+    position: relative;
+}
+
+#evolution-select select {
     border: 0;
     border: solid 1px #AAAAAA;
     padding: 3px;
     margin-left: 15px;
     color: #444444;
+
+    /*text-indent: 0.01px;
+    text-overflow: '';*/
 }
+
+/* TODO redesign select arrow button */
+/*#evolution-select .select-button {
+    background-color: #FFFFFF;
+    height: 45%;
+    overflow: hidden;
+    position: absolute;
+    right: 2px;
+    top: 9px;
+    width: 17px;
+}
+
+#evolution-select .select-button span {
+    background-color: #AAAAAA;
+    border: 1px solid #AAAAAA;
+    display: block;
+    height: 7px;
+    left: 3px;
+    position: relative;
+    top: -4px;
+    transform: rotate(45deg);
+    width: 7px;
+}*/
 
 #project_board {
     width: 90%;

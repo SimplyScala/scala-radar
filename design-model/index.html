@@ -70,7 +70,7 @@
             </div>
         </div>
         <div id="app-board">
-            <h1>App Name</h1>
+            <h1>SimplyScala / scala-radar</h1>
             <ul class="tabs">
                 <li class="active"><a href="#"><h5>Last Build</h5></a></li>
                 <li><a href="#"><h5>Tests Coverage</h5></a></li>
@@ -78,15 +78,18 @@
                 <li><a href="#"><h5>App Config</h5></a></li>
             </ul>
 
-            <p id="build-intro">
-                Version 1.0-SNAPSHOT - Ferbuary 12 2014 12:45
-                <select name="evolution" id="evolution">
-                    <option value="evolution">evolution over time</option>
-                    <option value="last build">Δ since last build (March 13th 2014)</option>
-                    <option value="delta15">Δ over 15 days (Ferbuary 12th 2014)</option>
-                    <option value="delta30">Δ over 30 days (January 15th 2014)</option>
-                </select>
-            </p>
+            <div id="build-intro">
+                <div>Version 1.0-SNAPSHOT - Ferbuary 12 2014 12:45</div>
+                <div id="evolution-select">
+                    <select name="evolution">
+                        <option value="evolution">evolution over time</option>
+                        <option value="last build">Δ since last build (March 13th 2014)</option>
+                        <option value="delta15">Δ over 15 days (Ferbuary 12th 2014)</option>
+                        <option value="delta30">Δ over 30 days (January 15th 2014)</option>
+                    </select>
+                    <!--<div class="select-button"><span></span></div>--><!-- TODO redesign arrow button -->
+                </div>
+            </div>
             <section id="project_board">
                 <div class="board_column_wrapper">
                     <section class="widget" id="lines">
